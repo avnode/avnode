@@ -5,8 +5,30 @@ html
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title #{title} - AVnode.net
+    link(rel='stylesheet', href='/css/font-awesome/font-awesome.css')
+    link(rel='stylesheet', href='/css/bootstrap/bootstrap.css')
     link(rel='stylesheet', href='/css/main.css')
-
   body
+    nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
+      .container
+        a.navbar-brand(href="/")
+          img(src="/images/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="")
+        ul.nav.navbar-nav
+        ul.nav.navbar-nav.float-xs-right
+          if user
+            li.nav-item
+              a.nav-link(href="/profile")
+                i.fa.fa-user
+                |  #{user.email}
+            li.nav-item
+              a.nav-link(href="/logout")
+                i.fa.fa-sign-out
+                |  Logout&nbsp;
+          else
+            li.nav-item
+              a.nav-link(href="/login")
+                i.fa.fa-sign-in
+                |  Login&nbsp;
     .container
+      include partials/flash
       block content
