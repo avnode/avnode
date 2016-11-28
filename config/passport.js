@@ -19,7 +19,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
   User.findOne({ email: email.toLowerCase() }, (err, user) => {
     if (err) { return done(err); }
     if (!user) {
-      return done(null, false, { msg: __(`Email ${email} not found.`) });
+      return done(null, false, { msg: __('Email %s not found.', email) });
     }
     user.comparePassword(password, (err, isMatch) => {
       if (err) { return done(err); }
@@ -30,3 +30,10 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
     });
   });
 }));
+
+exports.isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+};

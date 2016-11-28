@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  h1.display-4=__('Your Account')
+  .row
+    .col-lg-3.col-md-4
+      include menu
+    .col-lg-9.col-md-8
+      form(method='post')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label(for='name')=__('Name')
+          input.form-control(type='text', name='name', id='name', value=user.profile.name, placeholder=__('John Doe'), autofocus, required)
+        .form-group
+          label(for='email')=__('Email')
+          input.form-control(type='email', name='email', id='email', value=user.email, placeholder=__('example@foo.bar'), autofocus, required)
+        .form-group
+          button.btn.btn-primary(type='submit')=__('Save')

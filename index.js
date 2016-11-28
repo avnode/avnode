@@ -69,9 +69,15 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
+  const path = req.path.split('/')[1];
+  if (/auth|login|logout|signup|images|fonts/i.test(path)) {
+    return next();
+  }
   if (!req.user &&
       req.path !== '/login' &&
-      req.path !== '/signup') {
+      req.path !== '/signup' &&
+      !req.path.match(/^\/auth/) &&
+      !req.path.match(/\./)) {
     req.session.returnTo = req.path;
   } else if (req.user &&
       req.path == '/account') {
@@ -85,6 +91,9 @@ app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
+
+app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
+app.post('/account', passportConfig.isAuthenticated, userController.postProfile);
 
 app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env')); 

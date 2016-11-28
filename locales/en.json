@@ -6,5 +6,20 @@
 	"Email": "Email",
 	"Use at least eight characters": "Use at least eight characters",
 	"Welcome to AVnode.net": "Welcome to AVnode.net",
-	"Sign in": "Sign in"
+	"Sign in": "Sign in",
+	"Email is not valid": "Email is not valid",
+	"Password cannot be blank": "Password cannot be blank",
+	"You are logged in.": "You are logged in.",
+	"Your Account": "Your Account",
+	"Your Profile": "Your Profile",
+	"Events": "Events",
+	"Your profile": "Your profile",
+	"Name": "Name",
+	"Your name": "Your name",
+	"Save": "Save",
+	"Please enter a valid email address.": "Please enter a valid email address.",
+	"John Doe": "John Doe",
+	"Profile information has been updated.": "Profile information has been updated.",
+	"Invalid email or password.": "Invalid email or password.",
+	"Email %s not found.": "Email %s not found."
 }
