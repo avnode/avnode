@@ -1,8 +1,7 @@
 extends ../layout
 
 block content
-  h1.display-4 Sign in
-  .page-header
+  h1.display-4=__('Sign in')
   form(method='post')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group
