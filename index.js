@@ -4,7 +4,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const path = require('path');
-const dotenv = require('dotenv');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -13,7 +12,17 @@ const expressStatusMonitor = require('express-status-monitor');
 const expressValidator = require('express-validator');
 const sass = require('node-sass-middleware');
 
+const dotenv = require('dotenv');
 dotenv.load({ path: '.env.local' });
+
+const i18n = require('i18n');
+GLOBAL.i18n = i18n;
+i18n.configure({
+    locales:['en'],
+    defaultLocale: 'en',
+    directory: __dirname + '/locales',
+    register: global
+});
 
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
@@ -42,6 +51,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(flash());
+app.use(i18n.init);
 app.use(session({
   resave: true,
   saveUninitialized: true,
