@@ -21,5 +21,6 @@
 	"John Doe": "John Doe",
 	"Profile information has been updated.": "Profile information has been updated.",
 	"Invalid email or password.": "Invalid email or password.",
-	"Email %s not found.": "Email %s not found."
+	"Email %s not found.": "Email %s not found.",
+	"AVnode.net": "AVnode.net"
 }

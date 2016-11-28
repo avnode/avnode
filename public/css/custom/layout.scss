@@ -1,0 +1,21 @@
+html, body {
+  background-color: $gray-dark;
+}
+main {
+  background-color: $white;
+  padding: 5rem 0;
+}
+footer {
+  padding: 1rem 0;
+  background-color: $gray-dark;
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+.padding-left {
+  padding-left: .5rem;
+}
+.padding-right {
+  padding-right: .5rem;
+}

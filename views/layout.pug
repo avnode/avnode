@@ -6,7 +6,6 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title #{title} - AVnode.net
     link(rel='stylesheet', href='/css/font-awesome/font-awesome.css')
-    link(rel='stylesheet', href='/css/bootstrap/bootstrap.css')
     link(rel='stylesheet', href='/css/main.css')
   body
     nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
@@ -29,6 +28,10 @@ html
               a.nav-link(href="/login")
                 i.fa.fa-sign-in
                 |  Login&nbsp;
-    .container
-      include partials/flash
-      block content
+    main
+      .container
+        include partials/flash
+        block content
+    footer
+      .container
+        .text-muted=__('AVnode.net')
