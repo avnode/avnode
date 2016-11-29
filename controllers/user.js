@@ -81,7 +81,7 @@ exports.postProfile = (req, res, next) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect('/');
+    return res.redirect('/account');
   }
   res.render('account/signup', {
     title: __('Create Account')
