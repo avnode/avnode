@@ -25,6 +25,7 @@ i18n.configure({
 
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
+const performerController = require('./controllers/performer');
 
 const passportConfig = require('./config/passport');
 
@@ -95,6 +96,8 @@ app.get('/logout', userController.logout);
 
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account', passportConfig.isAuthenticated, userController.postProfile);
+
+app.get('/performers', performerController.getList);
 
 app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env')); 

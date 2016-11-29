@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  h1.display-4=__('Performers')
+  .card-columns
+    each item in data
+      .card
+        .card-block
+          h3.card-title
+            =item.profile.name
+          .card-title
+            =item.email
