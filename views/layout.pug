@@ -17,17 +17,21 @@ html
           if user
             li.nav-item
               a.nav-link(href="/account")
-                i.fa.fa-user
+                i.fa.fa-user.fa-fw
                 |  #{user.email}
             li.nav-item
               a.nav-link(href="/logout")
-                i.fa.fa-sign-out
-                |  Logout&nbsp;
+                i.fa.fa-sign-out.fa-fw
+                =__('Logout')
           else
             li.nav-item
               a.nav-link(href="/login")
-                i.fa.fa-sign-in
-                |  Login&nbsp;
+                i.fa.fa-sign-out.fa-fw
+                =__('Login')
+            li.nav-item
+              a.nav-link(href="/signup")
+                i.fa.fa-sign-in.fa-fw
+                =__('Sign up')
     main
       .container
         include partials/flash

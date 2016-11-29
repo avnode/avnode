@@ -9,7 +9,7 @@ exports.getLogin = (req, res) => {
     return res.redirect('/');
   }
   res.render('account/login', {
-    title: 'Login'
+    title: __('Login')
   });
 };
 
@@ -46,7 +46,7 @@ exports.logout = (req, res) => {
 
 exports.getAccount = (req, res) => {
   res.render('account/profile', {
-    title: 'Account Management'
+    title: __('Account Management')
   });
 };
 
@@ -75,6 +75,51 @@ exports.postProfile = (req, res, next) => {
       }
       req.flash('success', { msg: __('Profile information has been updated.') });
       res.redirect('/account');
+    });
+  });
+};
+
+exports.getSignup = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/signup', {
+    title: __('Create Account')
+  });
+};
+
+exports.postSignup = (req, res, next) => {
+  req.assert('email', __('Email is not valid')).isEmail();
+  req.assert('password', __('Use at least eight characters')).len(8);
+  req.assert('confirmPassword', __('Passwords do not match')).equals(req.body.password);
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/signup');
+  }
+
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password
+  });
+
+  User.findOne({ email: req.body.email }, (err, existingUser) => {
+    if (err) { return next(err); }
+    if (existingUser) {
+      req.flash('errors', { msg: __('Account already exists.') });
+      return res.redirect('/signup');
+    }
+    user.save((err) => {
+      if (err) { return next(err); }
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect('/');
+      });
     });
   });
 };

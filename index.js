@@ -87,6 +87,8 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 84600 }));
 
 app.get('/', homeController.index);
+app.get('/signup', userController.getSignup);
+app.post('/signup', userController.postSignup);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
