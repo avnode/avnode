@@ -16,7 +16,6 @@ const dotenv = require('dotenv');
 dotenv.load({ path: '.env.local' });
 
 const i18n = require('i18n');
-GLOBAL.i18n = i18n;
 i18n.configure({
     locales:['en'],
     defaultLocale: 'en',
