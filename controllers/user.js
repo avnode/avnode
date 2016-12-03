@@ -2,6 +2,7 @@ const async = require('async');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const passport = require('passport');
+const countries = require('country-list')().getData();
 const User = require('../models/User');
 
 exports.getLogin = (req, res) => {
@@ -46,7 +47,8 @@ exports.logout = (req, res) => {
 
 exports.getAccount = (req, res) => {
   res.render('account/profile', {
-    title: __('Account Management')
+    title: __('Account Management'),
+    countries: countries
   });
 };
 

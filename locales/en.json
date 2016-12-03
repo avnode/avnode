@@ -31,5 +31,20 @@
 	"Welcome": "Welcome",
 	"Performers": "Performers",
 	"Create Account": "Create Account",
-	"Account Management": "Account Management"
+	"Account Management": "Account Management",
+	"Birthday": "Birthday",
+	"YYYY-MM-DD": "YYYY-MM-DD",
+	"Citizenship": "Citizenship",
+	"Please select": "Please select",
+	"About": "About",
+	"Gender": "Gender",
+	"Male": "Male",
+	"Female": "Female",
+	"Other": "Other",
+	"Stagename": "Stagename",
+	"Change stagename": "Change stagename",
+	"Changing your stagename can have unintended side effects.": "Changing your stagename can have unintended side effects.",
+	"Current stagename": "Current stagename",
+	"Change": "Change",
+	"Close": "Close"
 }
