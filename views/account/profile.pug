@@ -11,18 +11,20 @@ block content
           .modal-dialog
             .modal-content
               .modal-header
-                h4="asdf"
+                h4=__("Changing your stagename can have unintended side effects!")
               .modal-body
-                .form-group
-                  label(for='stagename')=__('Stagename')
+                label(for='stagename')=__('Stagename')
+                .input-group
+                  span.input-group-addon #{settings.base}
                   input.form-control(type='text', name='stagename', value=user.stagename)
               .modal-footer
-                button.btn.btn-primary(type="button", data-dismiss="modal")=__("Close")
+                button.btn.btn-secondary(type="button", data-dismiss="modal")=__("Cancel")
+                button.btn.btn-danger=__("Change")
         .card
           .card-header=__("Stagename")
           .card-block
             p.card-text=__("Changing your stagename can have unintended side effects.")
-            button.btn.btn-danger(type="button", data-toggle="modal", data-target="#stagename")=__("Change")
+            button.btn.btn-secondary(type="button", data-toggle="modal", data-target="#stagename")=__("Change")
         .form-group
           label(for='gender')=__('Gender')
           select.form-control.custom-select(name="gender")
