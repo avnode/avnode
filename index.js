@@ -41,6 +41,7 @@ mongoose.connection.on('error', () => {
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.set('base', 'http://localhost:3000/');
 app.use(expressStatusMonitor());
 app.use(compression());
 app.use(sass({
