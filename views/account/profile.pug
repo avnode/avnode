@@ -11,14 +11,16 @@ block content
           .modal-dialog
             .modal-content
               .modal-header
-                h4=__('Changing your stagename can have unintended side effects!')
+                button(type='button', class='close', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') &times;
+                h4.modal-title=__('Caution!')
               .modal-body
+                p=__('Changing your stagename can have unintended side effects!')
                 label(for='stagename')=__('Stagename')
                 .input-group
                   span.input-group-addon #{settings.base}
                   input.form-control(type='text', name='stagename', value=user.stagename)
               .modal-footer
-                button.btn.btn-secondary(type='button', data-dismiss='modal')=__('Cancel')
                 button.btn.btn-danger=__('Change')
         .card
           .card-header=__('Stagename')

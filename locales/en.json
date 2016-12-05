@@ -43,8 +43,11 @@
 	"Other": "Other",
 	"Stagename": "Stagename",
 	"Change stagename": "Change stagename",
+	"Changing your stagename can have unintended side effects.": "Changing your stagename can have unintended side effects.",
+	"Current stagename": "Current stagename",
 	"Change": "Change",
 	"Close": "Close",
 	"Changing your stagename can have unintended side effects!": "Changing your stagename can have unintended side effects!",
-	"Cancel": "Cancel"
+	"Cancel": "Cancel",
+	"Caution!": "Caution!"
 }
