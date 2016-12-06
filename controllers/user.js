@@ -55,6 +55,7 @@ exports.getAccount = (req, res) => {
 exports.postProfile = (req, res, next) => {
   req.assert('email', __('Please enter a valid email address.')).isEmail();
   req.sanitize('email').normalizeEmail({ remove_dots: false });
+  req.assert('stagename', __('Please use only alphanumeric characters.')).isAlphanumeric();
 
   const errors = req.validationErrors();
 
@@ -67,6 +68,7 @@ exports.postProfile = (req, res, next) => {
     if (err) { return next(err); }
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
+    user.stagename = req.body.stagename || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {

@@ -49,5 +49,7 @@
 	"Close": "Close",
 	"Changing your stagename can have unintended side effects!": "Changing your stagename can have unintended side effects!",
 	"Cancel": "Cancel",
-	"Caution!": "Caution!"
+	"Caution!": "Caution!",
+	"Please use only alphanumeric characters.": "Please use only alphanumeric characters.",
+	"Account already exists.": "Account already exists."
 }
