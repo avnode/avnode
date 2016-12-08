@@ -40,49 +40,6 @@ exports.postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
-exports.logout = (req, res) => {
-  req.logout();
-  res.redirect('/');
-};
-
-exports.getAccount = (req, res) => {
-  res.render('account/profile', {
-    title: __('Account Management'),
-    countries: countries
-  });
-};
-
-exports.postProfile = (req, res, next) => {
-  req.assert('email', __('Please enter a valid email address.')).isEmail();
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
-  req.assert('stagename', __('Please use only alphanumeric characters.')).isAlphanumeric();
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/account');
-  }
-
-  User.findById(req.user.id, (err, user) => {
-    if (err) { return next(err); }
-    user.email = req.body.email || '';
-    user.profile.name = req.body.name || '';
-    user.stagename = req.body.stagename || '';
-    user.save((err) => {
-      if (err) {
-        if (err.code === 11000) {
-          req.flash('errors', { msg: __('The email address you have entered is already associated with an account.') });
-          return res.redirect('/account');
-        }
-        return next(err);
-      }
-      req.flash('success', { msg: __('Profile information has been updated.') });
-      res.redirect('/account');
-    });
-  });
-};
-
 exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect('/account');
@@ -126,4 +83,86 @@ exports.postSignup = (req, res, next) => {
       });
     });
   });
+};
+
+exports.logout = (req, res) => {
+  req.logout();
+  res.redirect('/');
+};
+
+exports.getAccount = (req, res) => {
+  res.redirect('/account/profile');
+};
+
+exports.getProfile = (req, res) => {
+  res.render('account/profile', {
+    title: __('Account Profile'),
+    countries: countries
+  });
+};
+exports.postProfile = (req, res, next) => {
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/account/profile');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.profile.name = req.body.name || '';
+    user.save((err) => {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', { msg: __('Profile information has been updated.') });
+      res.redirect('/account/profile');
+    });
+  });
+};
+
+exports.getPassword = (req, res) => {
+  res.render('account/password', {
+    title: __('Account Password')
+  });
+};
+exports.postPassword = (req, res, next) => {
+  req.assert('password', 'Password must be at least 4 characters long').len(4);
+  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/account/password');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.password = req.body.password;
+    user.save((err) => {
+      if (err) { return next(err); }
+      req.flash('success', { msg: 'Password has been changed.' });
+      res.redirect('/account/password');
+    });
+  });
+};
+
+exports.getEmails = (req, res) => {
+  res.render('account/emails', {
+    title: __('Account Emails')
+  });
+};
+exports.postEmails = (req, res, next) => {
+  res.redirect('/account/emails');
+};
+
+exports.getSettings = (req, res) => {
+  res.render('account/settings', {
+    title: __('Account Settings')
+  });
+};
+exports.postSettings = (req, res, next) => {
+  req.assert('stagename', __('Please use only alphanumeric characters.')).isAlphanumeric();
+  res.redirect('/account/settings');
 };

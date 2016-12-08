@@ -96,7 +96,18 @@ app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
 
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
-app.post('/account', passportConfig.isAuthenticated, userController.postProfile);
+
+app.get('/account/profile', passportConfig.isAuthenticated, userController.getProfile);
+app.post('/account/profile', passportConfig.isAuthenticated, userController.postProfile);
+
+app.get('/account/password', passportConfig.isAuthenticated, userController.getPassword);
+app.post('/account/password', passportConfig.isAuthenticated, userController.postPassword);
+
+app.get('/account/emails', passportConfig.isAuthenticated, userController.getEmails);
+app.post('/account/emails', passportConfig.isAuthenticated, userController.postEmails);
+
+app.get('/account/settings', passportConfig.isAuthenticated, userController.getSettings);
+app.post('/account/settings', passportConfig.isAuthenticated, userController.postSettings);
 
 app.get('/performers', performerController.getList);
 

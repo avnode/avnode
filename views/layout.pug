@@ -22,21 +22,17 @@ html
           if user
             li.nav-item
               a.nav-link(href='/account')
-                i.fa.fa-user.fa-fw
-                |  #{user.email}
+                i.fa.fa-user.fa-lg.fa-fw
+                span.hidden-md-down #{user.email}
             li.nav-item
               a.nav-link(href='/logout')
-                i.fa.fa-sign-out.fa-fw
-                =__('Logout')
+                i.fa.fa-power-off.fa-lg.fa-fw
+                span.hidden-md-down=__('Logout')
           else
             li.nav-item
-              a.nav-link(href='/login')
-                i.fa.fa-sign-out.fa-fw
-                =__('Login')
+              a.btn.btn-outline-secondary(href='/login')=__('Login')
             li.nav-item
-              a.nav-link(href='/signup')
-                i.fa.fa-sign-in.fa-fw
-                =__('Sign up')
+              a.btn.btn-outline-success(href='/signup')=__('Sign up')
     main
       .container
         include partials/flash

@@ -1,2 +1,7 @@
-nav.list-group
-  a.list-group-item.list-group-item-action(href='/account')=__('Your profile')
+.card
+  .card-header=__('Personal')
+  .list-group.list-group-flush
+    a.list-group-item.list-group-item-action(href='/account/profile')=__('Profile')
+    a.list-group-item.list-group-item-action(href='/account/password')=__('Password')
+    a.list-group-item.list-group-item-action(href='/account/emails')=__('Emails')
+    a.list-group-item.list-group-item-action(href='/account/settings')=__('Settings')

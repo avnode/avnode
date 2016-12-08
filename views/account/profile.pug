@@ -7,50 +7,30 @@ block content
     .col-lg-9.col-md-8
       form(method='post')
         input(type='hidden', name='_csrf', value=_csrf)
-        .modal(id='stagename')
-          .modal-dialog
-            .modal-content
-              .modal-header
-                button(type='button', class='close', data-dismiss='modal', aria-label='Close')
-                  span(aria-hidden='true') &times;
-                h4.modal-title=__('Caution!')
-              .modal-body
-                p=__('Changing your stagename can have unintended side effects!')
-                label(for='stagename')=__('Stagename')
-                .input-group
-                  span.input-group-addon #{settings.base}
-                  input.form-control(type='text', name='stagename', value=user.stagename)
-              .modal-footer
-                button.btn.btn-danger=__('Change')
         .card
-          .card-header=__('Stagename')
+          .card-header=__('Public')
           .card-block
-            p.card-text=__('Changing your stagename can have unintended side effects.')
-            button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#stagename')=__('Change')
-        .form-group
-          label(for='gender')=__('Gender')
-          select.form-control.custom-select(name='gender')
-            option(value='')=__('Please select')
-            option(value='female')=__('Male')
-            option(value='male')=__('Female')
-            option(value='other')=__('Other')
-        .form-group
-          label(for='name')=__('Name')
-          input.form-control(type='text', name='name', id='name', value=user.profile.name, placeholder=__('John Doe'), autofocus, required)
-        .form-group
-          label(for='email')=__('Email')
-          input.form-control(type='email', name='email', id='email', value=user.email, placeholder=__('example@foo.bar'), required)
-        .form-group
-          label(for='birthday')=__('Birthday')
-          input.form-control(type='birthday', name='birthday', id='birthday', value=user.profile.birthday, placeholder=__('YYYY-MM-DD'))
-        .form-group
-          label(for='citizenship')=__('About')
-          textarea.form-control(rows='4', name='about')
-        .form-group
-          label(for='citizenship')=__('Citizenship')
-          select.form-control.custom-select(name='citizenship')
-            option(value='')=__('Please select')
-            each country in countries
-              option(value=country.name, selected=(user.profile.citizenship && country.name==user.profile.citizenship ? 'selected' : undefined))=country.name
-        .form-group
-          button.btn.btn-primary(type='submit')=__('Save')
+            .form-group
+              label(for='gender')=__('Gender')
+              select.form-control.custom-select(name='gender')
+                option(value='')=__('Please select')
+                option(value='female')=__('Male')
+                option(value='male')=__('Female')
+                option(value='other')=__('Other')
+            .form-group
+              label(for='name')=__('Name')
+              input.form-control(type='text', name='name', id='name', value=user.profile.name, placeholder=__('John Doe'), autofocus)
+            .form-group
+              label(for='birthday')=__('Birthday')
+              input.form-control(type='birthday', name='birthday', id='birthday', value=user.profile.birthday, placeholder=__('YYYY-MM-DD'))
+            .form-group
+              label(for='citizenship')=__('About')
+              textarea.form-control(rows='4', name='about')
+            .form-group
+              label(for='citizenship')=__('Citizenship')
+              select.form-control.custom-select(name='citizenship')
+                option(value='')=__('Please select')
+                each country in countries
+                  option(value=country.name, selected=(user.profile.citizenship && country.name==user.profile.citizenship ? 'selected' : undefined))=country.name
+            .form-group
+              button.btn.btn-primary(type='submit')=__('Save')
