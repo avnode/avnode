@@ -51,5 +51,22 @@
 	"Cancel": "Cancel",
 	"Caution!": "Caution!",
 	"Please use only alphanumeric characters.": "Please use only alphanumeric characters.",
-	"Account already exists.": "Account already exists."
+	"Account already exists.": "Account already exists.",
+	"Public Profile": "Public Profile",
+	"Public": "Public",
+	"Profile": "Profile",
+	"Account": "Account",
+	"Emails": "Emails",
+	"Settings": "Settings",
+	"Personal": "Personal",
+	"Data": "Data",
+	"Crews": "Crews",
+	"Account Password": "Account Password",
+	"Account Emails": "Account Emails",
+	"Account Settings": "Account Settings",
+	"Account Profile": "Account Profile",
+	"New Password": "New Password",
+	"New password": "New password",
+	"Confirm password": "Confirm password",
+	"Change Password": "Change Password"
 }
