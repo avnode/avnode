@@ -14,18 +14,21 @@ block content
               label(for='gender')=__('Gender')
               select.form-control.custom-select(name='gender')
                 option(value='')=__('Please select')
-                option(value='female')=__('Male')
-                option(value='male')=__('Female')
-                option(value='other')=__('Other')
+                option(value='female', selected=(user.profile.gender == 'female' ? 'selected' : undefined))=__('Male')
+                option(value='male', selected=(user.profile.gender == 'male' ? 'selected' : undefined))=__('Female')
+                option(value='other', selected=(user.profile.gender == 'other' ? 'selected' : undefined))=__('Other')
             .form-group
               label(for='name')=__('Name')
               input.form-control(type='text', name='name', id='name', value=user.profile.name, placeholder=__('John Doe'), autofocus)
             .form-group
               label(for='birthday')=__('Birthday')
-              input.form-control(type='birthday', name='birthday', id='birthday', value=user.profile.birthday, placeholder=__('YYYY-MM-DD'))
+              .input-group.date(data-provide='datepicker-inline')
+                .input-group-addon
+                  i.fa.fa-calendar
+                input.form-control(type='birthday', name='birthday', id='birthday', value=user.profile.birthday, placeholder=__('YYYY-MM-DD'), data-date-format="yyyy-mm-dd", data-provide='datepicker')
             .form-group
               label(for='citizenship')=__('About')
-              textarea.form-control(rows='4', name='about')
+              textarea.form-control(rows='4', name='about')=user.profile.about
             .form-group
               label(for='citizenship')=__('Citizenship')
               select.form-control.custom-select(name='citizenship')

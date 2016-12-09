@@ -68,5 +68,8 @@
 	"New Password": "New Password",
 	"New password": "New password",
 	"Confirm password": "Confirm password",
-	"Change Password": "Change Password"
+	"Change Password": "Change Password",
+	"Please use only letters.": "Please use only letters.",
+	"Please use a valid date.": "Please use a valid date.",
+	"Current Password": "Current Password"
 }

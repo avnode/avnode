@@ -1,7 +1,8 @@
 .card
   .card-header=__('Personal')
   .list-group.list-group-flush
-    a.list-group-item.list-group-item-action(href='/account/profile')=__('Profile')
-    a.list-group-item.list-group-item-action(href='/account/password')=__('Password')
-    a.list-group-item.list-group-item-action(href='/account/emails')=__('Emails')
-    a.list-group-item.list-group-item-action(href='/account/settings')=__('Settings')
+    each item in nav
+      if item.url == path
+        a.active.list-group-item.list-group-item-action(href=item.url)=item.title
+      else
+        a.list-group-item.list-group-item-action(href=item.url)=item.title
