@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('express-flash');
 const expressStatusMonitor = require('express-status-monitor');
-const expressValidator = require('express-validator');
 const sass = require('node-sass-middleware');
+const lusca = require('lusca');
 
 const dotenv = require('dotenv');
 dotenv.load({ path: '.env.local' });
@@ -28,6 +28,7 @@ const userController = require('./controllers/user');
 const performerController = require('./controllers/performer');
 
 const passportConfig = require('./config/passport');
+const validationConfig = require('./config/validation');
 
 const app = express();
 
@@ -50,7 +51,6 @@ app.use(sass({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressValidator());
 app.use(flash());
 app.use(i18n.init);
 app.use(session({
@@ -62,6 +62,11 @@ app.use(session({
     autoReconnect: true
   })
 }));
+app.use((req, res, next) => {
+  lusca.csrf()(req, res, next);
+});
+app.use(lusca.xframe('SAMEORIGIN'));
+app.use(lusca.xssProtection(true));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
@@ -92,7 +97,7 @@ app.get('/', homeController.index);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/login', userController.getLogin);
-app.post('/login', userController.postLogin);
+app.post('/login', validationConfig.validate(userController.postLoginSchema), userController.postLogin);
 app.get('/logout', userController.logout);
 
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
@@ -110,6 +115,13 @@ app.get('/account/settings', passportConfig.isAuthenticated, userController.getS
 app.post('/account/settings', passportConfig.isAuthenticated, userController.postSettings);
 
 app.get('/performers', performerController.getList);
+
+app.use(function (err, req, res, next) {
+  if (err.isBoom) {
+    req.flash('errors', { msg: err.message });
+    return res.redirect('back');
+  }
+});
 
 app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env')); 

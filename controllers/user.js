@@ -1,9 +1,8 @@
-const async = require('async');
-const crypto = require('crypto');
-const nodemailer = require('nodemailer');
 const passport = require('passport');
 const countries = require('country-list')().getData();
 const User = require('../models/User');
+const Joi = require('joi');
+
 let nav = [{
   url: '/account/profile',
   title: __('Profile')
@@ -27,18 +26,14 @@ exports.getLogin = (req, res) => {
   });
 };
 
-exports.postLogin = (req, res, next) => {
-  req.assert('email', __('Email is not valid')).isEmail();
-  req.assert('password', __('Password cannot be blank')).notEmpty();
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/login');
+exports.postLoginSchema = {
+  body: {
+    _csrf: Joi.string().required().error(new Error(__('Sorry, malformed request.'))),
+    email: Joi.string().email().required().error(new Error(__('E-mail is not correct.'))),
+    password: Joi.string().required().error(new Error(__('Password is required!')))
   }
-
+};
+exports.postLogin = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) { return next(err); }
     if (!user) {
@@ -63,18 +58,6 @@ exports.getSignup = (req, res) => {
 };
 
 exports.postSignup = (req, res, next) => {
-  req.assert('email', __('Email is not valid')).isEmail();
-  req.assert('password', __('Use at least eight characters')).len(8);
-  req.assert('confirmPassword', __('Passwords do not match')).equals(req.body.password);
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/signup');
-  }
-
   const user = new User({
     email: req.body.email,
     password: req.body.password
@@ -116,16 +99,6 @@ exports.getProfile = (req, res) => {
   });
 };
 exports.postProfile = (req, res, next) => {
-  req.assert('gender', __('Please use only letters.')).isAlpha();
-  req.assert('name', __('Please use only letters.')).isAlpha();
-  req.assert('citizenship', __('Please use only letters.')).isAlpha();
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/account/profile');
-  }
-
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     user.profile.gender = req.body.gender || '';
@@ -151,16 +124,6 @@ exports.getPassword = (req, res) => {
   });
 };
 exports.postPassword = (req, res, next) => {
-  req.assert('newPassword', 'Password must be at least 4 characters long').len(4);
-  req.assert('confirmNewPassword', 'Passwords do not match').equals(req.body.newPassword);
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/account/password');
-  }
-
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
 
@@ -200,6 +163,5 @@ exports.getSettings = (req, res) => {
   });
 };
 exports.postSettings = (req, res, next) => {
-  req.assert('stagename', __('Please use only alphanumeric characters.')).isAlphanumeric();
   res.redirect('/account/settings');
 };
