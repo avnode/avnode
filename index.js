@@ -62,9 +62,13 @@ app.use(session({
     autoReconnect: true
   })
 }));
-app.use((req, res, next) => {
-  lusca.csrf()(req, res, next);
-});
+// This blocks mocha testing, so we disable it
+// in this context…
+if(process.env.NODE_ENV !== 'testing') {
+  app.use((req, res, next) => {
+    lusca.csrf()(req, res, next);
+  });
+}
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 app.use(passport.initialize());
