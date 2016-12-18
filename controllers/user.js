@@ -140,7 +140,7 @@ exports.postPassword = (req, res, next) => {
         req.flash('errors', { msg: 'Password has not been changed.' });
         res.redirect('/account/password');
       }
-    })
+    });
   });
 };
 
@@ -151,7 +151,7 @@ exports.getEmails = (req, res) => {
     path: req.path
   });
 };
-exports.postEmails = (req, res, next) => {
+exports.postEmails = (req, res, _next) => {
   res.redirect('/account/emails');
 };
 
@@ -162,6 +162,6 @@ exports.getSettings = (req, res) => {
     path: req.path
   });
 };
-exports.postSettings = (req, res, next) => {
+exports.postSettings = (req, res, _next) => {
   res.redirect('/account/settings');
 };

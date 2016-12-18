@@ -1,6 +1,6 @@
-var Joi = require('joi');
-var Boom = require('boom');
-var _ = require('lodash');
+const Joi = require('joi');
+const Boom = require('boom');
+const _ = require('lodash');
 
 module.exports.validate = function(schema) {
   return function validateRequest(req, res, next) {
@@ -15,12 +15,12 @@ module.exports.validate = function(schema) {
     });
     return Joi.validate(params, schema, onValidationComplete);
 
-    function onValidationComplete(err, validated) {
+    function onValidationComplete(err, _validated) {
       if (err) {
         return next(Boom.badRequest(err.message, err.details));
       }
       _.assignIn(req, params);
       return next();
     }
-  }
+  };
 };

@@ -17,10 +17,10 @@ dotenv.load({ path: '.env.local' });
 
 const i18n = require('i18n');
 i18n.configure({
-    locales:['en'],
-    defaultLocale: 'en',
-    directory: __dirname + '/locales',
-    register: global
+  locales:['en'],
+  defaultLocale: 'en',
+  directory: __dirname + '/locales',
+  register: global
 });
 
 const homeController = require('./controllers/home');
@@ -116,7 +116,7 @@ app.post('/account/settings', passportConfig.isAuthenticated, userController.pos
 
 app.get('/performers', performerController.getList);
 
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res, _next) {
   if (err.isBoom) {
     req.flash('errors', { msg: err.message });
     return res.redirect('back');
@@ -124,7 +124,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(app.get('port'), () => {
-  console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env')); 
+  console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
   console.log('  Press CTRL-C to stop\n');
 });
 module.exports = app;
