@@ -3,7 +3,7 @@ const countries = require('country-list')().getData();
 const User = require('../models/User');
 const Joi = require('joi');
 
-let nav = [{
+const nav = [{
   url: '/account/profile',
   title: __('Profile')
 },{
@@ -60,7 +60,8 @@ exports.getSignup = (req, res) => {
 exports.postSignup = (req, res, next) => {
   const user = new User({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    stagename: generateDummyStagename()
   });
 
   User.findOne({ email: req.body.email }, (err, existingUser) => {
@@ -80,6 +81,129 @@ exports.postSignup = (req, res, next) => {
     });
   });
 };
+
+const generateDummyStagename = () => {
+	return `${getAttribute()}_${getAnimal()}`;
+};
+
+const getAnimal = () => {
+	// http://list25.com/25-most-popular-animals-on-google-search/
+  const animals = [
+    'Bison',
+		'Dolphin',
+		'Eagle',
+		'Pony',
+		'Ape',
+		'Lobster',
+		'Monkey',
+		'Cow',
+		'Deer',
+		'Duck',
+		'Rabbit',
+		'Spider',
+		'Wolf',
+		'Turkey',
+		'Lion',
+		'Pig',
+		'Snake',
+		'Shark',
+		'Bird',
+		'Bear',
+		'Fish',
+		'Chicken',
+		'Horse',
+		'Cat',
+		'Dog'
+  ]
+
+	return animals[(Math.floor(Math.random() * animals.length))].toLowerCase();
+};
+
+const getAttribute = () => {
+	// http://examples.yourdictionary.com/examples-of-attributes.html
+  const attributes = [
+    'Achiever',
+    'Active',
+    'Adaptable',
+    'Ambitious',
+    'Balanced',
+    'Candid',
+    'Cheerful',
+    'Communicative',
+    'Compassionate',
+    'Competitive',
+    'Consistent',
+    'Cooperative',
+    'Courageous',
+    'Curious',
+    'Devoted',
+    'Diplomatic',
+    'Emotional',
+    'Enterprising',
+    'Enthusiastic',
+    'Entrepreneurial',
+    'Exciting',
+    'Facilitator',
+    'Fast',
+    'Flexible',
+    'Focused',
+    'Forgiving',
+    'Generous',
+    'Genuine',
+    'Good listener',
+    'Helpful',
+    'Imaginative',
+    'Incredible',
+    'Independent',
+    'Industrious',
+    'Initiator',
+    'Insightful',
+    'Interesting',
+    'Inventive',
+    'Knowledgeable',
+    'Leader',
+    'Literate',
+    'Logical',
+    'Meditative',
+    'Mediator',
+    'Modest',
+    'Organized',
+    'Original',
+    'Outgoing',
+    'Particular',
+    'Patient',
+    'Perceptive',
+    'Personable',
+    'Persuasive',
+    'Pleasant',
+    'Political',
+    'Positive',
+    'Powerful',
+    'Practical',
+    'Proactive',
+    'Productive',
+    'Professional',
+    'Quality',
+    'Quick',
+    'Quirky',
+    'Quixotic',
+    'Racy',
+    'Rebellious',
+    'Responsible',
+    'Sensible',
+    'Sensitive',
+    'Sensuous',
+    'Sincere',
+    'Skilled',
+    'Solid',
+    'Sporty',
+    'Thoughtful',
+    'Trustworthy',
+    'Wise'
+  ];
+
+	return attributes[(Math.floor(Math.random() * attributes.length))].toLowerCase();
+}
 
 exports.logout = (req, res) => {
   req.logout();
