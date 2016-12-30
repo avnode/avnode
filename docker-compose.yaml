@@ -1,0 +1,30 @@
+version: '2'
+
+networks:
+  avnet:
+
+services:
+  mongo:
+    image: mongo:3.4
+    volumes:
+      - ./.db:/data/db
+    networks:
+      - avnet
+    ports:
+      - "127.0.0.1:27017:27017"
+    container_name: mongo
+
+#  web:
+#    build: '.'
+#    ports:
+#      - "127.0.0.1:3001:3001"
+#    networks:
+#      - avnet
+#    #volumes:
+#      # - ./:/usr/local/app:ro
+#    depends_on:
+#      - mongo
+#
+#    environment:
+#      - SASS_BINARY_PATH=/usr/local/bin/sassc
+#        #- SASS_BINARY_NAME=sassc

@@ -3,3 +3,4 @@ public/css/main.css
 node_modules
 npm-debug.log
 storage
+.db
