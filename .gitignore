@@ -1,5 +1,5 @@
 public/css/main.css
-.env
+.env*
 node_modules
 npm-debug.log
 storage
