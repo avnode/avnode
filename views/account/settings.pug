@@ -23,6 +23,6 @@ block content
         .card
           .card-header=__('Stagename')
           .card-block
-            p.card-subtitle #{user.stagename}
+            p.card-text.h4 #{user.stagename}
             p.card-text #{process.env.BASE}performer/#{user.slug}
             button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#stagename')=__('Change')

@@ -10,7 +10,7 @@ html(lang='en')
     link(rel='stylesheet', href='/css/main.css')
     script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.slim.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
-    script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js')
   body
     nav.navbar.navbar-toggleable-sm.navbar-fixed-top.navbar-inverse.bg-inverse
       .container
@@ -37,10 +37,11 @@ html(lang='en')
             li.nav-item
               a.btn.btn-outline-secondary(href='/login')=__('Login')
             li.nav-item
-              a.btn.btn-outline-success(href='/signup')=__('Sign up')
+              a.btn.btn-outline-success.ml-3(href='/signup')=__('Sign up')
+    .container
+      include partials/flash
     main
       .container
-        include partials/flash
         .jumbotron
           h1.display-4=title
         block content
