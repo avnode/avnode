@@ -6,29 +6,16 @@ const chalk = require('chalk');
 const path = require('path');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-const passport = require('passport');
 const flash = require('express-flash');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
-const lusca = require('lusca');
+
+const i18n = require('./lib/plugins/i18n');
+const passport = require('./lib/plugins/passport');
+const routes = require('./lib/routes');
 
 const dotenv = require('dotenv');
 dotenv.load({ path: '.env.local' });
-
-const i18n = require('i18n');
-i18n.configure({
-  locales:['en'],
-  defaultLocale: 'en',
-  directory: __dirname + '/locales',
-  register: global
-});
-
-const homeController = require('./controllers/home');
-const userController = require('./controllers/user');
-const performerController = require('./controllers/performer');
-
-const passportConfig = require('./config/passport');
-const validationConfig = require('./config/validation');
 
 const app = express();
 
@@ -64,6 +51,8 @@ app.use(session({
 }));
 // This blocks mocha testing, so we disable it
 // in this context…
+/**
+const lusca = require('lusca');
 if(process.env.NODE_ENV !== 'testing') {
   app.use((req, res, next) => {
     lusca.csrf()(req, res, next);
@@ -71,6 +60,7 @@ if(process.env.NODE_ENV !== 'testing') {
 }
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
+*/
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
@@ -96,29 +86,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 84600 }));
-
-app.get('/', homeController.index);
-app.get('/signup', userController.getSignup);
-app.post('/signup', userController.postSignup);
-app.get('/login', userController.getLogin);
-app.post('/login', validationConfig.validate(userController.postLoginSchema), userController.postLogin);
-app.get('/logout', userController.logout);
-
-app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
-
-app.get('/account/profile', passportConfig.isAuthenticated, userController.getProfile);
-app.post('/account/profile', passportConfig.isAuthenticated, userController.postProfile);
-
-app.get('/account/password', passportConfig.isAuthenticated, userController.getPassword);
-app.post('/account/password', passportConfig.isAuthenticated, userController.postPassword);
-
-app.get('/account/emails', passportConfig.isAuthenticated, userController.getEmails);
-app.post('/account/emails', passportConfig.isAuthenticated, userController.postEmails);
-
-app.get('/account/settings', passportConfig.isAuthenticated, userController.getSettings);
-app.post('/account/settings', passportConfig.isAuthenticated, userController.postSettings);
-
-app.get('/performers', performerController.getList);
+app.use(routes);
 
 app.use(function (err, req, res, _next) {
   if (err.isBoom) {
@@ -131,4 +99,5 @@ app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
   console.log('  Press CTRL-C to stop\n');
 });
+
 module.exports = app;

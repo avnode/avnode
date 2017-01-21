@@ -2,3 +2,5 @@ public/css/main.css
 .env
 node_modules
 npm-debug.log
+storage
+.db

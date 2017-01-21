@@ -45,5 +45,13 @@
 	"Use at least eight characters": "Use at least eight characters",
 	"Forgot your password?": "Forgot your password?",
 	"Create Account": "Create Account",
-	"Signup": "Signup"
+	"Signup": "Signup",
+	"You are logged in.": "You are logged in.",
+	"Image": "Image",
+	"Account Image": "Account Image",
+	"Profile information has been updated.": "Profile information has been updated.",
+	"Invalid email or password.": "Invalid email or password.",
+	"Account already exists.": "Account already exists.",
+	"Account image has been saved.": "Account image has been saved.",
+	"Hmm…": "Hmm…"
 }
