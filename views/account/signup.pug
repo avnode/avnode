@@ -4,8 +4,11 @@ block content
   form(method='post')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group
+      label(for='stagename')=__('Stagename')
+      input.form-control(type='text', name='stagename', id='stagename', placeholder=__('Stagename'), autofocus, required)
+    .form-group
       label(for='email')=__('Email')
-      input.form-control(type='email', name='email', id='email', placeholder=__('Email'), autofocus, required)
+      input.form-control(type='email', name='email', id='email', placeholder=__('Email'), required)
     .form-group
       label(for='password')=__('Password')
       input.form-control(type='password', name='password', id='password', placeholder=__('Password'), required)
