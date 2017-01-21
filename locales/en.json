@@ -55,5 +55,6 @@
 	"Account image has been saved.": "Account image has been saved.",
 	"Hmm…": "Hmm…",
 	"Please check your inbox and confirm your Email": "Please check your inbox and confirm your Email",
-	"Your account is confirmed, you can now log in.": "Your account is confirmed, you can now log in."
+	"Your account is confirmed, you can now log in.": "Your account is confirmed, you can now log in.",
+	"Email %s not found.": "Email %s not found."
 }

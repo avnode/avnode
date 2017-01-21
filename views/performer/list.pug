@@ -7,17 +7,17 @@ block content
         if item.image
           img.card-img-top(
             src=`/storage/${item.image}`
-            alt=`${item.profile.name} profile image`
+            alt=`${item.name} profile image`
           )
         else
           img.card-img-top(
             src="/images/logo.svg"
             style="width: 100%"
-            alt=`${item.profile.name} profile image`
+            alt=`${item.name} profile image`
           )
         .card-block
           h3.card-title
-            =item.profile.name
+            =item.name
           h4.card-title
             =item.stagename
           .card-title
