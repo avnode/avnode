@@ -19,7 +19,7 @@ block content
           .card-block
             .form-group
               if user.image
-                img(
+                img.img-thumbnail.mb-3(
                   src=`/storage/${user.image}`
                 )
               else
