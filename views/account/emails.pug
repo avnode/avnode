@@ -22,24 +22,38 @@ block content
               .col-lg-6
                 .input-group.text-sm-right
                   if email.is_confirmed
-                    span.input-group-btn
-                      a.btn.btn-secondary.btn-sm(
-                        href="#"
-                      )=__('Make it primary')
+                    if !email.is_primary
+                      span.input-group-btn
+                        a.btn.btn-secondary.btn-sm.ajax(
+                          href="#"
+                          data-method="put"
+                          data-endpoint="/account/emails/primary"
+                          data-payload=`{"email": "${email.email}"}`
+                        )=__('Make it primary')
                     if email.is_public
                       span.input-group-btn
-                        a.btn.btn-secondary.btn-sm(
+                        a.btn.btn-secondary.btn-sm.ajax(
                           href="#"
+                          data-method="put"
+                          data-endpoint="/account/emails/private"
+                          data-payload=`{"email": "${email.email}"}`
                         )=__('Make it private')
                     else
                       span.input-group-btn
-                        a.btn.btn-secondary.btn-sm(
+                        a.btn.btn-secondary.btn-sm.ajax(
                           href="#"
+                          data-method="put"
+                          data-endpoint="/account/emails/public"
+                          data-payload=`{"email": "${email.email}"}`
                         )=__('Make it public')
-                  span.input-group-btn
-                    a.btn.btn-secondary.btn-sm(
-                      href="#"
-                    )=__('Delete')
+                  if !email.is_primary
+                    span.input-group-btn
+                      a.btn.btn-secondary.btn-sm.ajax(
+                        href="#"
+                        data-method="delete"
+                        data-endpoint="/account/emails"
+                        data-payload=`{"email": "${email.email}"}`
+                      )=__('Delete')
         form(method='post')
           input(type='hidden', name='_csrf', value=_csrf)
           .card-footer

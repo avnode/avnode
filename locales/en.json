@@ -65,5 +65,9 @@
 	"Delete": "Delete",
 	"Add new Email": "Add new Email",
 	"unconfirmed": "unconfirmed",
-	"confirmed": "confirmed"
+	"confirmed": "confirmed",
+	"Email confirmed": "Email confirmed",
+	"primary": "primary",
+	"public": "public",
+	"Make it private": "Make it private"
 }
