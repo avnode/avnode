@@ -37,7 +37,7 @@ describe('/login', () => {
     // send body data in the right form with supertest…
     request(server)
       .post('/login')
-      .end((err, _res) => {
+      .end((_err, _res) => {
         done();
       });
   });
