@@ -5,7 +5,65 @@ block content
     .col-lg-3.col-md-4
       include menu
     .col-lg-9.col-md-8
-      form(method='post')
-        input(type='hidden', name='_csrf', value=_csrf)
-        .card
-          .card-header=__('Emails')
+      .card
+        .card-header=__('Emails')
+        each email in user.emails
+          .card-block
+            if email.is_primary
+              span.badge.badge-primary=__('primary')
+            if email.is_confirmed
+              span.badge.badge-success=__('confirmed')
+            else
+              span.badge.badge-danger=__('unconfirmed')
+            if email.is_public
+              span.badge.badge-default=__('public')
+            .row
+              .col-lg-6=email.email
+              .col-lg-6
+                .input-group.text-sm-right
+                  if email.is_confirmed
+                    if !email.is_primary
+                      span.input-group-btn
+                        a.btn.btn-secondary.btn-sm.ajax(
+                          href="#"
+                          data-method="put"
+                          data-endpoint="/account/emails/primary"
+                          data-payload=`{"email": "${email.email}"}`
+                        )=__('Make it primary')
+                    if email.is_public
+                      span.input-group-btn
+                        a.btn.btn-secondary.btn-sm.ajax(
+                          href="#"
+                          data-method="put"
+                          data-endpoint="/account/emails/private"
+                          data-payload=`{"email": "${email.email}"}`
+                        )=__('Make it private')
+                    else
+                      span.input-group-btn
+                        a.btn.btn-secondary.btn-sm.ajax(
+                          href="#"
+                          data-method="put"
+                          data-endpoint="/account/emails/public"
+                          data-payload=`{"email": "${email.email}"}`
+                        )=__('Make it public')
+                  if !email.is_primary
+                    span.input-group-btn
+                      a.btn.btn-secondary.btn-sm.ajax(
+                        href="#"
+                        data-method="delete"
+                        data-endpoint="/account/emails"
+                        data-payload=`{"email": "${email.email}"}`
+                      )=__('Delete')
+        form(method='post')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .card-footer
+            .form-group
+              label(for="newEmail")=__('Add new Email')
+              input.form-control(
+                type='email'
+                name='newEmail'
+                id='newEmail'
+                placeholder=__('example@foo.bar')
+              )
+            .form-group
+              button.btn.btn-primary(type='submit')=__('Save')

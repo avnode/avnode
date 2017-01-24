@@ -55,5 +55,19 @@
 	"Account image has been saved.": "Account image has been saved.",
 	"Hmm…": "Hmm…",
 	"Please check your inbox and confirm your Email": "Please check your inbox and confirm your Email",
-	"Your account is confirmed, you can now log in.": "Your account is confirmed, you can now log in."
+	"Your account is confirmed, you can now log in.": "Your account is confirmed, you can now log in.",
+	"Email %s not found.": "Email %s not found.",
+	"Sorry, username already exists.": "Sorry, username already exists.",
+	"Sorry, stagename already exists.": "Sorry, stagename already exists.",
+	"New E-Mail": "New E-Mail",
+	"Make it public": "Make it public",
+	"Make it primary": "Make it primary",
+	"Delete": "Delete",
+	"Add new Email": "Add new Email",
+	"unconfirmed": "unconfirmed",
+	"confirmed": "confirmed",
+	"Email confirmed": "Email confirmed",
+	"primary": "primary",
+	"public": "public",
+	"Make it private": "Make it private"
 }

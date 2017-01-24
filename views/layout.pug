@@ -1,5 +1,5 @@
 doctype html
-html
+html(lang='en')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -8,18 +8,19 @@ html
     link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css')
     link(rel='stylesheet', href='/css/font-awesome/font-awesome.css')
     link(rel='stylesheet', href='/css/main.css')
-    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.slim.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
-    script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js')
+    script(src='/js/ajax.js')
   body
-    nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
+    nav.navbar.navbar-toggleable-sm.navbar-fixed-top.navbar-inverse.bg-inverse
       .container
         a.navbar-brand(href='/')
           img(src='/images/logo.svg', width='30', height='30', class='d-inline-block align-top' alt='')
-        ul.nav.navbar-nav
+        ul.navbar-nav.mr-auto
           li.nav-item
             a.nav-link(href='/performers')=__('Performers')
-        ul.nav.navbar-nav.float-xs-right
+        ul.navbar-nav
           if user
             li.nav-item
               a.nav-link(href='/account')
@@ -37,10 +38,11 @@ html
             li.nav-item
               a.btn.btn-outline-secondary(href='/login')=__('Login')
             li.nav-item
-              a.btn.btn-outline-success(href='/signup')=__('Sign up')
+              a.btn.btn-outline-success.ml-3(href='/signup')=__('Sign up')
+    .container
+      include partials/flash
     main
       .container
-        include partials/flash
         .jumbotron
           h1.display-4=title
         block content
