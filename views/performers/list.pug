@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .card-columns
+    each item in data
+      .card
+        img.card-img-top.img-fluid(
+          src=`${item.profileImage}`
+          alt=`${item.name} profile image`
+        )
+        .card-block
+          h4.card-title
+            =item.stagename
+          a.btn.btn-primary(href=`/performers/${item.slug}`)=__('More')

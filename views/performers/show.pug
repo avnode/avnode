@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  .row
+    .col-lg-8
+    .col-lg-4
+      .card
+        img.card-img-top.img-fluid(
+          src=`${performer.profileImage}`
+          alt=`${performer.name} profile image`
+        )
+        .card-block
+          h4.card-title=performer.name
+          h6.card-subtitle.mb-2.text-muted=performer.citizenship
+          p.card-text
+            each email in performer.publicEmails
+              a(href=`mailto:${email.email}`)
+                i.fa.fa-envelope-o
+                | &nbsp;
+                = email.email
+          if performer.about
+            p.card-text=performer.about
