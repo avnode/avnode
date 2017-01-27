@@ -5,10 +5,10 @@ block content
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group
       label(for='stagename')=__('Stagename')
-      input.form-control(type='text', name='stagename', id='stagename', placeholder=__('Stagename'), autofocus, required)
+      input.form-control(type='text', name='stagename', id='stagename', placeholder=__('Stagename'), autocomplete='off', autofocus, required)
     .form-group
       label(for='email')=__('Email')
-      input.form-control(type='email', name='email', id='email', placeholder=__('Email'), required)
+      input.form-control(type='email', name='email', id='email', placeholder=__('Email'), autocomplete='off', required)
     .form-group
       label(for='password')=__('Password')
       input.form-control(type='password', name='password', id='password', placeholder=__('Password'), required)
@@ -16,6 +16,4 @@ block content
       label(for='confirmPassword')=__('Confirm Password')
       input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder=__('Confirm Password'), required)
     .form-group
-      button.btn.btn-success(type='submit')
-        i.fa.fa-user-plus.fa-fw
-        =__('Signup')
+      button.btn.btn-success(type='submit')=__('Signup')
