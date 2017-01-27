@@ -10,8 +10,9 @@ block content
           alt=`${performer.name} profile image`
         )
         .card-block
-          h4.card-title=performer.name
-          h6.card-subtitle.mb-2.text-muted=performer.citizenship
+          h4.card-title=performer.stagename
+          if performer.name
+            h6.card-subtitle.mb-2.text-muted=performer.name
           p.card-text
             each email in performer.publicEmails
               a(href=`mailto:${email.email}`)
