@@ -34,15 +34,13 @@ html(lang='en')
               li.nav-item
                 a.nav-link(href='/account')
                   i.fa.fa-user.fa-lg.fa-fw
-                  span #{user.email}
               li.nav-item
                 form(
-                  method="post"
-                  action="/logout"
+                  method='post'
+                  action='/logout'
                 )
                   button.btn-link.nav-link
                     i.fa.fa-power-off.fa-lg.fa-fw
-                    span=__('Logout')
             else
               li.nav-item
                 a.btn.btn-outline-secondary(href='/login')=__('Login')

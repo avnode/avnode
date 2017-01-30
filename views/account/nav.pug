@@ -1,0 +1,6 @@
+.nav.nav-pills.mb-3
+  each item in nav
+    if item.key == navkey
+      a.active.nav-link(href=item.url)=item.title
+    else
+      a.nav-link(href=item.url)=item.title

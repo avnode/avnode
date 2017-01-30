@@ -21,3 +21,9 @@ footer {
     column-count: 3;
   }
 }
+.navbar {
+  .btn, .btn-link {
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+}

@@ -1,8 +1,0 @@
-.card.mb-3
-  .card-header=__('Personal')
-  .list-group.list-group-flush
-    each item in nav
-      if item.url == path
-        a.active.list-group-item.list-group-item-action(href=item.url)=item.title
-      else
-        a.list-group-item.list-group-item-action(href=item.url)=item.title

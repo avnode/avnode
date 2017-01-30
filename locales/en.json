@@ -70,5 +70,9 @@
 	"primary": "primary",
 	"public": "public",
 	"Make it private": "Make it private",
-	"More": "More"
+	"More": "More",
+	"Events": "Events",
+	"List": "List",
+	"Your Events": "Your Events",
+	"General": "General"
 }

@@ -1,9 +1,10 @@
-extends ../layout
+extends ../../layout
 
 block content
+  include ../nav
   .row
     .col-lg-3.col-md-4
-      include menu
+      include ../subnav
     .col-lg-9.col-md-8
       form(
         method='post'
