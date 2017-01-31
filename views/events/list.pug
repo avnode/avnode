@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+  .card-columns
+    each item in data
+      .card
+        .card-block
+          h4.card-title
+            =item.title
+          a.btn.btn-primary(href=item.publicUrl)=__('More')

@@ -18,4 +18,15 @@ describe('Event', () => {
     );
     done();
   });
+  it('should have a valid virtual property publicUrl', (done) => {
+    const event = new Event({
+      title: 'Foo Bar',
+      slug: slug.parse('Foo Bar')
+    });
+    assert.equal(
+      process.env.BASE + 'events/foo-bar',
+      event.publicUrl
+    );
+    done();
+  });
 });
