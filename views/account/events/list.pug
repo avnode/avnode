@@ -6,5 +6,22 @@ block content
     .col-lg-3.col-md-4
       include ../subnav
     .col-lg-9.col-md-8
-      .card
-        .card-header=__('List')
+      .list-group
+        each event in user.events
+          .list-group-item
+            .d-flex.w-100.justify-content-between
+              h5=event.title
+              .btn-group
+                a.btn.btn-danger.btn-sm.ajax(
+                  href="#"
+                  data-method="delete"
+                  data-endpoint=event.editUrl,
+                  data-payload=`{"_id": "${event._id}"}`
+                )=__('Delete')
+                a.btn.btn-secondary.btn-sm(
+                  href=event.editUrl
+                )=__('Edit')
+            p.w-100=event.subtitle
+            if event.is_public
+              p.w-100
+                span.badge.badge-default=__('public')

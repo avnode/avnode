@@ -74,5 +74,15 @@
 	"Events": "Events",
 	"List": "List",
 	"Your Events": "Your Events",
-	"General": "General"
+	"General": "General",
+	"Add a new Event": "Add a new Event",
+	"New Event": "New Event",
+	"Title": "Title",
+	"New Event has been created.": "New Event has been created.",
+	"Edit Event": "Edit Event",
+	"Subtitle": "Subtitle",
+	"Event Details": "Event Details",
+	"Event has been updated.": "Event has been updated.",
+	"Edit": "Edit",
+	"Event has been removed.": "Event has been removed."
 }
