@@ -17,5 +17,37 @@ block content
             .form-group
               label(for='subtitle')=__('Subtitle')
               input.form-control(type='text', name='subtitle', id='subtitle', value=event.subtitle, placeholder='')
+            .form-group.row
+              .col-lg-6
+                label(for='starts')=__('Starts')
+                .input-group.date(data-provide='datepicker-inline')
+                  .input-group-addon
+                    i.fa.fa-calendar
+                  input.form-control(
+                    type='text',
+                    name='starts',
+                    id='text',
+                    value=event.startsFormatted,
+                    placeholder=__('YYYY-MM-DD'),
+                    data-date-format='yyyy-mm-dd',
+                    data-provide='datepicker'
+                  )
+              .col-lg-6
+                label(for='ends')=__('Ends')
+                .input-group.date(data-provide='datepicker-inline')
+                  .input-group-addon
+                    i.fa.fa-calendar
+                  input.form-control(
+                    type='text',
+                    name='ends',
+                    id='text',
+                    value=event.endsFormatted,
+                    placeholder=__('YYYY-MM-DD'),
+                    data-date-format='yyyy-mm-dd',
+                    data-provide='datepicker'
+                  )
+            .form-group
+              label(for='about')=__('About')
+              textarea.form-control(rows='4', name='about', id='about')=event.about
             .form-group
               button.btn.btn-primary(type='submit')=__('Save')
