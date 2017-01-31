@@ -26,10 +26,10 @@ block content
               .input-group.date(data-provide='datepicker-inline')
                 .input-group-addon
                   i.fa.fa-calendar
-                input.form-control(type='birthday', name='birthday', id='birthday', value=user.birthdayFormatted, placeholder=__('YYYY-MM-DD'), data-date-format='yyyy-mm-dd', data-provide='datepicker')
+                input.form-control(type='text', name='birthday', id='birthday', value=user.birthdayFormatted, placeholder=__('YYYY-MM-DD'), data-date-format='yyyy-mm-dd', data-provide='datepicker')
             .form-group
-              label(for='citizenship')=__('About')
-              textarea.form-control(rows='4', name='about')=user.about
+              label(for='about')=__('About')
+              textarea.form-control(rows='4', name='about', id='about')=user.about
             .form-group
               label(for='citizenship')=__('Citizenship')
               select.form-control.custom-select(name='citizenship')
