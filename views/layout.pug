@@ -51,9 +51,13 @@ html(lang='en')
     .container
       include partials/flash
     main
+      block teaser
+      block title
+        if title
+          .jumbotron.jumbotron-fluid
+            .container
+              h1.display-4=title
       .container
-        .jumbotron
-          h1.display-4=title
         block content
     footer
       .container

@@ -6,7 +6,10 @@ block content
     .col-lg-3.col-md-4
       include ../subnav
     .col-lg-9.col-md-8
-      form(method='post')
+      form(
+        method='post'
+        enctype='multipart/form-data'
+      )
         input(type='hidden', name='_csrf', value=_csrf)
         .card
           .card-header=__('Event Details')
@@ -46,6 +49,19 @@ block content
                     data-date-format='yyyy-mm-dd',
                     data-provide='datepicker'
                   )
+            .form-group
+              if event.image
+                img.img-thumbnail.mb-3(
+                  src=event.imageUrl
+                )
+              else
+                p=__('Upload image')
+              label.custom-file
+                input.custom-file-input(
+                  type='file'
+                  name='image'
+                )
+                span.custom-file-control
             .form-group
               label(for='about')=__('About')
               textarea.form-control(rows='4', name='about', id='about')=event.about

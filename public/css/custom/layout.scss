@@ -22,6 +22,9 @@ footer {
   }
 }
 .navbar {
+  &-brand {
+    padding-right: 1rem;
+  }
   .btn, .btn-link {
     cursor: pointer;
     -webkit-appearance: none;
