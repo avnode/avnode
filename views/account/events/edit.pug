@@ -66,4 +66,18 @@ block content
               label(for='about')=__('About')
               textarea.form-control(rows='4', name='about', id='about')=event.about
             .form-group
+              label(for='address')
+                =__('Address')
+                small
+                  | (
+                  =__('will be geocoded after saving')
+                  | )
+              input.form-control(
+                type='text',
+                name='address',
+                id='address',
+                value=event.address,
+                placeholder=__('e.g. 1016 DT Amsterdam, Potsdamer Platz Berlin or Via Urbana Rome')
+              )
+            .form-group
               button.btn.btn-primary(type='submit')=__('Save')

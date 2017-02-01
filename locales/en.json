@@ -87,5 +87,11 @@
 	"Event has been removed.": "Event has been removed.",
 	"Starts": "Starts",
 	"Ends": "Ends",
-	"Upload image": "Upload image"
+	"Upload image": "Upload image",
+	"Address": "Address",
+	"Address was geocoded, please check result.": "Address was geocoded, please check result.",
+	"e.g. 1016 DT Amsterdam, Potsdamer Platz Berlin or Via Urbana Rome": "e.g. 1016 DT Amsterdam, Potsdamer Platz Berlin or Via Urbana Rome",
+	"Address (will be geocoded automatically)": "Address (will be geocoded automatically)",
+	"Address (will be geocoded after saving)": "Address (will be geocoded after saving)",
+	"will be geocoded after saving": "will be geocoded after saving"
 }
