@@ -1,6 +1,6 @@
-.nav.nav-pills.mb-3
+.nav.nav-pills.mb-3.justify-content-center
   each item in nav
     if item.key == navkey
-      a.active.nav-link(href=item.url)=item.title
+      a.h5.active.nav-link(href=item.url)=item.title
     else
-      a.nav-link(href=item.url)=item.title
+      a.h5.nav-link(href=item.url)=item.title

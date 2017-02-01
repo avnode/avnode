@@ -57,6 +57,8 @@ html(lang='en')
           .jumbotron.jumbotron-fluid
             .container
               h1.display-4=title
+              if subtitle
+                p.lead.mb-0=subtitle
       .container
         block content
     footer
