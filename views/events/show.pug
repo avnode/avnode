@@ -16,4 +16,15 @@ block title
 
 block content
   .row
-    .col-lg-12
+    .col-lg-8
+      p=event.about
+    .col-lg-4
+      .card
+        img.card-img-top.img-fluid(
+          src=`${event.user.profileImage}`
+          alt=`${event.user.name} profile image`
+        )
+        .card-block
+          h4.card-title
+            =event.user.stagename
+          a.btn.btn-primary(href=event.user.publicUrl)=__('More')
