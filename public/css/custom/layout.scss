@@ -30,3 +30,9 @@ footer {
     -webkit-appearance: none;
   }
 }
+
+.card-deck {
+  .card {
+    max-width: 350px;
+  }
+}

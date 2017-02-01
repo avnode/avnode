@@ -28,7 +28,7 @@ block content
                         a.btn.btn-secondary.btn-sm.ajax(
                           href="#"
                           data-method="put"
-                          data-endpoint="/account/emails/primary"
+                          data-endpoint="/account/profile/emails/primary"
                           data-payload=`{"email": "${email.email}"}`
                         )=__('Make it primary')
                     if email.is_public
@@ -36,7 +36,7 @@ block content
                         a.btn.btn-secondary.btn-sm.ajax(
                           href="#"
                           data-method="put"
-                          data-endpoint="/account/emails/private"
+                          data-endpoint="/account/profile/emails/private"
                           data-payload=`{"email": "${email.email}"}`
                         )=__('Make it private')
                     else
@@ -44,7 +44,7 @@ block content
                         a.btn.btn-secondary.btn-sm.ajax(
                           href="#"
                           data-method="put"
-                          data-endpoint="/account/emails/public"
+                          data-endpoint="/account/profile/emails/public"
                           data-payload=`{"email": "${email.email}"}`
                         )=__('Make it public')
                   if !email.is_primary
@@ -52,7 +52,7 @@ block content
                       a.btn.btn-secondary.btn-sm.ajax(
                         href="#"
                         data-method="delete"
-                        data-endpoint="/account/emails"
+                        data-endpoint="/account/profile/emails"
                         data-payload=`{"email": "${email.email}"}`
                       )=__('Delete')
         form(method='post')

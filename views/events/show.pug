@@ -1,10 +1,11 @@
 extends ../layout
 
 block teaser
-  img.card-img-top.img-fluid(
-    src=`${event.imageUrl}`
-    alt=`${event.name}`
-  )
+  .d-flex.justify-content-center.align-items-start
+    img.card-img-top.img-fluid(
+      src=`${event.imageUrl}`
+      alt=`${event.name}`
+    )
 
 block title
   if title
@@ -28,14 +29,14 @@ block content
             alt=event.address
           )
           .card-block
-            h6.card-title=__('Location')
-            h4.card-subtitle=event.address
+            h6.text-muted.card-title=__('Location')
+            h5.card-subtitle=event.address
 
       .card
         img.card-img-top.img-fluid(
-          src=`${event.user.profileImage}`
-          alt=`${event.user.name} profile image`
+          src=event.user.imageUrl
+          alt=event.user.name
         )
         .card-block
-          h6.card-title=__('Organizer')
-          h4.card-subtitle=event.user.stagename
+          h6.text-muted.card-title=__('Organizer')
+          h5.card-subtitle=event.user.stagename

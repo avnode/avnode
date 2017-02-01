@@ -1,23 +1,50 @@
 extends ../layout
 
+block teaser
+  if performer.teaserImageUrl
+    .d-flex.justify-content-center.align-items-start
+      img.img-fluid(
+        src=performer.teaserImageUrl
+        alt=performer.name
+      )
+
+block title
+  if title
+    .jumbotron.jumbotron-fluid
+      .container
+        .row
+          .col-lg-8
+            h1.display-4=performer.stagename
+            if performer.name
+              p.lead=performer.name
+            if performer.about
+              p=performer.about
+            each email in performer.publicEmails
+              i.fa.fa-fw.fa-envelope-o
+              span=email.email
+            if performer.citizenship
+              p=performer.citizenship
+
+          .col-lg-4
+            img.card-img-top.img-fluid(
+              src=performer.imageUrl
+              alt=performer.name
+            )
+
 block content
   .row
-    .col-lg-8
-    .col-lg-4
-      .card
-        img.card-img-top.img-fluid(
-          src=`${performer.profileImage}`
-          alt=`${performer.name} profile image`
-        )
-        .card-block
-          h4.card-title=performer.stagename
-          if performer.name
-            h6.card-subtitle.mb-2.text-muted=performer.name
-          p.card-text
-            each email in performer.publicEmails
-              a(href=`mailto:${email.email}`)
-                i.fa.fa-envelope-o
-                | &nbsp;
-                = email.email
-          if performer.about
-            p.card-text=performer.about
+    .col-lg-12
+      h3=__('Events')
+      .card-deck
+        each event in performer.events
+          .card
+            img.card-img-top.img-fluid(
+              src=event.imageUrl
+              alt=event.title
+            )
+            .card-block
+              h4.card-title=event.title
+              h6.card-subtitle.text-muted=event.subtitle
+            .card-block.pt-0
+              p.card-text=event.dateFormatted
+              a.btn.btn-secondary(href=event.publicUrl)=__('More')

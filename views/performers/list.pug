@@ -5,8 +5,8 @@ block content
     each item in data
       .card
         img.card-img-top.img-fluid(
-          src=`${item.profileImage}`
-          alt=`${item.name} profile image`
+          src=item.imageUrl
+          alt=item.name
         )
         .card-block
           h4.card-title
