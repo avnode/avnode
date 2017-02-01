@@ -16,9 +16,14 @@ block content
                   href='#'
                   data-method='delete'
                   data-endpoint=event.editUrl,
-                  data-payload=`{"_id": "${event._id}"}`
+                  data-payload=`{"_id": "${event._id}"}`,
+                  data-confirm='true'
                 )
                   i.fa.fa-trash
+                a.btn.btn-secondary(
+                  href=event.publicUrl
+                )
+                  i.fa.fa-eye
                 a.btn.btn-secondary(
                   href=event.editUrl
                 )
