@@ -1,10 +1,10 @@
 extends ../layout
 
 block teaser
-  if performer.teaserImageUrl
+  if performer.teaserImage
     .d-flex.justify-content-center.align-items-start
       img.img-fluid(
-        src=performer.teaserImageUrl
+        src=performer.teaserImagePath
         alt=performer.name
       )
 
@@ -27,7 +27,7 @@ block title
 
           .col-lg-4
             img.card-img-top.img-fluid(
-              src=performer.imageUrl
+              src=performer.imagePath
               alt=performer.name
             )
 
