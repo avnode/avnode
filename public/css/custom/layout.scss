@@ -22,8 +22,17 @@ footer {
   }
 }
 .navbar {
+  &-brand {
+    padding-right: 1rem;
+  }
   .btn, .btn-link {
     cursor: pointer;
     -webkit-appearance: none;
+  }
+}
+
+.card-deck {
+  .card {
+    max-width: 350px;
   }
 }

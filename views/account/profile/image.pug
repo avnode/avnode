@@ -15,20 +15,38 @@ block content
           name='_csrf'
           value=_csrf
         )
-        .card
-          .card-header=__('Image')
+        .card.mb-3
+          .card-header=__('Profile Image')
           .card-block
             .form-group
               if user.image
                 img.img-thumbnail.mb-3(
-                  src=`/storage/${user.image}/500/200`
+                  src=user.imagePath
                 )
               else
-                p="Upload one you lazy bastard…"
+                p=__('Upload image')
               label.custom-file
                 input.custom-file-input(
-                  type="file"
-                  name="image"
+                  type='file'
+                  name='image'
+                )
+                span.custom-file-control
+            .form-group
+              button.btn.btn-primary(type='submit')=__('Save')
+        .card
+          .card-header=__('Teaser Image')
+          .card-block
+            .form-group
+              if user.teaserImage
+                img.img-thumbnail.mb-3(
+                  src=user.teaserImagePath
+                )
+              else
+                p=__('Upload image')
+              label.custom-file
+                input.custom-file-input(
+                  type='file'
+                  name='teaserImage'
                 )
                 span.custom-file-control
             .form-group

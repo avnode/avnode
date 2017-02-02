@@ -1,0 +1,42 @@
+extends ../layout
+
+block teaser
+  .d-flex.justify-content-center.align-items-start
+    img.card-img-top.img-fluid(
+      src=`${event.imageUrl}`
+      alt=`${event.name}`
+    )
+
+block title
+  if title
+    .jumbotron.jumbotron-fluid
+      .container
+        h1.display-4=title
+        p.lead=event.dateFormatted
+        p.lead=event.subtitle
+        p=event.about
+
+block content
+  .row
+    .col-lg-8
+      h3=__('Schedule')
+      h3=__('Performer')
+    .col-lg-4
+      if event.mapUrl
+        .card.mb-3
+          img.card-img-top.img-fluid(
+            src=event.mapUrl,
+            alt=event.address
+          )
+          .card-block
+            h6.text-muted.card-title=__('Location')
+            h5.card-subtitle=event.address
+
+      .card
+        img.card-img-top.img-fluid(
+          src=event.user.imageUrl
+          alt=event.user.name
+        )
+        .card-block
+          h6.text-muted.card-title=__('Organizer')
+          h5.card-subtitle=event.user.stagename

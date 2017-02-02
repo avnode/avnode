@@ -5,10 +5,10 @@ block content
     each item in data
       .card
         img.card-img-top.img-fluid(
-          src=item.imageUrl
-          alt=item.name
+          src=`${item.imageUrl}`
+          alt=`${item.name} profile image`
         )
         .card-block
           h4.card-title
-            =item.stagename
+            =item.title
           a.btn.btn-primary(href=item.publicUrl)=__('More')

@@ -6,7 +6,10 @@ block content
     .col-lg-3.col-md-4
       include ../subnav
     .col-lg-9.col-md-8
-      form(method='post')
+      form(
+        method='post'
+        enctype='multipart/form-data'
+      )
         input(type='hidden', name='_csrf', value=_csrf)
         .card
           .card-header=__('Event Details')
@@ -17,5 +20,64 @@ block content
             .form-group
               label(for='subtitle')=__('Subtitle')
               input.form-control(type='text', name='subtitle', id='subtitle', value=event.subtitle, placeholder='')
+            .form-group.row
+              .col-lg-6
+                label(for='starts')=__('Starts')
+                .input-group.date(data-provide='datepicker-inline')
+                  .input-group-addon
+                    i.fa.fa-calendar
+                  input.form-control(
+                    type='text',
+                    name='starts',
+                    id='text',
+                    value=event.startsFormatted,
+                    placeholder=__('YYYY-MM-DD'),
+                    data-date-format='yyyy-mm-dd',
+                    data-provide='datepicker'
+                  )
+              .col-lg-6
+                label(for='ends')=__('Ends')
+                .input-group.date(data-provide='datepicker-inline')
+                  .input-group-addon
+                    i.fa.fa-calendar
+                  input.form-control(
+                    type='text',
+                    name='ends',
+                    id='text',
+                    value=event.endsFormatted,
+                    placeholder=__('YYYY-MM-DD'),
+                    data-date-format='yyyy-mm-dd',
+                    data-provide='datepicker'
+                  )
+            .form-group
+              if event.image
+                img.img-thumbnail.mb-3(
+                  src=event.imageUrl
+                )
+              else
+                p=__('Upload image')
+              label.custom-file
+                input.custom-file-input(
+                  type='file'
+                  name='image'
+                )
+                span.custom-file-control
+            .form-group
+              label(for='about')=__('About')
+              textarea.form-control(rows='4', name='about', id='about')=event.about
+            .form-group
+              label(for='address')
+                =__('Address')
+                small
+                  | (
+                  =__('will be geocoded after saving')
+                  | )
+              input.form-control(
+                type='text',
+                name='address',
+                id='address',
+                value=event.address,
+                placeholder=__('e.g. 1016 DT Amsterdam, Potsdamer Platz Berlin or Via Urbana Rome')
+              )
             .form-group
               button.btn.btn-primary(type='submit')=__('Save')
