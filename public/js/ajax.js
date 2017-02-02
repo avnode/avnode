@@ -13,7 +13,12 @@ $(document).on('click', '.ajax', function(ev) {
   const $el = $(this);
   const url = $el.attr('data-endpoint');
   const method = $el.attr('data-method');
-  const payload = JSON.parse($el.attr('data-payload'));
+  let payload = $el.attr('data-payload');
+  if (payload) {
+    payload = JSON.parse(payload);
+  } else {
+    payload = {};
+  }
   const confirm = $el.attr('data-confirm');
   if (confirm) {
     bootbox.confirm({
