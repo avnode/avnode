@@ -21,7 +21,7 @@ block content
             .form-group
               if user.image
                 img.img-thumbnail.mb-3(
-                  src=user.imageUrl
+                  src=user.imagePath
                 )
               else
                 p=__('Upload image')
@@ -39,7 +39,7 @@ block content
             .form-group
               if user.teaserImage
                 img.img-thumbnail.mb-3(
-                  src=user.teaserImageUrl
+                  src=user.teaserImagePath
                 )
               else
                 p=__('Upload image')
