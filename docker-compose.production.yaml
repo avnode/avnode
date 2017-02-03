@@ -9,7 +9,7 @@ services:
     ports:
     - "127.0.0.1:7777:3000"
     networks:
-      -avnet
+      - avnet
     volumes:
       - ./:/usr/local/app
     depends_on:
