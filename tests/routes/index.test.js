@@ -1,23 +1,17 @@
-const server = require('../../index');
+const server = require('../../server');
 const request = require('supertest');
 const mongoose = require('mongoose');
 
 
-describe('/', () => {
+describe('Routes: /', () => {
   before((done) => {
     mongoose.models = {};
     mongoose.modelSchemas = {};
-    server.listen().close();
-    done();
+    server.listen(done);
   });
   after((done) => {
     server.listen().close();
     done();
-  });
-  beforeEach(() => {
-  });
-
-  afterEach(() => {
   });
 
   it('GET to /returns 200 and a page',  (done) => {
@@ -28,7 +22,7 @@ describe('/', () => {
       .expect(200, done);
   });
 
-  xit('GET to unknown route returns 404', (done) => {
+  it('GET to unknown route returns 404', (done) => {
     request(server)
       .get('/foo/bar')
       .expect(404, done);
