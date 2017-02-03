@@ -53,6 +53,15 @@ block content
                     i.fa.fa-trash
             .form-group
               label(for='member')=__('Invite others')
-              input.form-control(type='text', member='member', id='member', placeholder='Type...')
+              input.form-control(
+                type='text',
+                member='member',
+                id='member',
+                placeholder='Type...',
+                data-source-endpoint='/user/search/member/' + crew.id + '/',
+                data-target-endpoint=crew.editUrl + '/members/',
+                autocomplete='off'
+              )
+              .results#members
             .form-group
               button.btn.btn-primary(type='submit')=__('Save')
