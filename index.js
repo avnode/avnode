@@ -1,3 +1,6 @@
+// Require mogoose models once!
+require('./lib/models');
+
 const express = require('express');
 const compression = require('compression');
 const session = require('express-session');
@@ -24,6 +27,9 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', () => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
+});
+mongoose.disconnect(() => {
+  console.log('DISCONNECT');
 });
 
 app.set('port', process.env.PORT || 3000);
