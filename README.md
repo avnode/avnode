@@ -15,9 +15,8 @@ We're using [docker][docker] for the database (and later probably the whole proj
 
 * Run `nvm use` in this directory to use a compatible version of nodejs.
 * Run `docker-compose up -d` in this directory to start up mongodb in docker.
-* Run `npm run dev` to run in development mode.
 * Copy `example.env.local` to `.env.local`.
-
+* Run `npm run dev` to run in development mode.
 
 #### Asset Management
 
