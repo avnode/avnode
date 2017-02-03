@@ -11,4 +11,7 @@ block content
         .card-block
           h4.card-title
             =item.title
+          if item.subtitle
+            p.card-subtitle.mb-3.text-muted
+              =item.subtitle
           a.btn.btn-primary(href=item.publicUrl)=__('More')
