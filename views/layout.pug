@@ -20,6 +20,7 @@ html(lang='en')
     script(src='//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js')
     script(src='/js/ajax.js')
+    script(src='/js/autocomplete.js')
   body
     .container
       nav.navbar.navbar-toggleable-md.navbar-fixed-top.navbar-inverse.bg-inverse
@@ -37,6 +38,8 @@ html(lang='en')
           ul.navbar-nav.mr-auto
             li.nav-item
               a.nav-link(href='/performers')=__('Performers')
+            li.nav-item
+              a.nav-link(href='/crews')=__('Crews')
             li.nav-item
               a.nav-link(href='/events')=__('Events')
           ul.navbar-nav

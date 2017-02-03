@@ -1,0 +1,18 @@
+extends ../../layout
+
+block content
+  include ../nav
+  .row
+    .col-lg-3.col-md-4
+      include ../subnav
+    .col-lg-9.col-md-8
+      form(method='post')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .card
+          .card-header=__('New Crew')
+          .card-block
+            .form-group
+              label(for='name')=__('Name')
+              input.form-control(type='text', name='name', id='name', placeholder='', autofocus)
+            .form-group
+              button.btn.btn-primary(type='submit')=__('Save')

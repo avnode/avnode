@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .card-columns
+    each item in data
+      .card
+        img.card-img-top.img-fluid(
+          src=`${item.imageUrl}`
+          alt=`${item.name} profile image`
+        )
+        .card-block
+          h4.card-title=item.name
+          p.card-text=item.about
+          a.btn.btn-primary(href=item.publicUrl)=__('More')
