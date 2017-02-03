@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const app = require('./server');
-const mongoose = require('./mongoose');
+const mongoose = require('./lib/plugins/mongoose');
 
 mongoose.connect(process.env.MONGODB_URI, {}, () => {
   app.listen(app.get('port'), () => {

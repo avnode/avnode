@@ -1,13 +1,6 @@
 const assert = require('assert');
-const mongoose = require('mongoose');
 const slug = require('../../lib/utilities/slug');
-
-let Event;
-try {
-  Event = mongoose.model('Event');
-} catch (e) {
-  Event = require('../../lib/models/Event');
-}
+const Event = require('../../lib/models/Event');
 
 describe('Event', () => {
   beforeEach(() => {
