@@ -1,0 +1,31 @@
+extends ../layout
+
+block teaser
+  .d-flex.justify-content-center.align-items-start
+    img.card-img-top.img-fluid(
+      src=`${crew.imageUrl}`
+      alt=`${crew.name}`
+    )
+
+block title
+  if title
+    .jumbotron.jumbotron-fluid
+      .container
+        h1.display-4=title
+        p=crew.about
+
+block content
+  .row
+    .col-lg-12
+      h3=__('Members')
+      .card-columns
+        each member in members
+          .card
+            img.card-img-top.img-fluid(
+              src=member.imagePath
+              alt=member.name
+            )
+            .card-block
+              h4.card-title
+                =member.stagename
+              a.btn.btn-primary(href=member.publicUrl)=__('More')

@@ -32,11 +32,12 @@ block content
             h6.text-muted.card-title=__('Location')
             h5.card-subtitle=event.address
 
-      .card
-        img.card-img-top.img-fluid(
-          src=event.user.imageUrl
-          alt=event.user.name
-        )
-        .card-block
-          h6.text-muted.card-title=__('Organizer')
-          h5.card-subtitle=event.user.stagename
+      each user in users
+        .card
+          img.card-img-top.img-fluid(
+            src=user.imagePath
+            alt=user.name
+          )
+          .card-block
+            h6.text-muted.card-title=__('Organizer')
+            h5.card-subtitle=user.stagename
