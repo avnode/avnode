@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+  form(method="get")
+    .form-group
+      input.form-control(type="text", name="q", value="q")
+      button=__('search')
+
+  each hit in data
+    case hit._type
+      when 'event'
+        h1 Event
+      when 'user'
+        h1 User
+        - var item = hit._source
+        include partials/performer
