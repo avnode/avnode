@@ -2,19 +2,16 @@ extends layout
 
 block content
 
-  form(method="get")
-    .form-group.row
-      .col-sm-11
-        input.form-control(
-          placeholder="What are you searching for?"
-          type="text"
-          name="q"
-          value=q
-        )
-      .col-sm-1
-        button.btn.btn-primary(
-          type="submit"
-        )=__('search')
+  form.mb-3(method='get')
+    .input-group.input-group-lg
+      input.form-control(
+        placeholder=__('What are you searching for?')
+        type='text'
+        name='q'
+        value=q
+      )   
+      span.input-group-btn
+        button.btn.btn-primary=__('Search')
 
   if resultCount
     each hit in data
