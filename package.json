@@ -7,7 +7,7 @@
     "test": "PORT=3001 NODE_ENV=testing mocha --reporter spec --recursive tests",
     "test:watch": "PORT=3001 NODE_ENV=testing mocha --watch --reporter spec --recursive tests",
     "lint": "eslint -c .eslintrc.json --ignore-path .gitignore --ignore-path .eslintignore .",
-    "dev": "STORAGE=./storage/ DEBUG=avnode.debug,avnode nodemon index.js"
+    "dev": "STORAGE=./storage/ DEBUG=avnode.debug,avnode nodemon -i tests -i storage index.js"
   },
   "author": "",
   "license": "ISC",
