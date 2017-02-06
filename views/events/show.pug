@@ -30,7 +30,8 @@ block content
           )
           .card-block
             h6.text-muted.card-title=__('Location')
-            h5.card-subtitle=event.address
+            h5.card-subtitle.mb-3=event.address
+            a.btn.btn-primary(href=event.direction)=__('Directions')
 
       each user in users
         .card
@@ -40,4 +41,5 @@ block content
           )
           .card-block
             h6.text-muted.card-title=__('Organizer')
-            h5.card-subtitle=user.stagename
+            h5.card-subtitle.mb-3=user.stagename
+            a.btn.btn-primary(href=user.publicUrl)=__('More')

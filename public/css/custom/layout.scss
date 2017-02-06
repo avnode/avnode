@@ -14,11 +14,17 @@ footer {
 
 .card-columns {
   column-count: 1;
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
   @include media-breakpoint-only(md) {
     column-count: 2;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
   }
   @include media-breakpoint-up(lg) {
     column-count: 3;
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
   }
 }
 .navbar {
