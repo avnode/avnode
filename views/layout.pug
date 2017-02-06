@@ -42,10 +42,6 @@ html(lang='en')
               a.nav-link(href='/crews')=__('Crews')
             li.nav-item
               a.nav-link(href='/events')=__('Events')
-            li.nav-item
-              a.nav-link.ml-3(href='/search?q=*') 
-                i.fa.fa-search.fa-lg.fa-fw      
-                =__('Search')
           ul.navbar-nav
             if user
               li.nav-item
@@ -63,6 +59,10 @@ html(lang='en')
                 a.btn.btn-outline-secondary(href='/login')=__('Login')
               li.nav-item
                 a.btn.btn-outline-success.ml-3(href='/signup')=__('Sign up')
+            li.nav-item
+              a.nav-link.ml-3(href='/search?q=*') 
+                i.fa.fa-search.fa-lg.fa-fw      
+                =__('Search')
     .container
       include partials/flash
     main
