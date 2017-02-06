@@ -10,6 +10,6 @@ node {
 	}
 	stage('Restart all services') {
     def files = '-f docker-compose.yaml -f docker-compose.production.yaml'
-    sh "cd ${livePath} && docker-compose ${files} stop && docker-compose ${files} up"
+    sh "cd ${livePath} && docker-compose ${files} stop && docker-compose ${files} up -d"
 	}
 }
