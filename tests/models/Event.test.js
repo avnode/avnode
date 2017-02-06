@@ -1,6 +1,6 @@
 const assert = require('assert');
-const Event = require('../../lib/models/Event');
 const slug = require('../../lib/utilities/slug');
+const Event = require('../../lib/models/Event');
 
 describe('Event', () => {
   beforeEach(() => {

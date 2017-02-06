@@ -42,6 +42,10 @@ html(lang='en')
               a.nav-link(href='/crews')=__('Crews')
             li.nav-item
               a.nav-link(href='/events')=__('Events')
+            li.nav-item
+              a.nav-link.ml-3(href='/search?q=*') 
+                i.fa.fa-search.fa-lg.fa-fw      
+                =__('Search')
           ul.navbar-nav
             if user
               li.nav-item

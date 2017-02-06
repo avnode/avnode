@@ -1,11 +1,17 @@
+const server = require('../../server');
 const request = require('supertest');
-const server = require('../../index');
+const mongoose = require('mongoose');
 
-describe('/', () => {
-  beforeEach(() => {
+
+describe('Routes: /', () => {
+  before((done) => {
+    mongoose.models = {};
+    mongoose.modelSchemas = {};
+    server.listen(done);
   });
-
-  afterEach(() => {
+  after((done) => {
+    server.listen().close();
+    done();
   });
 
   it('GET to /returns 200 and a page',  (done) => {
