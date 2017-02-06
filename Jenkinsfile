@@ -9,7 +9,7 @@ node {
     sh "cd ${livePath} && docker run --rm -v ${livePath}:/data -w /data ${node} npm install"
 	}
 	stage('Restart all services') {
-    def files = '-f docker-compose.production.yaml -f docker-compose-production.yaml'
+    def files = '-f docker-compose.yaml -f docker-compose.production.yaml'
     sh "cd ${livePath} && docker-compose ${files} stop && docker-compose ${files} up"
 	}
 }
