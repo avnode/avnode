@@ -1,13 +1,15 @@
 import { h, Component } from 'preact';
+import Router from 'preact-router';
 
-import AddEvent from '../containers/AddEvent'
-import Events from '../components/Events'
+import Events from './Events'
+import EditEvent from '../containers/EditEvent'
 
 const App = () => (
   <div>
-    <h1>Wuff</h1>
-    <AddEvent />
-    <Events />
+    <Router>
+      <Events path="/events" />
+      <EditEvent path="/events/:id" />
+    </Router>
   </div>
 )
 

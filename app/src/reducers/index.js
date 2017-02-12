@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { ADD_EVENT } from './actions'
+import { EDIT_EVENT } from './actions'
 import { REMOVE_EVENT } from './actions'
 
 const initialState = [{
@@ -19,6 +20,11 @@ function events(state = initialState, action) {
       return [
         ...state,
         { id: state.length + 1, title: action.title }
+      ]
+    case EDIT_EVENT:
+      return [
+        ...state,
+        action.payload
       ]
     case REMOVE_EVENT:
       return state.filter(item => { return item.id !== action.id })
