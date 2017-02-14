@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import { ADD_EVENT } from './actions'
-import { EDIT_EVENT } from './actions'
-import { REMOVE_EVENT } from './actions'
+import { reducer as formReducer } from 'redux-form'
+
+import { ADD_EVENT, GET_EVENT, EDIT_EVENT, REMOVE_EVENT } from './actions'
 
 const initialState = [{
   id: 1,
@@ -10,22 +10,37 @@ const initialState = [{
   id: 2,
   title: 'wuff'
 }]
-console.log(initialState.filter(function(item) {
-  return item.id != 2
-}));
 
-function events(state = initialState, action) {
+const event = (state = {}, action) => {
   switch (action.type) {
+    case EDIT_EVENT:
+      if (state.id !== action.id) {
+        return state;
+      }
+      return [
+        ...state,
+        action.payload
+      ];
+    default:
+      return state;
+  }
+}
+
+const events = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_EVENT:
+      return {
+        title: 'wuff'
+      }
     case ADD_EVENT:
       return [
         ...state,
         { id: state.length + 1, title: action.title }
       ]
     case EDIT_EVENT:
-      return [
-        ...state,
-        action.payload
-      ]
+      return state.map(e =>
+        event(e, action)
+      )
     case REMOVE_EVENT:
       return state.filter(item => { return item.id !== action.id })
     default:
@@ -33,8 +48,9 @@ function events(state = initialState, action) {
   }
 }
 
-const accountApp = combineReducers({
-  events
+const reducer = combineReducers({
+  events,
+  form: formReducer
 })
 
-export default accountApp
+export default reducer

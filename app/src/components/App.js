@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import Router from 'preact-router';
 
 import Events from './Events'
-import EditEvent from '../containers/EditEvent'
+import EditEvent from './EditEvent'
 
 const App = () => (
   <div>

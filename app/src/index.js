@@ -1,11 +1,11 @@
 import { Provider, connect } from 'preact-redux';
 import { h, render } from 'preact';
-
 import { createStore } from 'redux'
-import App from './components/App'
-import accountApp from './reducers'
 
-let store = createStore(accountApp)
+import App from './components/App'
+import reducer from './reducers'
+
+let store = createStore(reducer)
 
 render(
   <Provider store={store}>

@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h } from 'preact'
 import { connect } from 'preact-redux'
 
 import { addEvent } from '../reducers/actions'

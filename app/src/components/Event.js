@@ -1,5 +1,6 @@
-import { h, Component } from 'preact'
+import { h } from 'preact'
 import { connect } from 'preact-redux'
+
 import { removeEvent } from '../reducers/actions'
 import { editEvent } from '../reducers/actions'
 
