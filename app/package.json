@@ -39,6 +39,7 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "preact": "^6.0.0",
     "preact-compat": "^3.0.0",
     "preact-redux": "^2.0.0",
@@ -47,7 +48,9 @@
     "react": "^15.4.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "redux-form": "^6.5.0"
+    "redux-form": "^6.5.0",
+    "redux-logger": "^2.8.1",
+    "redux-thunk": "^2.2.0"
   },
   "author": "",
   "license": "ISC"

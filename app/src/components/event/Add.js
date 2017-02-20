@@ -1,9 +1,9 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
 
-import { addEvent } from '../reducers/actions'
+import { addEvent } from '../../reducers/actions'
 
-const AddEvent = ({ dispatch }) => {
+const EventAdd = ({ dispatch }) => {
   let input
   return (
     <div>
@@ -25,4 +25,4 @@ const AddEvent = ({ dispatch }) => {
     </div>
   )
 }
-export default connect()(AddEvent)
+export default connect()(EventAdd)

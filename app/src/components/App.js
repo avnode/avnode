@@ -1,14 +1,14 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import Router from 'preact-router';
 
 import Events from './Events'
-import EditEvent from './EditEvent'
+import EventEdit from './event/Edit'
 
 const App = () => (
   <div>
     <Router>
       <Events path="/events" />
-      <EditEvent path="/events/:id" />
+      <EventEdit path="/events/:_id" />
     </Router>
   </div>
 )
