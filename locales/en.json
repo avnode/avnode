@@ -92,5 +92,6 @@
 	"Reset your password": "Reset your password",
 	"Passwords are not equal. Try again…": "Passwords are not equal. Try again…",
 	"Your password has been reset.": "Your password has been reset.",
-	"Invalid email or password.": "Invalid email or password."
+	"Invalid email or password.": "Invalid email or password.",
+	"Request a new password": "Request a new password"
 }
