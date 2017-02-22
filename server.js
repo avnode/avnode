@@ -84,6 +84,8 @@ app.use(function (err, req, res, _next) {
   if (err.isBoom) {
     req.flash('errors', { msg: err.message });
     return res.redirect('back');
+  } else {
+    throw err;
   }
 });
 
