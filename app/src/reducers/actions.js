@@ -18,8 +18,24 @@ export function editEvent(json) {
 
 export function fetchUser() {
   return dispatch => {
-    return fetch(`http://localhost:3000/user`)
+    return fetch(`/account/api/user`)
       .then(response => response.json())
       .then(json => dispatch(gotUser(json)))
+  }
+}
+
+export function postEvent(data) {
+  return dispatch => {
+    return fetch(
+      `/account/api/event/${data._id}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(json => console.log('json', json))
   }
 }

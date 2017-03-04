@@ -12,8 +12,7 @@ const event = (state = {}, action) => {
       if (state._id !== action.json._id) {
         return state
       }
-      let newState = Object.assign(state, action.json);
-      return newState;
+      return Object.assign(state, action.json);
     default:
       return state
   }
@@ -25,11 +24,11 @@ const user = (state = initialValues, action) => {
     case EDIT_USER:
       return state
     case EDIT_EVENT:
-      let newState = Object.assign({}, state)
-      newState.events = newState.events.map(e => {
-        return event(e, action)
-      })
-      return newState
+      return Object.assign({}, state, {
+        events: state.events.map((e) => {
+          return event(e, action);
+        })
+      });
     default:
       return state
   }

@@ -3,7 +3,7 @@ import { connect } from 'preact-redux'
 import { route } from 'preact-router'
 import { Field, reduxForm } from 'redux-form';
 
-import { editEvent } from '../../reducers/actions'
+import { editEvent, postEvent } from '../../reducers/actions'
 
 let EventForm = props => {
   const { handleSubmit } = props
@@ -19,24 +19,30 @@ let EventForm = props => {
   )
 }
 
-EventForm = reduxForm({
-  form: 'event',
-  onSubmit: (props, dispatch, a, b) => {
-    dispatch(editEvent(props));
-    route('/events');
-  }
-})(EventForm);
+EventForm = reduxForm({ form: 'event' })(EventForm);
 
 const EditEvent = props => {
-  let { _id, event } = props
+  let { _id, event, user } = props
+  const onSubmit = (props, dispatch) => {
+    dispatch(editEvent(props));
+    dispatch(postEvent(props));
+  }
+  const onSubmitSuccess = () => {
+    route('/events')
+  }
   return (
-    <EventForm initialValues={event} />
+    <EventForm
+      initialValues={event}
+      onSubmit={onSubmit}
+      onSubmitSuccess={onSubmitSuccess}
+    />
   )
 }
 
 const mapStateToProps = (state, props) => {
   return {
-    event: (state.user.events.find(item => { return item._id === props._id }))
+    event: (state.user.events.find(event => { return event._id === props._id })),
+    user: state.user
   }
 }
 

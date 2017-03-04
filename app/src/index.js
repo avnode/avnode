@@ -20,10 +20,19 @@ let store = createStore(
     )
   )
 )
-store.dispatch(fetchUser())
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('app')
-)
+
+const init = () => {
+  store.dispatch(fetchUser())
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('app')
+  )
+};
+
+init();
+
+if (module.hot) {
+  module.hot.accept('./components/App', init);
+}
