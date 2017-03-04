@@ -7,7 +7,7 @@
     "test": "PORT=3001 NODE_ENV=testing mocha --reporter spec --recursive tests",
     "test:watch": "PORT=3001 NODE_ENV=testing mocha --watch --reporter spec --recursive tests",
     "lint": "eslint -c .eslintrc.json --ignore-path .gitignore --ignore-path .eslintignore .",
-    "dev": "DEBUG=avnode.debug,avnode nodemon -i tests -i storage -i .db -i .elasticsearch index.js"
+    "dev": "DEBUG=avnode.debug,avnode nodemon -i tests -i storage -i .db -i .elasticsearch -i app  index.js"
   },
   "author": "",
   "license": "ISC",
@@ -47,10 +47,19 @@
     "uuid": "^3.0.1"
   },
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "cors": "^2.8.1",
     "eslint": "^3.12.2",
     "mocha": "^3.2.0",
     "mocha-mongoose-fix-overwitemodelerror": "^1.0.0",
     "nodemon": "^1.11.0",
-    "supertest": "^2.0.1"
+    "react-hot-loader": "^3.0.0-beta.6",
+    "script-ext-html-webpack-plugin": "^1.7.1",
+    "supertest": "^2.0.1",
+    "webpack": "^1.13.3",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-hot-middleware": "^2.17.0"
   }
 }
