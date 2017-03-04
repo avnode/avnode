@@ -6,3 +6,6 @@ storage/*.jpeg
 .db
 .elasticsearch
 logs/*
+storage
+build
+.DS_Store
