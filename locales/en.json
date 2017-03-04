@@ -78,5 +78,13 @@
 	"Member has been added.": "Member has been added.",
 	"Directions": "Directions",
 	"Search unavailable…": "Search unavailable…",
-	"Search is currently unavailable…": "Search is currently unavailable…"
+	"Search is currently unavailable…": "Search is currently unavailable…",
+	"public": "public",
+	"Current Password": "Current Password",
+	"New Password": "New Password",
+	"New password": "New password",
+	"Confirm Password": "Confirm Password",
+	"Confirm password": "Confirm password",
+	"Change Password": "Change Password",
+	"Your Account": "Your Account"
 }
