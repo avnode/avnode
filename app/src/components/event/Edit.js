@@ -10,11 +10,11 @@ let EventForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <Field name="_id" component="input" type="hidden" />
-      <div>
+      <div class="form-group">
         <label htmlFor="title">Title</label>
-        <Field name="title" component="input" type="text" value={props.title} />
+        <Field class="form-control" name="title" component="input" type="text" value={props.title} />
       </div>
-      <button type="submit">Submit</button>
+      <button class="btn btn-primary" type="submit">Submit</button>
     </form>
   )
 }
@@ -28,7 +28,7 @@ const EditEvent = props => {
     dispatch(postEvent(props));
   }
   const onSubmitSuccess = () => {
-    route('/events')
+    route('/account/events')
   }
   return (
     <EventForm

@@ -1,4 +1,4 @@
-import { h, Component } from 'preact'
+import { h } from 'preact'
 import { connect } from 'preact-redux'
 
 import EventAdd from './event/Add'
@@ -8,9 +8,9 @@ const Events = props => {
   const { events } = props
   return (
     <div>
-      <h1>Events</h1>
       <EventAdd />
-      <ul>
+      <hr />
+      <ul class="list-group">
         {events.map((event) =>
           <EventShow event={event} />
         )}

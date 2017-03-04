@@ -15,12 +15,12 @@ const EventAdd = ({ dispatch }) => {
         dispatch(addEvent(input.value))
         input.value = ''
       }}>
-        <input ref={node => {
-          input = node
-        }} />
-        <button type="submit">
-          Add Event
-        </button>
+        <div class="input-group">
+          <input class="form-control" ref={node => {
+            input = node
+          }} />
+          <button type="submit" class="input-group-addon">Add Event</button>
+        </div>
       </form>
     </div>
   )
