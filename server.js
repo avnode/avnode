@@ -109,23 +109,20 @@ app.use(routes);
 //
 // error middleware for errors that occurred in middleware
 // declared before this
+/*
 app.use(function onerror(err, req, res, next) {
   console.log('asdf');
   throw err;
-});
+});*/
 
-// FIXME
-// So far not working
-// Having express serving it all would be great.
-// This is nothing for me, I'll leave it for computer kids knowing
-// how to deal with it.
-//
-// var webpack = require('webpack');
-// var webpackConfig = require('./webpack.config');
-// var compiler = webpack(webpackConfig);
-// app.use(require("webpack-dev-middleware")(compiler, {
-//     noInfo: true, publicPath: webpackConfig.output.publicPath
-// }));
-// app.use(require("webpack-hot-middleware")(compiler));
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config');
+const compiler = webpack(webpackConfig);
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true, publicPath: webpackConfig.output.publicPath
+}));
+app.use(require('webpack-hot-middleware')(compiler, {
+  log: console.log
+}));
 
 module.exports = app;

@@ -4,7 +4,6 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 
-import App from './components/App'
 import reducer from './reducers'
 import { fetchUser } from './reducers/actions'
 
@@ -21,18 +20,24 @@ let store = createStore(
   )
 )
 
+let root;
+
 const init = () => {
-  store.dispatch(fetchUser())
-  render(
+  const App = require('./components/App').default;
+  root = render(
     <Provider store={store}>
       <App />
     </Provider>,
-    document.getElementById('app')
-  )
+    document.getElementById('app'),
+    root
+  );
 };
 
-init();
-
 if (module.hot) {
-  module.hot.accept('./components/App', init);
+  module.hot.accept('./components/App', () => {
+    return requestAnimationFrame(init);
+  });
 }
+
+init();
+store.dispatch(fetchUser())
