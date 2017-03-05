@@ -46,9 +46,7 @@ const user = (state = initialValues, action) => {
   case EDIT_EVENT:
     return state; // FIXME?!
   case REQUEST_ADD_EVENT:
-    return Object.assign({}, state, {
-      events: event(state.events, action)
-    });
+    return Object.assign({}, state, event(state, action));
   case REQUEST_EDIT_EVENT:
   case REQUEST_DELETE_EVENT:
     return Object.assign({}, state, {

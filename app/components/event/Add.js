@@ -9,9 +9,9 @@ const EventAdd = ({ ajaxInProgress, dispatch }) => {
     <div>
       <form onSubmit={e => {
         e.preventDefault();
-        //if (!input.value.trim()) {
-        //  return
-        //}
+        if (!input.value.trim()) {
+          return;
+        }
         dispatch(addEvent(input.value));
         input.value = '';
       }}>

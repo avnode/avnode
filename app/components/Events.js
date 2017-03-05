@@ -4,11 +4,10 @@ import { connect } from 'preact-redux';
 import EventAdd from './event/Add';
 import EventShow from './event/Show';
 
-const Events = props => {
-  const { events } = props;
+const Events = ({ events, ajaxInProgress })  => {
   return (
     <div>
-      <EventAdd />
+      <EventAdd ajaxInProgress={ajaxInProgress} />
       <hr />
       <ul className="list-group">
         {events.map((event) =>
@@ -21,7 +20,8 @@ const Events = props => {
 
 const mapStateToProps = (state) => {
   return {
-    events: state.user.events
+    events: state.user.events,
+    ajaxInProgress: state.user.ajaxInProgress
   };
 };
 
