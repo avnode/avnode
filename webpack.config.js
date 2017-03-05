@@ -10,15 +10,14 @@ import V8LazyParseWebpackPlugin from 'v8-lazy-parse-webpack-plugin';
 const ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  context: path.resolve(__dirname, "app/src"),
+  context: path.resolve(__dirname, 'app/'),
   entry: [
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     './index.js',
-    //'webpack-hot-middleware/client',
   ],
 
   output: {
-    path: path.resolve(__dirname, "app/build"),
+    path: path.resolve(__dirname, 'public/js'),
     publicPath: '/js/',
     filename: 'bundle.js'
   },
@@ -30,8 +29,8 @@ module.exports = {
     ],
     extensions: ['.jsx', '.js', '.json'],
     alias: {
-      components: path.resolve(__dirname, "app/src/components"),    // used for tests
-      style: path.resolve(__dirname, "app/src/style"),
+      components: path.resolve(__dirname, 'app/src/components'),    // used for tests
+      style: path.resolve(__dirname, 'app/src/style'),
       'react': 'preact-compat',
       'react-dom': 'preact-compat'
     }
@@ -48,29 +47,6 @@ module.exports = {
       test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
       loader: ENV==='production' ? 'file?name=[path][name]_[hash:base64:5].[ext]' : 'url-loader'
     }]
-    /*v1
-    preLoaders: [
-    ],
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: ['babel']
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
-        test: /\.(xml|html|txt|md)$/,
-        loader: 'raw'
-      },
-      {
-        test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
-        loader: ENV==='production' ? 'file?name=[path][name]_[hash:base64:5].[ext]' : 'url'
-      }
-    ]
-    * */
   },
   plugins: ([
     new webpack.NoEmitOnErrorsPlugin(),
