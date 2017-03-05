@@ -7,5 +7,4 @@ storage/*.jpeg
 .elasticsearch
 logs/*
 storage
-build
 .DS_Store
