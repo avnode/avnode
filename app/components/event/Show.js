@@ -8,7 +8,15 @@ const EventShow = ({event, dispatch}) => {
     <li className="list-group-item justify-content-between">
       {event.title}
       <span>
-        <a className="btn btn-secondary" href="#" onClick={() => { dispatch(deleteEvent(event._id)); }}><i className="fa fa-trash"></i></a>
+        { event.ajaxInProgress === true ?
+          <button className="btn btn-secondary disabled">
+            <i className="fa fa-fw fa-spinner fa-pulse"></i>
+          </button> :
+          <button className="btn btn-secondary"
+            onClick={() => { dispatch(deleteEvent(event._id)); }}>
+            <i className="fa fa-fw fa-trash"></i>
+          </button>
+        }
         <a className="btn btn-secondary" href={'/account/events/' + event._id}><i className="fa fa-edit"></i></a>
       </span>
     </li>

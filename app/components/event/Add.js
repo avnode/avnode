@@ -3,7 +3,7 @@ import { connect } from 'preact-redux';
 
 import { addEvent } from '../../reducers/actions';
 
-const EventAdd = ({ dispatch }) => {
+const EventAdd = ({ ajaxInProgress, dispatch }) => {
   let input;
   return (
     <div>
@@ -19,7 +19,14 @@ const EventAdd = ({ dispatch }) => {
           <input className="form-control" ref={node => {
             input = node;
           }} />
-          <button type="submit" className="input-group-addon">Add Event</button>
+        { ajaxInProgress ?
+          <button type="button" className="input-group-addon disabled">
+            Wait for it…
+          </button> :
+          <button type="submit" className="input-group-addon">
+            Add Event
+          </button>
+        }
         </div>
       </form>
     </div>
