@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import R from 'ramda';
 
 import {
   GOT_USER,
@@ -8,7 +9,10 @@ import {
   EDIT_EVENT,
   REQUEST_DELETE_EVENT,
   REQUEST_EDIT_EVENT,
-  REQUEST_ADD_EVENT 
+  REQUEST_ADD_EVENT,
+
+  RESPONSE_SUGGEST_CREWMEMBER,
+  ADD_CREWMEMBER
 } from './actions';
 
 const initialValues = {
@@ -38,6 +42,22 @@ const event = (state = {}, action) => {
     return state;
   }
 };
+
+const crew = (state = {}, action) => {
+  switch (action.type) {
+  case ADD_CREWMEMBER:
+    if(state._id !== action.payload.crewId) {
+      return state;
+    }
+    return Object.assign({}, state, {
+      members: R.append(action.payload.member, state.members)
+    });
+
+  default:
+    return state;
+  }
+};
+
 const user = (state = initialValues, action) => {
   switch (action.type) {
   case GOT_USER:
@@ -55,6 +75,17 @@ const user = (state = initialValues, action) => {
         return event(e, action);
       })
     });
+  case RESPONSE_SUGGEST_CREWMEMBER:
+    return Object.assign({}, state, {
+      _memberSuggestions: action.suggestions
+    });
+  case ADD_CREWMEMBER:
+    return Object.assign({}, state, {
+      crews: state.crews.map((c) => {
+        return crew(c, action);
+      })
+    });
+    
   default:
     return state;
   }
