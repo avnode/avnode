@@ -18,7 +18,9 @@ export function editEvent(json) {
 
 export function fetchUser() {
   return dispatch => {
-    return fetch(`/account/api/user`)
+    return fetch(`/account/api/user`, {
+        credentials: 'same-origin'
+      })
       .then(response => response.json())
       .then(json => dispatch(gotUser(json)))
   }
