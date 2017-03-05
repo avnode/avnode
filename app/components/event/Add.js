@@ -1,28 +1,29 @@
-import { h } from 'preact'
-import { connect } from 'preact-redux'
+import { h } from 'preact';
+import { connect } from 'preact-redux';
 
-import { addEvent } from '../../reducers/actions'
+import { addEvent } from '../../reducers/actions';
 
 const EventAdd = ({ dispatch }) => {
-  let input
+  let input;
   return (
     <div>
       <form onSubmit={e => {
-        e.preventDefault()
+        e.preventDefault();
         //if (!input.value.trim()) {
         //  return
         //}
-        dispatch(addEvent(input.value))
-        input.value = ''
+        dispatch(addEvent(input.value));
+        input.value = '';
       }}>
-        <div class="input-group">
-          <input class="form-control" ref={node => {
-            input = node
+        <div className="input-group">
+          <input className="form-control" ref={node => {
+            input = node;
           }} />
-          <button type="submit" class="input-group-addon">Add Event</button>
+          <button type="submit" className="input-group-addon">Add Event</button>
         </div>
       </form>
     </div>
-  )
-}
-export default connect()(EventAdd)
+  );
+};
+
+export default connect()(EventAdd);

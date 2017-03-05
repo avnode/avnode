@@ -25,7 +25,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(require('morgan')('short'));
+app.use(morgan('short'));
 app.use(expressStatusMonitor());
 app.use(compression());
 app.use(sass({

@@ -1,18 +1,17 @@
-import { h } from 'preact'
-import { connect } from 'preact-redux'
+import { h } from 'preact';
+import { connect } from 'preact-redux';
 
-const General = props => {
+const General = _props => {
   //const { events } = props
   return (
     <div>
     general
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => {
-  return {
-  }
-}
+const mapStateToProps = (_state) => {
+  return { };
+};
 
-export default connect(mapStateToProps)(General)
+export default connect(mapStateToProps)(General);

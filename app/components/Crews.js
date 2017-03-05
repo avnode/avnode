@@ -1,18 +1,18 @@
-import { h } from 'preact'
-import { connect } from 'preact-redux'
+import { h } from 'preact';
+import { connect } from 'preact-redux';
 
-const Crews = props => {
+const Crews = _props => {
   //const { events } = props
   return (
     <div>
       Crews crews crews
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (_state) => {
   return {
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(Crews)
+export default connect(mapStateToProps)(Crews);

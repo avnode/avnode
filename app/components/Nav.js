@@ -1,15 +1,13 @@
-import { h } from 'preact'
-import { connect } from 'preact-redux'
-import Router from 'preact-router';
+import { h } from 'preact';
 
 const Nav = () => {
   return (
-    <nav class="nav nav-pills nav-justified">
-      <a class="nav-link" href="/account/general">General</a>
-      <a class="nav-link" href="/account/events">Events</a>
-      <a class="nav-link" href="/account/crews">Crews</a>
+    <nav className="nav nav-pills nav-justified">
+      <a className="nav-link" href="/account/general">General</a>
+      <a className="nav-link" href="/account/events">Events</a>
+      <a className="nav-link" href="/account/crews">Crews</a>
     </nav>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

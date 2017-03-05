@@ -1,11 +1,11 @@
 import { h } from 'preact';
 import Router from 'preact-router';
 
-import Nav from './Nav'
-import General from './General'
-import Events from './Events'
-import EventEdit from './event/Edit'
-import Crews from './Crews'
+import Nav from './Nav';
+import General from './General';
+import Events from './Events';
+import EventEdit from './event/Edit';
+import Crews from './Crews';
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
         <Crews path="/account/crews" />
       </Router>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

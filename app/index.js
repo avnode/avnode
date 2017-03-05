@@ -1,13 +1,13 @@
-import { Provider, connect } from 'preact-redux';
+import { Provider } from 'preact-redux';
 import { h, render } from 'preact';
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 
-import reducer from './reducers'
-import { fetchUser } from './reducers/actions'
+import reducer from './reducers';
+import { fetchUser } from './reducers/actions';
 
-const loggerMiddleware = createLogger()
+const loggerMiddleware = createLogger();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 let store = createStore(
@@ -18,7 +18,7 @@ let store = createStore(
       loggerMiddleware
     )
   )
-)
+);
 
 let root;
 
@@ -40,4 +40,4 @@ if (module.hot) {
 }
 
 init();
-store.dispatch(fetchUser())
+store.dispatch(fetchUser());
