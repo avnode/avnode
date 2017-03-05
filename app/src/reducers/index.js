@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
-import { GOT_USER, EDIT_USER, EDIT_EVENT } from './actions'
+import { GOT_USER, EDIT_USER, EDIT_EVENT, DELETE_EVENT, ADD_EVENT } from './actions'
 
 const initialValues = {
   events: []
