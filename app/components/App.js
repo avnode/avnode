@@ -6,6 +6,7 @@ import General from './General';
 import Events from './Events';
 import EventEdit from './event/Edit';
 import Crews from './Crews';
+import CrewEdit from './crew/Edit';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Events path="/account/events" />
         <EventEdit path="/account/events/:_id" />
         <Crews path="/account/crews" />
+        <CrewEdit path="/account/crews/:_id" />
       </Router>
     </div>
   );

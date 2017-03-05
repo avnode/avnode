@@ -12,7 +12,8 @@ import {
 } from './actions';
 
 const initialValues = {
-  events: []
+  events: [],
+  crews: []
 };
 const event = (state = {}, action) => {
   switch (action.type) {

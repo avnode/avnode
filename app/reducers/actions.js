@@ -10,6 +10,10 @@ export const REQUEST_DELETE_EVENT = 'REQUEST_DELETE_EVENT';
 export const REQUEST_ADD_EVENT = 'REQUEST_ADD_EVENT';
 export const REQUEST_EDIT_EVENT = 'REQUEST_EDIT_EVENT';
 
+export const REQUEST_ADD_CREW = 'REQUEST_ADD_CREW';
+export const REQUEST_DELETE_CREW = 'REQUEST_DELETE_CREW';
+export const REQUEST_EDIT_CREW = 'REQUEST_EDIT_CREW';
+
 // Wrap fetch with some default settings, always
 // return parsed JSON…
 const fetch = (path, options = {}) => {
@@ -62,11 +66,7 @@ export function addEvent(title) {
         method: 'POST',
         body: JSON.stringify({ title })
       })
-      .then(json => {
-        setTimeout(() => {
-          return dispatch(gotUser(json));
-        }, 3000);
-      });
+      .then(json => dispatch(gotUser(json)));
   };
 }
 
@@ -79,6 +79,49 @@ export function deleteEvent(id) {
     return fetch(
       `/account/api/event/${id}`, {
         method: 'DELETE',
+      })
+      .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function addCrew(title) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_CREW
+    });
+    return fetch(
+      '/account/api/crew', {
+        method: 'POST',
+        body: JSON.stringify({ title })
+      })
+      .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function deleteCrew(id) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_DELETE_CREW,
+      id
+    });
+    return fetch(
+      `/account/api/crew/${id}`, {
+        method: 'DELETE',
+      })
+      .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function editCrew(data) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_EDIT_CREW,
+      id: data._id
+    });
+    return fetch(
+      `/account/api/crew/${data._id}`, {
+        method: 'PUT',
+        body: JSON.stringify(data)
       })
       .then(json => dispatch(gotUser(json)));
   };

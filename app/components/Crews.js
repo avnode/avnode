@@ -1,17 +1,27 @@
 import { h } from 'preact';
 import { connect } from 'preact-redux';
 
-const Crews = _props => {
-  //const { events } = props
+import CrewAdd from './crew/Add';
+import CrewShow from './crew/Show';
+
+const Crews = ({ crews, ajaxInProgress }) => {
   return (
     <div>
-      Crews crews crews
+      <CrewAdd ajaxInProgress={ajaxInProgress} />
+      <hr />
+      <ul className="list-group">
+        {crews.map((crew) =>
+          <CrewShow crew={crew} />
+        )}
+      </ul>
     </div>
   );
 };
 
-const mapStateToProps = (_state) => {
+const mapStateToProps = (state) => {
   return {
+    crews: state.user.crews,
+    ajaxInProgress: state.user.ajaxInProgress
   };
 };
 

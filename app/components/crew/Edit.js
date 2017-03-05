@@ -3,35 +3,35 @@ import { connect } from 'preact-redux';
 import { route } from 'preact-router';
 import { Field, reduxForm } from 'redux-form';
 
-import { editEvent } from '../../reducers/actions';
+import { editCrew } from '../../reducers/actions';
 
-let EventForm = props => {
+let CrewForm = props => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
       <Field name="_id" component="input" type="hidden" />
       <div className="form-group">
-        <label htmlFor="title">Title</label>
-        <Field className="form-control" name="title" component="input" type="text" value={props.title} />
+        <label htmlFor="name">Name</label>
+        <Field className="form-control" name="name" component="input" type="text" value={props.name} />
       </div>
       <button className="btn btn-primary" type="submit">Submit</button>
     </form>
   );
 };
 
-EventForm = reduxForm({ form: 'event' })(EventForm);
+CrewForm = reduxForm({ form: 'crew' })(CrewForm);
 
-const EditEvent = props => {
-  let { event } = props;
+const EditCrew = props => {
+  let { crew } = props;
   const onSubmit = (props, dispatch) => {
-    dispatch(editEvent(props));
+    dispatch(editCrew(props));
   };
   const onSubmitSuccess = () => {
-    route('/account/events');
+    route('/account/crews');
   };
   return (
-    <EventForm
-      initialValues={event}
+    <CrewForm
+      initialValues={crew}
       onSubmit={onSubmit}
       onSubmitSuccess={onSubmitSuccess}
     />
@@ -40,9 +40,9 @@ const EditEvent = props => {
 
 const mapStateToProps = (state, props) => {
   return {
-    event: (state.user.events.find(event => { return event._id === props._id; })),
+    crew: (state.user.crews.find(c => { return c._id === props._id; })),
     user: state.user
   };
 };
 
-export default connect(mapStateToProps)(EditEvent);
+export default connect(mapStateToProps)(EditCrew);
