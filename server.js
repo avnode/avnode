@@ -3,6 +3,7 @@ const compression = require('compression');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
+const morgan = require('morgan');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('express-flash');
 const expressStatusMonitor = require('express-status-monitor');
@@ -24,6 +25,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(require('morgan')('short'));
 app.use(expressStatusMonitor());
 app.use(compression());
 app.use(sass({
