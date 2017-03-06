@@ -2,6 +2,7 @@ import { h } from 'preact';
 import { connect } from 'preact-redux';
 import { route } from 'preact-router';
 import { Field, reduxForm } from 'redux-form';
+import { injectIntl, FormattedMessage} from 'preact-intl';
 
 import { editCrew, suggestCrewMember, addCrewMember } from '../../reducers/actions';
 
@@ -51,12 +52,14 @@ let CrewForm = props => {
     <form onSubmit={handleSubmit}>
       <div className="card">
         <div className="card-header">
-          Crew Details FIXME {props._id}
+          <FormattedMessage id="crew.edit.headline" defaultMessage="Crew Details" />
         </div>
         <div className="card-block">
           <Field name="_id" component="input" type="hidden" />
           <div className="form-group">
-            <label htmlFor="name">Name FIXME</label>
+            <label htmlFor="name">
+              <FormattedMessage id="crew.edit.form.label.name" defaultMessage="Name" />
+            </label>
             <Field className="form-control" name="name" component="input" type="text" value={props.name} />
           </div>
           <div className="formGroup">
@@ -76,11 +79,15 @@ let CrewForm = props => {
               */} 
           </div>
           <div className="form-group">
-            <label htmlFor="about">About FIXME</label>
+            <label htmlFor="about">
+              <FormattedMessage id="crew.edit.form.label.about" defaultMessage="About" />
+            </label>
             <Field className="form-control" name="about" component="textarea" value={props.about} />
           </div>
           <div className="form-group">
-            <label htmlFor="members">Members FIXME</label>
+            <label htmlFor="members">
+              <FormattedMessage id="crew.edit.form.label.members" defaultMessage="Members" />
+            </label>
             <ul className="list-group">
               {/* props.members.map((m) => (
                   <Member member={m} />
@@ -89,8 +96,16 @@ let CrewForm = props => {
             </ul>
           </div>
           <div className="form-group">
-            <label htmlFor="member">Invite others FIXME</label>
-            <input className="form-control" type="text" autocomplete="off" placeholder="Type… FIXME" onKeyUp={ findMember } />
+            <label htmlFor="member">
+              <FormattedMessage id="crew.edit.form.label.about" defaultMessage="Invite others" />
+            </label>
+            <input
+              className="form-control"
+              type="text"
+              autocomplete="off"
+              placeholder={props.intl.formatMessage({id: "crew.edit.form.label.about", defaultMessage:"Type to find users…"})}
+              onKeyUp={ findMember }
+            />
             <div className="mt-1">
               { memberSuggestions.map((m) => (
                 <button
@@ -105,7 +120,9 @@ let CrewForm = props => {
             </div>
           </div>
           <div className="form-group">
-            <button className="btn btn-primary" type="submit">Save</button>
+            <button className="btn btn-primary" type="submit">
+              <FormattedMessage id="general.form.save" defaultMessage="Save" />
+            </button>
           </div>
         </div>
       </div>
@@ -113,7 +130,7 @@ let CrewForm = props => {
   );
 };
 
-CrewForm = reduxForm({ form: 'crew' })(CrewForm);
+CrewForm = injectIntl(reduxForm({ form: 'crew' })(CrewForm));
 
 const EditCrew = props => {
   const memberSuggestions = props._memberSuggestions || [];
