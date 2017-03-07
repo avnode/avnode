@@ -16,17 +16,23 @@ export const REQUEST_EDIT_CREW = 'REQUEST_EDIT_CREW';
 export const REQUEST_SUGGEST_CREWMEMBER = 'REQUEST_SUGGEST_CREWMEMBER';
 export const RESPONSE_SUGGEST_CREWMEMBER = 'RESPONSE_SUGGEST_CREWMEMBER';
 export const ADD_CREWMEMBER = 'ADD_CREWMEMBER';
+export const REQUEST_ADD_CREWIMAGE = 'REQUEST_ADD_CREWIMAGE';
 
 // Wrap fetch with some default settings, always
 // return parsed JSON…
-const fetch = (path, options = {}) => {
-  return isomorphicFetch(path, Object.assign({}, {
-    headers: {
+const fetch = (path, options = {}, json = true) => {
+  const opts = Object.assign({}, {
+    credentials: 'same-origin'
+  }, options);
+  if (json === true) {
+    opts.headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    credentials: 'same-origin'
-  }, options)).then(response => response.json());
+    };
+  }
+
+  return isomorphicFetch(path, opts)
+    .then(response => response.json());
 };
 
 export function gotUser(json) {
@@ -154,4 +160,19 @@ export function addCrewMember(crewId, member) {
       member
     }
   };
+}
+
+export function addCrewImage(id, file) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_CREWIMAGE
+    });
+    const formData = new FormData();
+    formData.append('image', file, file.name)
+    return fetch(`/account/api/crew/${id}/image`, {
+      method: 'POST',
+      body: formData
+    }, false)
+    .then(json => dispatch(gotUser(json)));
+  }
 }

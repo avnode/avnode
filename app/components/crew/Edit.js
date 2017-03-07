@@ -2,9 +2,10 @@ import { h } from 'preact';
 import { connect } from 'preact-redux';
 import { route } from 'preact-router';
 import { Field, reduxForm } from 'redux-form';
-import { injectIntl, FormattedMessage} from 'preact-intl';
+import { injectIntl, FormattedMessage } from 'preact-intl';
 
-import { editCrew, suggestCrewMember, addCrewMember } from '../../reducers/actions';
+import { editCrew, suggestCrewMember, addCrewMember, addCrewImage } from '../../reducers/actions';
+import ImageDropzone from '../ImageDropzone';
 
 const Member = ({member}) => {
   return (
@@ -35,6 +36,7 @@ const Member = ({member}) => {
   );
 };
 
+
 let CrewForm = props => {
   const { handleSubmit, dispatch, crew } = props;
   const memberSuggestions = props.user._memberSuggestions || [];
@@ -48,6 +50,17 @@ let CrewForm = props => {
     e.preventDefault();
     return dispatch(addCrewMember(crewId, member));
   };
+
+  const onImageDrop = (crewId) => (files, _something, ev) => {
+    const file = files[0];
+    console.log(file);
+    return dispatch(addCrewImage(crewId, file));
+  };
+
+  const getImageUrl = (image) => {
+    console.log('IMAGE', image);
+    return `/storage/${image._id}/1920/400`;
+  };
   return (
     <form onSubmit={handleSubmit}>
       <div className="card">
@@ -56,34 +69,32 @@ let CrewForm = props => {
         </div>
         <div className="card-block">
           <Field name="_id" component="input" type="hidden" />
+
           <div className="form-group">
             <label htmlFor="name">
               <FormattedMessage id="crew.edit.form.label.name" defaultMessage="Name" />
             </label>
             <Field className="form-control" name="name" component="input" type="text" value={props.name} />
           </div>
-          <div className="formGroup">
-            { /*
-               if crew.image
-                 img.img-thumbnail.mb-3(
-                   src=crew.imageUrl
-                 )
-               else
-                 p=__('Upload image')
-               label.custom-file
-                 input.custom-file-input(
-                   type='file'
-                   name='image'
-                 )
-                 span.custom-file-control
-              */} 
+
+          <div className="form-group">
+            <label htmlFor="image">
+              <FormattedMessage id="crew.edit.form.label.image" defaultMessage="Image" />
+            </label>
+            { props.crew && props.crew.image ?
+              <img className="img-thumbnail mb-3" src={getImageUrl(props.crew.image)} alt={`image of ${props.crew.name}`} /> :
+              <p>FUCK IT</p>
+            }
+            <ImageDropzone onDrop={onImageDrop(props._id)} />
           </div>
+
           <div className="form-group">
             <label htmlFor="about">
               <FormattedMessage id="crew.edit.form.label.about" defaultMessage="About" />
             </label>
             <Field className="form-control" name="about" component="textarea" value={props.about} />
           </div>
+
           <div className="form-group">
             <label htmlFor="members">
               <FormattedMessage id="crew.edit.form.label.members" defaultMessage="Members" />
@@ -95,6 +106,7 @@ let CrewForm = props => {
               }
             </ul>
           </div>
+
           <div className="form-group">
             <label htmlFor="member">
               <FormattedMessage id="crew.edit.form.label.about" defaultMessage="Invite others" />
@@ -106,11 +118,11 @@ let CrewForm = props => {
               placeholder={props.intl.formatMessage({id: "crew.edit.form.label.about", defaultMessage:"Type to find users…"})}
               onKeyUp={ findMember }
             />
-            <div className="mt-1">
+            <div className="mt-1 list-group">
               { memberSuggestions.map((m) => (
                 <button
                   type="button"
-                  className="btn btn-secondary btn-block text-left"
+                  className="list-group-item list-group-item-action"
                   onClick={ addMember(props._id)(m) }
                 >
                     {m.stagename} ({m.name})
@@ -119,6 +131,7 @@ let CrewForm = props => {
               }
             </div>
           </div>
+
           <div className="form-group">
             <button className="btn btn-primary" type="submit">
               <FormattedMessage id="general.form.save" defaultMessage="Save" />
