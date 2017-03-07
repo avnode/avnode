@@ -180,7 +180,10 @@ export function removeCrewMember(crewId, member) {
 export function addCrewImage(id, file) {
   return dispatch => {
     dispatch({
-      type: REQUEST_ADD_CREWIMAGE
+      type: REQUEST_ADD_CREWIMAGE,
+      payload: {
+        crewId: id
+      }
     });
     const formData = new FormData();
     formData.append('image', file, file.name)

@@ -12,6 +12,7 @@ import {
   REQUEST_ADD_EVENT,
 
   RESPONSE_SUGGEST_CREWMEMBER,
+  REQUEST_ADD_CREWIMAGE,
   ADD_CREWMEMBER
 } from './actions';
 
@@ -52,6 +53,13 @@ const crew = (state = {}, action) => {
     return Object.assign({}, state, {
       members: R.append(action.payload.member, state.members)
     });
+  case REQUEST_ADD_CREWIMAGE:
+    if(state._id !== action.payload.crewId) {
+      return state;
+    }
+    return Object.assign({}, state, {
+      imageUploadInProgress: true
+    });
 
   default:
     return state;
@@ -79,6 +87,7 @@ const user = (state = initialValues, action) => {
     return Object.assign({}, state, {
       _memberSuggestions: action.suggestions
     });
+  case REQUEST_ADD_CREWIMAGE:
   case ADD_CREWMEMBER:
     return Object.assign({}, state, {
       crews: state.crews.map((c) => {

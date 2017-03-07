@@ -115,6 +115,7 @@ let CrewForm = props => {
               null
             }
             <ImageDropzone
+              imageUploadInProgress={(crew && crew.imageUploadInProgress)}
               onDrop={onImageDrop(props._id)}
             />
           </div>
