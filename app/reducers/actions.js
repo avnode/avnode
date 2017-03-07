@@ -15,7 +15,8 @@ export const REQUEST_DELETE_CREW = 'REQUEST_DELETE_CREW';
 export const REQUEST_EDIT_CREW = 'REQUEST_EDIT_CREW';
 export const REQUEST_SUGGEST_CREWMEMBER = 'REQUEST_SUGGEST_CREWMEMBER';
 export const RESPONSE_SUGGEST_CREWMEMBER = 'RESPONSE_SUGGEST_CREWMEMBER';
-export const ADD_CREWMEMBER = 'ADD_CREWMEMBER';
+export const REQUEST_ADD_CREWMEMBER = 'REQUEST_ADD_CREWMEMBER';
+export const REQUEST_DELETE_CREWMEMBER = 'REQUEST_DELETE_CREWMEMBER';
 export const REQUEST_ADD_CREWIMAGE = 'REQUEST_ADD_CREWIMAGE';
 
 // Wrap fetch with some default settings, always
@@ -153,12 +154,26 @@ export function suggestCrewMember(q) {
 };
 
 export function addCrewMember(crewId, member) {
-  return {
-    type: ADD_CREWMEMBER,
-    payload: {
-      crewId,
-      member
-    }
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_CREWMEMBER
+    });
+    return fetch(`/account/api/crew/${crewId}/member/${member.id}`, {
+      method: 'PUT',
+    })
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function removeCrewMember(crewId, member) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_DELETE_CREWMEMBER
+    });
+    return fetch(`/account/api/crew/${crewId}/member/${member._id}`, {
+      method: 'DELETE',
+    })
+    .then(json => dispatch(gotUser(json)));
   };
 }
 

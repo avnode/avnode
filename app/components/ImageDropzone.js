@@ -14,6 +14,7 @@ const ActualDropzone = (onDrop) =>  (field) => {
     backgroundColor: '#eee'
   };
   const allowedTypes = [ 'image/png', 'image/jpeg', 'image/jpg' ];
+  // FIXME: Restrict to these types…
         //( filesToUpload, e ) => field.input.onChange(filesToUpload)}
   //accept={allowedTypes.join(', ')}
   /*
