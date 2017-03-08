@@ -168,7 +168,11 @@ export function addCrewMember(crewId, member) {
 export function removeCrewMember(crewId, member) {
   return dispatch => {
     dispatch({
-      type: REQUEST_DELETE_CREWMEMBER
+      type: REQUEST_DELETE_CREWMEMBER,
+      payload: {
+        crewId,
+        memberId: member._id
+      }
     });
     return fetch(`/account/api/crew/${crewId}/member/${member._id}`, {
       method: 'DELETE',

@@ -27,13 +27,22 @@ const Member = injectIntl(({member, me, onDelete, intl}) => {
           : null
         }
       </span>
-      <button
-        type="button"
-        className="btn btn-danger"
-        onClick={onDelete}
-      >
-        <i className="fa fa-trash"></i>
-      </button>
+      { member.deletionInProgress ?
+        <button
+          type="button"
+          className="btn btn-danger disabled"
+        >
+          <i className="fa fa-fw fa-spinner fa-pulse"></i>
+        </button>
+        :
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={onDelete}
+        >
+          <i className="fa fa-trash"></i>
+        </button>
+      }
     </li>
   );
 });

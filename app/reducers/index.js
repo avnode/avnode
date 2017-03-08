@@ -13,7 +13,8 @@ import {
 
   RESPONSE_SUGGEST_CREWMEMBER,
   REQUEST_ADD_CREWIMAGE,
-  ADD_CREWMEMBER
+  ADD_CREWMEMBER,
+  REQUEST_DELETE_CREWMEMBER
 } from './actions';
 
 const initialValues = {
@@ -47,18 +48,33 @@ const event = (state = {}, action) => {
 const crew = (state = {}, action) => {
   switch (action.type) {
   case ADD_CREWMEMBER:
-    if(state._id !== action.payload.crewId) {
+    if (state._id !== action.payload.crewId) {
       return state;
     }
     return Object.assign({}, state, {
       members: R.append(action.payload.member, state.members)
     });
   case REQUEST_ADD_CREWIMAGE:
-    if(state._id !== action.payload.crewId) {
+    if (state._id !== action.payload.crewId) {
       return state;
     }
     return Object.assign({}, state, {
       imageUploadInProgress: true
+    });
+  case REQUEST_DELETE_CREWMEMBER:
+    if (state._id !== action.payload.crewId) {
+      return state;
+    }
+    return Object.assign({}, state, {
+      members: state.members.map((m) => {
+        if (m._id === action.payload.memberId) {
+          return Object.assign({}, m, {
+            deletionInProgress: true
+          });
+        } else {
+          return m;
+        }
+      })
     });
 
   default:
@@ -88,6 +104,7 @@ const user = (state = initialValues, action) => {
       _memberSuggestions: action.suggestions
     });
   case REQUEST_ADD_CREWIMAGE:
+  case REQUEST_DELETE_CREWMEMBER:
   case ADD_CREWMEMBER:
     return Object.assign({}, state, {
       crews: state.crews.map((c) => {
