@@ -137,11 +137,14 @@ export function editCrew(data) {
   };
 }
 
-export function suggestCrewMember(q) {
+export function suggestCrewMember(crewId, q) {
   return dispatch => {
     dispatch({
       type: REQUEST_SUGGEST_CREWMEMBER,
-      q
+      payload: {
+        q,
+        crewId
+      }
     });
     return fetch(`/account/api/search/user?q=${q}`)
       .then(json => {

@@ -11,6 +11,7 @@ import {
   REQUEST_EDIT_EVENT,
   REQUEST_ADD_EVENT,
 
+  REQUEST_SUGGEST_CREWMEMBER,
   RESPONSE_SUGGEST_CREWMEMBER,
   REQUEST_ADD_CREWIMAGE,
   ADD_CREWMEMBER,
@@ -76,7 +77,6 @@ const crew = (state = {}, action) => {
         }
       })
     });
-
   default:
     return state;
   }
@@ -101,10 +101,16 @@ const user = (state = initialValues, action) => {
     });
   case RESPONSE_SUGGEST_CREWMEMBER:
     return Object.assign({}, state, {
-      _memberSuggestions: action.suggestions
+      _memberSuggestions: action.suggestions,
+      _memberSuggestionInProgress: false
+    });
+  case REQUEST_SUGGEST_CREWMEMBER:
+    return Object.assign({}, state, {
+      _memberSuggestionInProgress: true
     });
   case REQUEST_ADD_CREWIMAGE:
   case REQUEST_DELETE_CREWMEMBER:
+  case REQUEST_SUGGEST_CREWMEMBER:
   case ADD_CREWMEMBER:
     return Object.assign({}, state, {
       crews: state.crews.map((c) => {

@@ -48,12 +48,12 @@ const Member = injectIntl(({member, me, onDelete, intl}) => {
 });
 
 let CrewForm = props => {
-  const { handleSubmit, dispatch, crew } = props;
+  const { handleSubmit, dispatch, crew, user } = props;
   const memberSuggestions = props.user._memberSuggestions || [];
   const findMember = (e) => {
     e.preventDefault();
     if (e.target.value.length > 2) {
-      return dispatch(suggestCrewMember(e.target.value));
+      return dispatch(suggestCrewMember(crew._id, e.target.value));
     } // FIXME: handle reset
   };
   const addMember = (crewId) => (member) => (e) => {
@@ -175,12 +175,23 @@ let CrewForm = props => {
               type="text"
               autocomplete="off"
               placeholder={props.intl.formatMessage({
-                id: "crew.edit.form.label.about",
+                id: "crew.edit.form.label.suggestMembers",
                 defaultMessage:"Type to find users…"
               })}
               onKeyUp={ findMember }
             />
             <div className="mt-1 list-group">
+              { user && user._memberSuggestionInProgress ?
+                <div className="list-group-item">
+                  <i className="fa fa-fw fa-spinner fa-pulse"></i>
+                  {' '}
+                  <FormattedMessage
+                    id="crew.edit.form.label.suggestMembersLoading"
+                    defaultMessage="Finding users…"
+                  />
+                </div> :
+                null
+              }
               { memberSuggestions.map((m) => (
                 <button
                   type="button"
