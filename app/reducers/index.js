@@ -5,6 +5,14 @@ import R from 'ramda';
 import {
   GOT_USER,
   EDIT_USER,
+  CHANGE_LANGUAGE,
+  RESPONSE_COUNTRIES,
+  REQUEST_ADD_USERPROFILEIMAGE,
+  REQUEST_ADD_USERTEASERIMAGE,
+  OPEN_STAGENAME_MODAL,
+  CLOSE_STAGENAME_MODAL,
+  OPEN_PASSWORD_MODAL,
+  CLOSE_PASSWORD_MODAL,
 
   EDIT_EVENT,
   REQUEST_DELETE_EVENT,
@@ -82,12 +90,22 @@ const crew = (state = {}, action) => {
   }
 };
 
+// EVENT.REQUEST_ADD
+// CREW.REQUEST_SUGGEST_MEMBER
 const user = (state = initialValues, action) => {
   switch (action.type) {
   case GOT_USER:
     return action.json;
   case EDIT_USER:
     return state;
+  case REQUEST_ADD_USERPROFILEIMAGE:
+    return Object.assign({}, state, {
+      profileImageUploadInProgress: true
+    });
+  case REQUEST_ADD_USERTEASERIMAGE:
+    return Object.assign({}, state, {
+      teaserImageUploadInProgress: true
+    });
   case EDIT_EVENT:
     return state; // FIXME?!
   case REQUEST_ADD_EVENT:
@@ -110,12 +128,38 @@ const user = (state = initialValues, action) => {
     });
   case REQUEST_ADD_CREWIMAGE:
   case REQUEST_DELETE_CREWMEMBER:
-  case REQUEST_SUGGEST_CREWMEMBER:
   case ADD_CREWMEMBER:
     return Object.assign({}, state, {
       crews: state.crews.map((c) => {
         return crew(c, action);
       })
+    });
+
+  case OPEN_STAGENAME_MODAL:
+    return Object.assign({}, state, {
+      _stagenameModalActive: true
+    });
+  case CLOSE_STAGENAME_MODAL:
+    return Object.assign({}, state, {
+      _stagenameModalActive: false
+    });
+  case OPEN_PASSWORD_MODAL:
+    return Object.assign({}, state, {
+      _passwordModalActive: true
+    });
+  case CLOSE_PASSWORD_MODAL:
+    return Object.assign({}, state, {
+      _passwordModalActive: false
+    });
+  case CHANGE_LANGUAGE:
+    return Object.assign({}, state, {
+      settings: Object.assign({}, state.settings, {
+        language: action.payload.language
+      })
+    });
+  case RESPONSE_COUNTRIES:
+    return Object.assign({}, state, {
+      _countries: action.payload.countries
     });
     
   default:

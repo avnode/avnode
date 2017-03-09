@@ -1,12 +1,19 @@
 import { h } from 'preact';
 import { connect } from 'preact-redux';
 
+import Card from './Card';
 import CrewAdd from './crew/Add';
 import CrewShow from './crew/Show';
+import { injectIntl } from 'preact-intl';
 
-const Crews = ({ crews, ajaxInProgress }) => {
+const Crews = ({ crews, ajaxInProgress, intl }) => {
   return (
-    <div>
+    <Card
+      title={intl.formatMessage({
+        id: 'crews.edit.form.title',
+        defaultMessage: 'Your Crews'
+      })}
+    >
       <CrewAdd ajaxInProgress={ajaxInProgress} />
       <hr />
       <ul className="list-group">
@@ -14,7 +21,7 @@ const Crews = ({ crews, ajaxInProgress }) => {
           <CrewShow crew={crew} />
         )}
       </ul>
-    </div>
+    </Card>
   );
 };
 
@@ -25,4 +32,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Crews);
+export default connect(mapStateToProps)(injectIntl(Crews));

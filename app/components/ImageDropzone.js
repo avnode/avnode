@@ -1,8 +1,7 @@
 import { h } from 'preact';
-import { connect } from 'preact-redux';
 import Dropzone from 'react-dropzone';
 import { FormattedMessage } from 'preact-intl';
-import { Field, reduxForm } from 'redux-form';
+import { Field } from 'redux-form';
 
 
 const dropzoneStyle = {
@@ -14,7 +13,7 @@ const dropzoneStyle = {
 
 const ActualDropzone = (onDrop) =>  (field) => {
   //const files = field.input.value;
-  const allowedTypes = [ 'image/png', 'image/jpeg', 'image/jpg' ];
+  //const allowedTypes = [ 'image/png', 'image/jpeg', 'image/jpg' ];
   // FIXME: Restrict to these types…
         //( filesToUpload, e ) => field.input.onChange(filesToUpload)}
   //accept={allowedTypes.join(', ')}

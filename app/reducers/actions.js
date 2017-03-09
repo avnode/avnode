@@ -1,7 +1,16 @@
 import isomorphicFetch from 'isomorphic-fetch';
 
 export const GOT_USER = 'GOT_USER';
+export const REQUEST_EDIT_USER = 'REQUEST_EDIT_USER';
 export const EDIT_USER = 'EDIT_USER';
+export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
+export const RESPONSE_COUNTRIES = 'RESPONSE_COUNTRIES';
+export const REQUEST_ADD_USERPROFILEIMAGE = 'REQUEST_ADD_USERPROFILEIMAGE';
+export const REQUEST_ADD_USERTEASERIMAGE = 'REQUEST_ADD_USERTEASERIMAGE';
+export const OPEN_STAGENAME_MODAL = 'OPEN_STAGENAME_MODAL';
+export const CLOSE_STAGENAME_MODAL = 'CLOSE_STAGENAME_MODAL';
+export const OPEN_PASSWORD_MODAL = 'OPEN_PASSWORD_MODAL';
+export const CLOSE_PASSWORD_MODAL = 'CLOSE_PASSWORD_MODAL';
 
 export const DELETE_EVENT = 'DELETE_EVENT';
 export const ADD_EVENT = 'ADD_EVENT';
@@ -38,10 +47,6 @@ const fetch = (path, options = {}, json = true) => {
 
 export function gotUser(json) {
   return { type: GOT_USER, json };
-}
-
-export function editUser(json) {
-  return { type: EDIT_USER, json };
 }
 
 export function fetchUser() {
@@ -154,7 +159,7 @@ export function suggestCrewMember(crewId, q) {
         });
       });
   };
-};
+}
 
 export function addCrewMember(crewId, member) {
   return dispatch => {
@@ -192,12 +197,120 @@ export function addCrewImage(id, file) {
         crewId: id
       }
     });
-    const formData = new FormData();
-    formData.append('image', file, file.name)
     return fetch(`/account/api/crew/${id}/image`, {
       method: 'POST',
-      body: formData
+      body: wrapInFormData(file)
     }, false)
     .then(json => dispatch(gotUser(json)));
-  }
+  };
+}
+
+export function openStagenameModal(dispatch) {
+  return () => (
+    dispatch({
+      type: OPEN_STAGENAME_MODAL
+    })
+  );
+}
+
+export function closeStagenameModal(dispatch) {
+  return () => (
+    dispatch({
+      type: CLOSE_STAGENAME_MODAL
+    })
+  );
+}
+
+export function openPasswordModal(dispatch) {
+  return () => (
+    dispatch({
+      type: OPEN_PASSWORD_MODAL
+    })
+  );
+}
+
+export function closePasswordModal(dispatch) {
+  return () => (
+    dispatch({
+      type: CLOSE_PASSWORD_MODAL
+    })
+  );
+}
+
+const wrapInFormData = (file) => {
+  const formData = new FormData();
+  formData.append('image', file, file.name);
+  return formData;
+};
+
+export function addUserProfileImage(dispatch) {
+  return (id, file) => {
+    dispatch({
+      type: REQUEST_ADD_USERPROFILEIMAGE,
+      payload: {
+        user: id
+      }
+    });
+    return fetch(`/account/api/user/${id}/image/profile`, {
+      method: 'POST',
+      body: wrapInFormData(file)
+    }, false)
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function addUserTeaserImage(dispatch) {
+  return (id, file) => {
+    dispatch({
+      type: REQUEST_ADD_USERTEASERIMAGE,
+      payload: {
+        user: id
+      }
+    });
+    return fetch(`/account/api/user/${id}/image/teaser`, {
+      method: 'POST',
+      body: wrapInFormData(file)
+    }, false)
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function editUser(data) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_EDIT_USER,
+      id: data._id
+    });
+    return fetch(
+      `/account/api/user/${data._id}`, {
+        method: 'PUT',
+        body: JSON.stringify(data)
+      })
+      .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function changeLanguage(dispatch) {
+  return language => {
+    dispatch({
+      type: CHANGE_LANGUAGE,
+      payload: {
+        language
+      }
+    });
+  };
+}
+
+export function fetchCountries(dispatch) {
+  return () => {
+    return fetch('/account/api/countries')
+    .then(json => (
+      dispatch({
+        type: RESPONSE_COUNTRIES,
+        payload: {
+          countries: json
+        }
+      })
+    ));
+  };
 }

@@ -15,8 +15,8 @@ import ImageDropzone from '../ImageDropzone';
 
 const Member = injectIntl(({member, me, onDelete, intl}) => {
   const meLabel = intl.formatMessage({
-    id: "crew.edit.form.member.met",
-    defaultMessage:"Me"
+    id: 'crew.edit.form.member.met',
+    defaultMessage: 'Me'
   });
   return (
     <li className="list-group-item justify-content-between">
@@ -66,7 +66,7 @@ let CrewForm = props => {
     return dispatch(removeCrewMember(crewId, member));
   };
 
-  const onImageDrop = (crewId) => (files, _something, ev) => {
+  const onImageDrop = (crewId) => (files, _something, _ev) => {
     const file = files[0];
     return dispatch(addCrewImage(crewId, file));
   };
@@ -173,10 +173,10 @@ let CrewForm = props => {
             <input
               className="form-control"
               type="text"
-              autocomplete="off"
+              autoComplete="off"
               placeholder={props.intl.formatMessage({
-                id: "crew.edit.form.label.suggestMembers",
-                defaultMessage:"Type to find users…"
+                id: 'crew.edit.form.label.suggestMembers',
+                defaultMessage: 'Type to find users…'
               })}
               onKeyUp={ findMember }
             />
@@ -225,7 +225,6 @@ let CrewForm = props => {
 CrewForm = injectIntl(reduxForm({ form: 'crew' })(CrewForm));
 
 const EditCrew = props => {
-  const memberSuggestions = props._memberSuggestions || [];
   const onSubmit = (props, dispatch) => {
     dispatch(editCrew(props));
   };
@@ -246,11 +245,6 @@ const mapStateToProps = (state, props) => {
   return {
     crew: (state.user.crews.find(c => { return c._id === props._id; })),
     user: state.user,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
   };
 };
 

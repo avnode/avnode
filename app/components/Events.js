@@ -1,12 +1,19 @@
 import { h } from 'preact';
 import { connect } from 'preact-redux';
 
+import Card from './Card';
 import EventAdd from './event/Add';
 import EventShow from './event/Show';
+import { injectIntl } from 'preact-intl';
 
-const Events = ({ events, ajaxInProgress })  => {
+const Events = ({ events, ajaxInProgress, intl })  => {
   return (
-    <div>
+    <Card
+      title={ intl.formatMessage({
+        id: 'events.edit.form.title',
+        defaultMessage: 'Your Events'
+      })}
+    >
       <EventAdd ajaxInProgress={ajaxInProgress} />
       <hr />
       <ul className="list-group">
@@ -14,7 +21,7 @@ const Events = ({ events, ajaxInProgress })  => {
           <EventShow event={event} />
         )}
       </ul>
-    </div>
+    </Card>
   );
 };
 
@@ -25,4 +32,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Events);
+export default connect(mapStateToProps)(injectIntl(Events));
