@@ -93,5 +93,9 @@
 	"Passwords are not equal. Try again…": "Passwords are not equal. Try again…",
 	"Your password has been reset.": "Your password has been reset.",
 	"Invalid email or password.": "Invalid email or password.",
-	"Request a new password": "Request a new password"
+	"Request a new password": "Request a new password",
+	"public": "public",
+	"New Image": "New Image",
+	"Video": "Video",
+	"New Video": "New Video"
 }
