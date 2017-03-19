@@ -63,4 +63,18 @@ footer {
       padding: .5rem 1rem;
     }
   }
+  fieldset {
+    margin-top: 2rem;
+  }
+  legend {
+    font-size: 1.25rem;
+  }
+  label {
+    color: $gray-light;
+    margin-bottom: .2rem;
+    font-size: .8rem;
+  }
+  .list-group-item {
+    background-color: transparent;
+  }
 }

@@ -206,29 +206,60 @@ const General = ({
               })}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="birthday">
-              <FormattedMessage
-                id="user.edit.form.label.birthday"
-                defaultMessage="Birthday"
-              />
-            </label>
-            <div className="input-group date" data-provide="datepicker-inline">
-              <div className="input-group-addon">
-                  <i className="fa fa-calendar"></i>
+          <div className="row">
+            <div className="col-md-6 form-group">
+              <label htmlFor="birthday">
+                <FormattedMessage
+                  id="user.edit.form.label.birthday"
+                  defaultMessage="Birthday"
+                />
+              </label>
+              <div className="input-group date" data-provide="datepicker-inline">
+                <div className="input-group-addon">
+                    <i className="fa fa-calendar"></i>
+                </div>
+                <Field
+                  className="form-control"
+                  name="birthday"
+                  component="input"
+                  data-provide="datepicker"
+                  data-date-format="yyyy-mm-dd"
+                  placeholder={intl.formatMessage({
+                    id: 'user.edit.form.label.name.default',
+                    defaultMessage: 'YYYY-MM-DD'
+                  })}
+                  value={user.birthday}
+                />
               </div>
-              <Field
-                className="form-control"
-                name="birthday"
-                component="input"
-                data-provide="datepicker"
-                data-date-format="yyyy-mm-dd"
-                placeholder={intl.formatMessage({
-                  id: 'user.edit.form.label.name.default',
-                  defaultMessage: 'YYYY-MM-DD'
-                })}
-                value={user.birthday}
-              />
+            </div>
+            <div className="col-md-6 form-group">
+              <label htmlFor="citizenship">
+                <FormattedMessage
+                  id="user.edit.form.label.citizenship"
+                  defaultMessage="Citizenship"
+                />
+              </label>
+              { user._countries ?
+                <Field
+                  className="form-control custom-select"
+                  name="citizenship"
+                  component="select"
+                  value={user.gender}
+                >
+                  <option value="">
+                    <FormattedMessage
+                      id="user.edit.form.label.citizenship.empty"
+                      defaultMessage="Please select"
+                    />
+                  </option>
+                  { user._countries.map((c) => (
+                    <option value={c.key.toLowerCase()}>{c.name}</option>
+                    ))
+                  }
+                  { /* FIXME: How do we handle countries here? */ }
+                </Field> :
+                <p>Loading a list of countries…</p>
+              }
             </div>
           </div>
           <div className="form-group">
@@ -250,35 +281,6 @@ const General = ({
               value={user.about}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="citizenship">
-              <FormattedMessage
-                id="user.edit.form.label.citizenship"
-                defaultMessage="Citizenship"
-              />
-            </label>
-            { user._countries ?
-              <Field
-                className="form-control custom-select"
-                name="citizenship"
-                component="select"
-                value={user.gender}
-              >
-                <option value="">
-                  <FormattedMessage
-                    id="user.edit.form.label.citizenship.empty"
-                    defaultMessage="Please select"
-                  />
-                </option>
-                { user._countries.map((c) => (
-                  <option value={c.key.toLowerCase()}>{c.name}</option>
-                  ))
-                }
-                { /* FIXME: How do we handle countries here? */ }
-              </Field> :
-              <p>Loading a list of countries…</p>
-            }
-          </div>
         </fieldset>
 
         <fieldset className="form-group">
@@ -295,7 +297,7 @@ const General = ({
           >
             <FormattedMessage
               id="user.edit.form.label.password.change"
-              defaultMessage="Change"
+              defaultMessage="Change your password"
             />
           </button>
           <Modal
@@ -380,7 +382,7 @@ const General = ({
           <legend>
             <FormattedMessage
               id="user.edit.form.fieldset.email"
-              defaultMessage="Email"
+              defaultMessage="Emails"
             />
           </legend>
 
@@ -429,10 +431,8 @@ const General = ({
               defaultMessage="Stagename"
             />
           </legend>
-          <p className="h4">
-            Current stagename: {user.stagename}
-          </p>
           <p>
+            Current stagename: <strong>{user.stagename}</strong><br />
             <pre>{user.publicUrl}</pre> { /* FIXME */ }
           </p>
           <button
@@ -442,7 +442,7 @@ const General = ({
           >
             <FormattedMessage
               id="user.edit.form.label.stagename.change"
-              defaultMessage="Change"
+              defaultMessage="Change your stagename"
             />
           </button>
           <Modal
