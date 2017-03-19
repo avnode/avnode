@@ -12,16 +12,26 @@ import Preferences from './PreferencesContainer';
 const App = () => {
   return (
     <div>
-      <Nav />
-      <hr />
-      <Router>
-        <Profile path="/account/profile" />
-        <Events path="/account/events" />
-        <EventEdit path="/account/events/:_id" />
-        <Crews path="/account/crews" />
-        <CrewEdit path="/account/crews/:_id" />
-        <Preferences path="/account/preferences" />
-      </Router>
+      <div className="jumbotron jumbotron-fluid">
+        <div className="container">
+          <h1 className="display-4">Account</h1>
+        </div>
+      </div>
+      <div className="container-fluid account-nav-wrap">
+        <div className="container">
+          <Nav />
+        </div>
+      </div>
+      <div className="container">
+        <Router>
+          <Profile path="/account/profile" />
+          <Events path="/account/events" />
+          <EventEdit path="/account/events/:_id" />
+          <Crews path="/account/crews" />
+          <CrewEdit path="/account/crews/:_id" />
+          <Preferences path="/account/preferences" />
+        </Router>
+      </div>
     </div>
   );
 };

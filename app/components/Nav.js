@@ -3,7 +3,7 @@ import { FormattedMessage } from 'preact-intl';
 
 const Nav = () => {
   return (
-    <nav className="nav nav-pills nav-justified">
+    <nav id="account-nav" className="nav nav-pills nav-justified">
       <a className="nav-link" href="/account/profile">
         <FormattedMessage
           id="nav.profile"

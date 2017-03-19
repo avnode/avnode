@@ -27,6 +27,7 @@ footer {
     -moz-column-count: 3;
   }
 }
+
 .navbar {
   &-brand {
     padding-right: 1rem;
@@ -40,5 +41,18 @@ footer {
 .card-deck {
   .card {
     max-width: 350px;
+  }
+}
+
+#app {
+  .account-nav-wrap {
+    margin-top: $jumbotron-padding * -1;
+    background-color: $gray-lighter;
+  }
+  #account-nav {
+    margin-bottom: $jumbotron-padding;
+    .nav-link {
+      padding: 1rem;
+    }
   }
 }
