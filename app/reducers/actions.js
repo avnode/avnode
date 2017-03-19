@@ -1,5 +1,6 @@
 import isomorphicFetch from 'isomorphic-fetch';
 
+export const NAVIGATE = 'NAVIGATE';
 export const GOT_USER = 'GOT_USER';
 export const REQUEST_EDIT_USER = 'REQUEST_EDIT_USER';
 export const EDIT_USER = 'EDIT_USER';
@@ -44,6 +45,10 @@ const fetch = (path, options = {}, json = true) => {
   return isomorphicFetch(path, opts)
     .then(response => response.json());
 };
+
+export function navigate(active) {
+  return { type: NAVIGATE, active };
+}
 
 export function gotUser(json) {
   return { type: GOT_USER, json };

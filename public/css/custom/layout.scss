@@ -45,14 +45,22 @@ footer {
 }
 
 #app {
+  background-color: $gray-lightest;
   .account-nav-wrap {
     margin-top: $jumbotron-padding * -1;
     background-color: $gray-lighter;
+    margin-bottom: $jumbotron-padding;
   }
   #account-nav {
-    margin-bottom: $jumbotron-padding;
     .nav-link {
-      padding: 1rem;
+      background-color: $gray-lighter;
+      color: $gray-dark;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      &.active {
+        background-color: $gray-lightest;
+      }
+      padding: .5rem 1rem;
     }
   }
 }

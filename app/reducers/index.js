@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import R from 'ramda';
 
 import {
+  NAVIGATE,
   GOT_USER,
   EDIT_USER,
   CHANGE_LANGUAGE,
@@ -27,6 +28,7 @@ import {
 } from './actions';
 
 const initialValues = {
+  active: window.location.pathname,
   events: [],
   crews: []
 };
@@ -94,8 +96,12 @@ const crew = (state = {}, action) => {
 // CREW.REQUEST_SUGGEST_MEMBER
 const user = (state = initialValues, action) => {
   switch (action.type) {
+  case NAVIGATE:
+    return Object.assign({}, state, {
+      active: action.active
+    });
   case GOT_USER:
-    return action.json;
+    return Object.assign({}, state, action.json);
   case EDIT_USER:
     return state;
   case REQUEST_ADD_USERPROFILEIMAGE:
@@ -161,7 +167,6 @@ const user = (state = initialValues, action) => {
     return Object.assign({}, state, {
       _countries: action.payload.countries
     });
-    
   default:
     return state;
   }
