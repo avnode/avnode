@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'preact-intl';
 import ImageDropzone from './ImageDropzone';
 import Modal from './Modal';
-import Card from './Card';
+import Layout from './Layout';
 
 const Email = ({email}) => {
   return (
@@ -132,12 +132,7 @@ const General = ({
 
   console.log(user._id, user.name, user.password);
   return (
-    <Card
-      title={intl.formatMessage({
-        id: 'user.edit.form.title',
-        defaultMessage: 'Your Profile'
-      })}
-    >
+    <Layout>
       <form onSubmit={handleSubmit}>
         <Field
           name="_id"
@@ -554,7 +549,7 @@ const General = ({
           </button>
         </div>
       </form>
-    </Card>
+    </Layout>
   );
 };
 

@@ -5,7 +5,12 @@ import { addCrew } from '../../reducers/actions';
 
 const CrewAdd = ({ajaxInProgress}) => {
   return (
-    <TitleForm label="Add Crew" ajaxInProgress={ajaxInProgress} action={addCrew} />
+    <TitleForm
+      label="Add Crew"
+      placeholder="Name new crew"
+      ajaxInProgress={ajaxInProgress}
+      action={addCrew}
+    />
   );
 };
 

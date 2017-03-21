@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'preact-intl';
-import Card from './Card';
+import Layout from './Layout';
 
 const Preferences = ({user, changeLanguage, onSubmit, intl}) => {
   const onChange = ({target: { value }}) => {
@@ -10,7 +10,7 @@ const Preferences = ({user, changeLanguage, onSubmit, intl}) => {
     }
   };
   return (
-    <Card
+    <Layout
       title={intl.formatMessage({
         id: 'preferences.edit.form.title',
         defaultMessage: 'Your Preferences'
@@ -50,7 +50,7 @@ const Preferences = ({user, changeLanguage, onSubmit, intl}) => {
           </Field>
         </div>
       </form>
-    </Card>
+    </Layout>
   );
 };
 

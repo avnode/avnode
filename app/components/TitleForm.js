@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { connect } from 'preact-redux';
 
-const TitleForm = ({ajaxInProgress, dispatch, action, label}) => {
+const TitleForm = ({ajaxInProgress, dispatch, action, label, placeholder}) => {
   let input;
   return (
     <div>
@@ -13,10 +13,17 @@ const TitleForm = ({ajaxInProgress, dispatch, action, label}) => {
         dispatch(action(input.value));
         input.value = '';
       }}>
+        <label>
+          Name
+        </label>
         <div className="input-group">
-          <input className="form-control" ref={node => {
-            input = node;
-          }} />
+          <input
+            className="form-control form-control-lg"
+            placeholder={placeholder}
+            ref={node => {
+              input = node;
+            }}
+          />
         { ajaxInProgress ?
           <button type="button" className="input-group-addon disabled">
             Wait for it…

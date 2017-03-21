@@ -5,7 +5,12 @@ import { addPerformance } from '../../reducers/actions';
 
 const PerformanceAdd = ({ajaxInProgress}) => {
   return (
-    <TitleForm label="Add Performance" ajaxInProgress={ajaxInProgress} action={addPerformance} />
+    <TitleForm
+      label="Add Performance"
+      placeholder="Name new performance"
+      ajaxInProgress={ajaxInProgress}
+      action={addPerformance}
+    />
   );
 };
 

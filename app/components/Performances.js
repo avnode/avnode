@@ -1,19 +1,14 @@
 import { h } from 'preact';
 import { connect } from 'preact-redux';
 
-import Card from './Card';
+import Layout from './Layout';
 import PerformanceAdd from './performance/Add';
 import PerformanceShow from './performance/Show';
 import { injectIntl } from 'preact-intl';
 
 const Performances = ({ performances, ajaxInProgress, intl }) => {
   return (
-    <Card
-      title={intl.formatMessage({
-        id: 'performances.edit.form.title',
-        defaultMessage: 'Your Performances'
-      })}
-    >
+    <Layout>
       <PerformanceAdd ajaxInProgress={ajaxInProgress} />
       <hr />
       <ul className="list-group">
@@ -21,7 +16,7 @@ const Performances = ({ performances, ajaxInProgress, intl }) => {
           <PerformanceShow performance={performance} />
         )}
       </ul>
-    </Card>
+    </Layout>
   );
 };
 
