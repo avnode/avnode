@@ -4,9 +4,9 @@ import { navigate } from '../reducers/actions';
 import { FormattedMessage } from 'preact-intl';
 import { route, Router, Route, Link } from 'preact-router';
 
-const Nav = ({active, dispatch}) => {
+const Nav = ({user, dispatch}) => {
   const classes = (path) => {
-    return (active === path) ? 'nav-link active' : 'nav-link'
+    return (user.active === path) ? 'nav-link active' : 'nav-link'
   }
   return (
     <nav id="account-nav" class="nav nav-pills nav-justified">
@@ -20,19 +20,19 @@ const Nav = ({active, dispatch}) => {
         <FormattedMessage
           id="nav.crews"
           defaultMessage="Crews"
-        />
+        /> <span class="badge badge-pill badge-default">{user.crews.length}</span>
       </a>
       <a className={classes('/account/performances')} href="/account/performances" onClick={e => { dispatch(navigate('/account/performances')) }}>
         <FormattedMessage
           id="nav.performances"
           defaultMessage="Performances"
-        />
+        /> <span class="badge badge-pill badge-default">{user.performances.length}</span>
       </a>
       <a className={classes('/account/events')} href="/account/events" onClick={e => { dispatch(navigate('/account/events')) }}>
         <FormattedMessage
           id="nav.events"
           defaultMessage="Events"
-        />
+        /> <span class="badge badge-pill badge-default">{user.events.length}</span>
       </a>
       <a className={classes('/account/preferences')} href="/account/preferences" onClick={e => { dispatch(navigate('/account/preferences')) }}>
         <FormattedMessage
@@ -45,7 +45,7 @@ const Nav = ({active, dispatch}) => {
 };
 
 const mapStateToProps = ({user}) => ({
-  active: user.active
+  user: user
 });
 
 export default connect(mapStateToProps)(Nav);
