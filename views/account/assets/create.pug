@@ -9,21 +9,6 @@ block content
       form(method='post')
         input(type='hidden', name='_csrf', value=_csrf)
         .card
-          .card-header=__('New Image')
-          .card-block
-            .form-group
-              label.custom-file
-                input.custom-file-input(
-                  type='file'
-                  name='image'
-                )
-                span.custom-file-control
-            .form-group
-              button.btn.btn-primary(type='submit')=__('Save')
-
-      form(method='post')
-        input(type='hidden', name='_csrf', value=_csrf)
-        .card
           .card-header=__('New Video')
           .card-block
             .form-group

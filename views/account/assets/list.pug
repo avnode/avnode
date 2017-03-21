@@ -1,5 +1,12 @@
 extends ../../layout
 
+mixin embbedVideo(asset)
+  if asset.video.type == 'youtube'
+    iframe(src="https://www.youtube.com/embed/" + asset.video.id frameborder="0" allowfullscreen)
+  if asset.video.type == 'vimeo'
+    iframe(src="https://player.vimeo.com/video/" + asset.video.id frameborder="0" allowfullscreen)
+
+
 block content
   include ../nav
   .row
@@ -9,5 +16,4 @@ block content
       .list-group
         each asset in assets
           .list-group-item
-            .d-flex.w-100.justify-content-between
-              h6=asset.video.url
+            +embbedVideo(asset)
