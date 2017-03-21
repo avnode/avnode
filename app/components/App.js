@@ -7,6 +7,8 @@ import Events from './Events';
 import EventEdit from './event/Edit';
 import Crews from './Crews';
 import CrewEdit from './crew/Edit';
+import Performances from './Performances';
+import PerformanceEdit from './performance/Edit';
 import Preferences from './PreferencesContainer';
 
 const App = () => {
@@ -29,6 +31,8 @@ const App = () => {
           <EventEdit path="/account/events/:_id" />
           <Crews path="/account/crews" />
           <CrewEdit path="/account/crews/:_id" />
+          <Performances path="/account/performances" />
+          <PerformanceEdit path="/account/performances/:_id" />
           <Preferences path="/account/preferences" />
         </Router>
       </div>

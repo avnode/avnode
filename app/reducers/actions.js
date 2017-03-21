@@ -19,6 +19,7 @@ export const EDIT_EVENT = 'EDIT_EVENT';
 export const REQUEST_DELETE_EVENT = 'REQUEST_DELETE_EVENT';
 export const REQUEST_ADD_EVENT = 'REQUEST_ADD_EVENT';
 export const REQUEST_EDIT_EVENT = 'REQUEST_EDIT_EVENT';
+export const REQUEST_ADD_EVENTIMAGE = 'REQUEST_ADD_EVENTIMAGE';
 
 export const REQUEST_ADD_CREW = 'REQUEST_ADD_CREW';
 export const REQUEST_DELETE_CREW = 'REQUEST_DELETE_CREW';
@@ -28,6 +29,11 @@ export const RESPONSE_SUGGEST_CREWMEMBER = 'RESPONSE_SUGGEST_CREWMEMBER';
 export const REQUEST_ADD_CREWMEMBER = 'REQUEST_ADD_CREWMEMBER';
 export const REQUEST_DELETE_CREWMEMBER = 'REQUEST_DELETE_CREWMEMBER';
 export const REQUEST_ADD_CREWIMAGE = 'REQUEST_ADD_CREWIMAGE';
+
+export const REQUEST_ADD_PERFORMANCE = 'REQUEST_ADD_PERFORMANCE';
+export const REQUEST_DELETE_PERFORMANCE = 'REQUEST_DELETE_PERFORMANCE';
+export const REQUEST_EDIT_PERFORMANCE = 'REQUEST_EDIT_PERFORMANCE';
+export const REQUEST_ADD_PERFORMANCEIMAGE = 'REQUEST_ADD_PERFORMANCEIMAGE';
 
 // Wrap fetch with some default settings, always
 // return parsed JSON…
@@ -101,6 +107,22 @@ export function deleteEvent(id) {
         method: 'DELETE',
       })
       .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function addEventImage(id, file) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_EVENTIMAGE,
+      payload: {
+        eventId: id
+      }
+    });
+    return fetch(`/account/api/event/${id}/image`, {
+      method: 'POST',
+      body: wrapInFormData(file)
+    }, false)
+    .then(json => dispatch(gotUser(json)));
   };
 }
 
@@ -203,6 +225,65 @@ export function addCrewImage(id, file) {
       }
     });
     return fetch(`/account/api/crew/${id}/image`, {
+      method: 'POST',
+      body: wrapInFormData(file)
+    }, false)
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function addPerformance(title) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_PERFORMANCE
+    });
+    return fetch(
+      '/account/api/performance', {
+        method: 'POST',
+        body: JSON.stringify({ title })
+      })
+      .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function deletePerformance(id) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_DELETE_PERFORMANCE,
+      id
+    });
+    return fetch(
+      `/account/api/performance/${id}`, {
+        method: 'DELETE',
+      })
+      .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function editPerformance(data) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_EDIT_PERFORMANCE,
+      id: data._id
+    });
+    return fetch(
+      `/account/api/performance/${data._id}`, {
+        method: 'PUT',
+        body: JSON.stringify(data)
+      })
+      .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function addPerformanceImage(id, file) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_PERFORMANCEIMAGE,
+      payload: {
+        performanceId: id
+      }
+    });
+    return fetch(`/account/api/performance/${id}/image`, {
       method: 'POST',
       body: wrapInFormData(file)
     }, false)

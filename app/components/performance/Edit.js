@@ -4,15 +4,18 @@ import { route } from 'preact-router';
 import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'preact-intl';
 
-import { editEvent, addEventImage } from '../../reducers/actions';
+import {
+  editPerformance,
+  addPerformanceImage
+} from '../../reducers/actions';
 import ImageDropzone from '../ImageDropzone';
 
-let EventForm = props => {
-  const { handleSubmit, dispatch, event, user } = props;
+let PerformanceForm = props => {
+  const { handleSubmit, dispatch, performance, user } = props;
 
-  const onImageDrop = (eventId) => (files, _something, _ev) => {
+  const onImageDrop = (performanceId) => (files, _something, _ev) => {
     const file = files[0];
-    return dispatch(addEventImage(eventId, file));
+    return dispatch(addPerformanceImage(performanceId, file));
   };
 
   // FIXME: Get url from backend somehow…
@@ -31,7 +34,7 @@ let EventForm = props => {
       <div className="form-group">
         <label htmlFor="title">
           <FormattedMessage
-            id="event.edit.form.label.title"
+            id="performance.edit.form.label.title"
             defaultMessage="Name"
           />
         </label>
@@ -47,20 +50,20 @@ let EventForm = props => {
       <div className="form-group">
         <label htmlFor="image">
           <FormattedMessage
-            id="event.edit.form.label.image"
+            id="performance.edit.form.label.image"
             defaultMessage="Image"
           />
         </label>
-        { event && event.image ?
+        { performance && performance.image ?
           <img
             className="img-thumbnail mb-3"
-            src={getImageUrl(event.image)}
-            alt={`image of ${event.title}`}
+            src={getImageUrl(performance.image)}
+            alt={`image of ${performance.title}`}
             /> :
           null
         }
         <ImageDropzone
-          imageUploadInProgress={(event && event.imageUploadInProgress)}
+          imageUploadInProgress={(performance && performance.imageUploadInProgress)}
           onDrop={onImageDrop(props._id)}
         />
       </div>
@@ -68,7 +71,7 @@ let EventForm = props => {
       <div className="form-group">
         <label htmlFor="about">
           <FormattedMessage
-            id="event.edit.form.label.about"
+            id="performance.edit.form.label.about"
             defaultMessage="About"
           />
         </label>
@@ -95,18 +98,18 @@ let EventForm = props => {
   );
 };
 
-EventForm = injectIntl(reduxForm({ form: 'event' })(EventForm));
+PerformanceForm = injectIntl(reduxForm({ form: 'performance' })(PerformanceForm));
 
-const EditEvent = props => {
+const EditPerformance = props => {
   const onSubmit = (props, dispatch) => {
-    dispatch(editEvent(props));
+    dispatch(editPerformance(props));
   };
   const onSubmitSuccess = () => {
-    route('/account/events');
+    route('/account/performances');
   };
   return (
-    <EventForm
-      initialValues={props.event}
+    <PerformanceForm
+      initialValues={props.performance}
       onSubmit={onSubmit}
       onSubmitSuccess={onSubmitSuccess}
       {...props}
@@ -116,9 +119,9 @@ const EditEvent = props => {
 
 const mapStateToProps = (state, props) => {
   return {
-    event: (state.user.events.find(event => { return event._id === props._id; })),
-    user: state.user
+    performance: (state.user.performances.find(c => { return c._id === props._id; })),
+    user: state.user,
   };
 };
 
-export default connect(mapStateToProps)(EditEvent);
+export default connect(mapStateToProps)(EditPerformance);

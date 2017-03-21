@@ -19,17 +19,21 @@ import {
   REQUEST_DELETE_EVENT,
   REQUEST_EDIT_EVENT,
   REQUEST_ADD_EVENT,
+  REQUEST_ADD_EVENTIMAGE,
 
   REQUEST_SUGGEST_CREWMEMBER,
   RESPONSE_SUGGEST_CREWMEMBER,
   REQUEST_ADD_CREWIMAGE,
   ADD_CREWMEMBER,
-  REQUEST_DELETE_CREWMEMBER
+  REQUEST_DELETE_CREWMEMBER,
+
+  REQUEST_ADD_PERFORMANCEIMAGE
 } from './actions';
 
 const initialValues = {
   active: window.location.pathname,
   events: [],
+  performances: [],
   crews: []
 };
 const event = (state = {}, action) => {
@@ -50,7 +54,13 @@ const event = (state = {}, action) => {
     return Object.assign({}, state, {
       ajaxInProgress: true
     });
-
+  case REQUEST_ADD_EVENTIMAGE:
+    if (state._id !== action.payload.eventId) {
+      return state;
+    }
+    return Object.assign({}, state, {
+      imageUploadInProgress: true
+    });
   default:
     return state;
   }
@@ -86,6 +96,20 @@ const crew = (state = {}, action) => {
           return m;
         }
       })
+    });
+  default:
+    return state;
+  }
+};
+
+const performance = (state = {}, action) => {
+  switch (action.type) {
+  case REQUEST_ADD_PERFORMANCEIMAGE:
+    if (state._id !== action.payload.performanceId) {
+      return state;
+    }
+    return Object.assign({}, state, {
+      imageUploadInProgress: true
     });
   default:
     return state;
@@ -138,6 +162,13 @@ const user = (state = initialValues, action) => {
     return Object.assign({}, state, {
       crews: state.crews.map((c) => {
         return crew(c, action);
+      })
+    });
+
+  case REQUEST_ADD_CREWIMAGE:
+    return Object.assign({}, state, {
+      performances: state.performances.map((c) => {
+        return performance(c, action);
       })
     });
 

@@ -19,12 +19,13 @@ const ActualDropzone = (onDrop) =>  (field) => {
   //accept={allowedTypes.join(', ')}
 
   return (
-    <div>
+    <div className="dropzone">
       <Dropzone
         style={dropzoneStyle}
         name={field.name}
         multiple={false}
         onDrop={onDrop}
+        activeClassName="drop"
       >
         <div>
           <FormattedMessage id="crew.edit.form.label.imageDrop" defaultMessage="Drop image here or click to upload…" />

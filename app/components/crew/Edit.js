@@ -73,150 +73,140 @@ let CrewForm = props => {
 
   // FIXME: Get url from backend somehow…
   const getImageUrl = (image) => {
-    return `/storage/${image._id}/1920/400`;
+    return `/storage/${image._id}/512/200`;
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="card">
-        <div className="card-header">
+      <Field
+        name="_id"
+        component="input"
+        type="hidden"
+      />
+
+      <div className="form-group">
+        <label htmlFor="name">
           <FormattedMessage
-            id="crew.edit.headline"
-            defaultMessage="Crew Details"
+            id="crew.edit.form.label.name"
+            defaultMessage="Name"
           />
-        </div>
-        <div className="card-block">
-          <Field
-            name="_id"
-            component="input"
-            type="hidden"
+        </label>
+        <Field
+          className="form-control"
+          name="name"
+          component="input"
+          type="text"
+          value={props.name}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="image">
+          <FormattedMessage
+            id="crew.edit.form.label.image"
+            defaultMessage="Image"
           />
+        </label>
+        { crew && crew.image ?
+          <img
+            className="img-thumbnail mb-3"
+            src={getImageUrl(crew.image)}
+            alt={`image of ${crew.name}`}
+            /> :
+          null
+        }
+        <ImageDropzone
+          imageUploadInProgress={(crew && crew.imageUploadInProgress)}
+          onDrop={onImageDrop(props._id)}
+        />
+      </div>
 
-          <div className="form-group">
-            <label htmlFor="name">
-              <FormattedMessage
-                id="crew.edit.form.label.name"
-                defaultMessage="Name"
-              />
-            </label>
-            <Field
-              className="form-control"
-              name="name"
-              component="input"
-              type="text"
-              value={props.name}
+      <div className="form-group">
+        <label htmlFor="about">
+          <FormattedMessage
+            id="crew.edit.form.label.about"
+            defaultMessage="About"
+          />
+        </label>
+        <Field
+          className="form-control"
+          name="about"
+          component="textarea"
+          value={props.about}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="members">
+          <FormattedMessage
+            id="crew.edit.form.label.members"
+            defaultMessage="Members"
+          />
+        </label>
+        <ul className="list-group">
+          { crew && crew.members.map((m) => (
+            <Member
+              member={m}
+              me={props.user._id}
+              onDelete={removeMember(crew._id)(m)}
             />
-          </div>
+            ))
+          }
+        </ul>
+      </div>
 
-          <div className="form-group">
-            <label htmlFor="image">
+      <div className="form-group">
+        <label htmlFor="member">
+          <FormattedMessage
+            id="crew.edit.form.label.about"
+            defaultMessage="Invite others"
+          />
+        </label>
+        <input
+          className="form-control"
+          type="text"
+          autoComplete="off"
+          placeholder={props.intl.formatMessage({
+            id: 'crew.edit.form.label.suggestMembers',
+            defaultMessage: 'Type to find users…'
+          })}
+          onKeyUp={ findMember }
+        />
+        <div className="mt-1 list-group">
+          { user && user._memberSuggestionInProgress ?
+            <div className="list-group-item">
+              <i className="fa fa-fw fa-spinner fa-pulse"></i>
+              {' '}
               <FormattedMessage
-                id="crew.edit.form.label.image"
-                defaultMessage="Image"
+                id="crew.edit.form.label.suggestMembersLoading"
+                defaultMessage="Finding users…"
               />
-            </label>
-            { crew && crew.image ?
-              <img
-                className="img-thumbnail mb-3"
-                src={getImageUrl(crew.image)}
-                alt={`image of ${crew.name}`}
-                /> :
-              null
-            }
-            <ImageDropzone
-              imageUploadInProgress={(crew && crew.imageUploadInProgress)}
-              onDrop={onImageDrop(props._id)}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="about">
-              <FormattedMessage
-                id="crew.edit.form.label.about"
-                defaultMessage="About"
-              />
-            </label>
-            <Field
-              className="form-control"
-              name="about"
-              component="textarea"
-              value={props.about}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="members">
-              <FormattedMessage
-                id="crew.edit.form.label.members"
-                defaultMessage="Members"
-              />
-            </label>
-            <ul className="list-group">
-              { crew && crew.members.map((m) => (
-                <Member
-                  member={m}
-                  me={props.user._id}
-                  onDelete={removeMember(crew._id)(m)}
-                />
-                ))
-              }
-            </ul>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="member">
-              <FormattedMessage
-                id="crew.edit.form.label.about"
-                defaultMessage="Invite others"
-              />
-            </label>
-            <input
-              className="form-control"
-              type="text"
-              autoComplete="off"
-              placeholder={props.intl.formatMessage({
-                id: 'crew.edit.form.label.suggestMembers',
-                defaultMessage: 'Type to find users…'
-              })}
-              onKeyUp={ findMember }
-            />
-            <div className="mt-1 list-group">
-              { user && user._memberSuggestionInProgress ?
-                <div className="list-group-item">
-                  <i className="fa fa-fw fa-spinner fa-pulse"></i>
-                  {' '}
-                  <FormattedMessage
-                    id="crew.edit.form.label.suggestMembersLoading"
-                    defaultMessage="Finding users…"
-                  />
-                </div> :
-                null
-              }
-              { memberSuggestions.map((m) => (
-                <button
-                  type="button"
-                  className="list-group-item list-group-item-action"
-                  onClick={ addMember(props._id)(m) }
-                >
-                    {m.stagename} ({m.name})
-                  </button>
-                ))
-              }
-            </div>
-          </div>
-
-          <div className="form-group">
+            </div> :
+            null
+          }
+          { memberSuggestions.map((m) => (
             <button
-              className="btn btn-primary"
-              type="submit"
+              type="button"
+              className="list-group-item list-group-item-action"
+              onClick={ addMember(props._id)(m) }
             >
-              <FormattedMessage
-                id="general.form.save"
-                defaultMessage="Save"
-              />
-            </button>
-          </div>
+                {m.stagename} ({m.name})
+              </button>
+            ))
+          }
         </div>
+      </div>
+
+      <div className="form-group">
+        <button
+          className="btn btn-primary"
+          type="submit"
+        >
+          <FormattedMessage
+            id="general.form.save"
+            defaultMessage="Save"
+          />
+        </button>
       </div>
     </form>
   );
