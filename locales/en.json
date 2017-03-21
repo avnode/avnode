@@ -86,5 +86,10 @@
 	"Confirm Password": "Confirm Password",
 	"Confirm password": "Confirm password",
 	"Change Password": "Change Password",
-	"Your Account": "Your Account"
+	"Your Account": "Your Account",
+	"Create Account": "Create Account",
+	"Stagename": "Stagename",
+	"Signup": "Signup",
+	"Please check your inbox and confirm your Email": "Please check your inbox and confirm your Email",
+	"Your account is confirmed, you can now log in.": "Your account is confirmed, you can now log in."
 }
