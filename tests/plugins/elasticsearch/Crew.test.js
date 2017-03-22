@@ -3,12 +3,16 @@ const indexPlugin = require('../../../lib/plugins/elasticsearch/Crew');
 
 const getEsStub = (i = false, r = false) => {
   return {
-    index(cleaned) {
-      if (i) {
-        i(cleaned);
-      }
+    getClient() {
+      return {
+        index(cleaned) {
+          if (i) {
+            i(cleaned);
+          }
+        }
+      };
     },
-    remove() {
+    remover() {
       if (r) {
         r();
       }

@@ -2,7 +2,7 @@ public/css/main.css
 .env*
 node_modules
 npm-debug.log
-storage/*.jpeg
+storage/
 .db
 .elasticsearch
 logs/*

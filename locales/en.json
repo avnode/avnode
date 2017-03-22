@@ -92,4 +92,23 @@
 	"Signup": "Signup",
 	"Please check your inbox and confirm your Email": "Please check your inbox and confirm your Email",
 	"Your account is confirmed, you can now log in.": "Your account is confirmed, you can now log in."
+	"Password forgot": "Password forgot",
+	"reset password": "reset password",
+	"User with e-mail Hasn@lsdjm not found": "User with e-mail Hasn@lsdjm not found",
+	"User with e-mail finkbeiner.patrick@gmail.com not found": "User with e-mail finkbeiner.patrick@gmail.com not found",
+	"User with e-mail sdfadgfsd@sdfsd not found": "User with e-mail sdfadgfsd@sdfsd not found",
+	"We sent you link to reset your password.": "We sent you link to reset your password.",
+	"Password reset link sent p.finkbeiner@zimmer7.com.": "Password reset link sent p.finkbeiner@zimmer7.com.",
+	"User not found.": "User not found.",
+	"Retype password": "Retype password",
+	"Link expired.": "Link expired.",
+	"Reset your password": "Reset your password",
+	"Passwords are not equal. Try again…": "Passwords are not equal. Try again…",
+	"Your password has been reset.": "Your password has been reset.",
+	"Invalid email or password.": "Invalid email or password.",
+	"Request a new password": "Request a new password",
+	"public": "public",
+	"New Image": "New Image",
+	"Video": "Video",
+	"New Video": "New Video"
 }

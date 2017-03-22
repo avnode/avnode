@@ -3,12 +3,16 @@ const indexPlugin = require('../../../lib/plugins/elasticsearch/Event');
 
 const getEsStub = (i = false, r = false) => {
   return {
-    index(cleaned) {
-      if (i) {
-        i(cleaned);
-      }
+    getClient() {
+      return {
+        index(cleaned) {
+          if (i) {
+            i(cleaned);
+          }
+        }
+      };
     },
-    remove() {
+    remover() {
       if (r) {
         r();
       }
@@ -40,7 +44,8 @@ describe('Elasticsearch: Event Index Plugin', () => {
   it('when indexing, it should index reduced model', () => {
     const event = {
       _id: '656789076',
-      secret: 'this should not be indexed'
+      secret: 'this should not be indexed',
+      is_public: true
     };
     const indexer = (clean) => {
       assert.notDeepEqual(clean, event, 'not indexing whole event');
@@ -59,5 +64,8 @@ describe('Elasticsearch: Event Index Plugin', () => {
     };
     indexPlugin(getEsStub(indexer))(schema, {});
     internal();
+  });
+
+  xit('does not index when `is_public` is false', () => {
   });
 });
