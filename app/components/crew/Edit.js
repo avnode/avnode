@@ -72,11 +72,6 @@ let CrewForm = props => {
     return dispatch(addCrewImage(crewId, file));
   };
 
-  // FIXME: Get url from backend somehow…
-  const getImageUrl = (image) => {
-    return `/storage/${image._id}/512/200`;
-  };
-
   return (
     <Layout>
       <form onSubmit={handleSubmit}>
@@ -112,7 +107,7 @@ let CrewForm = props => {
           { crew && crew.image ?
             <img
               className="img-thumbnail mb-3"
-              src={getImageUrl(crew.image)}
+              src={crew.image.publicUrl}
               alt={`image of ${crew.name}`}
               /> :
             null

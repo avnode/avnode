@@ -22,8 +22,8 @@ const mapDispatchToProps = (dispatch) => ({
   closePasswordModal: dispatch(closePasswordModal),
   addUserProfileImage: dispatch(addUserProfileImage),
   addUserTeaserImage: dispatch(addUserTeaserImage),
-  onSubmit: (props) => {
-    console.log('HERE', props);
+  saveProfile: (ev, props) => {
+    console.log('HERE', ev, props);
   },
   fetchCountries: dispatch(fetchCountries)
 });

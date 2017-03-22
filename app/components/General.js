@@ -106,17 +106,9 @@ const General = ({
   addUserProfileImage,
   addUserTeaserImage,
   handleSubmit,
+  saveProfile,
   fetchCountries
   }) => {
-
-  // FIXME: Get url from backend somehow…
-  const getProfileImageUrl = (image) => {
-    return `/storage/${image._id}/512/200`;
-  };
-  // FIXME: Get url from backend somehow…
-  const getTeaserImageUrl = (image) => {
-    return `/storage/${image._id}/1920/400`;
-  };
 
   const onProfileImageDrop = (userId) => (files, _something, _ev) => {
     addUserProfileImage(userId, files[0]);
@@ -133,7 +125,7 @@ const General = ({
   console.log(user._id, user.name, user.password);
   return (
     <Layout>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(saveProfile)}>
         <Field
           name="_id"
           component="input"
@@ -501,7 +493,7 @@ const General = ({
               <div>
                 <img
                   className="img-thumbnail mb-3"
-                  src={getProfileImageUrl(user.image)}
+                  src={user.image.publicUrl}
                   alt={`image of ${user.stagename}`}
                 />
               </div> :
@@ -524,7 +516,7 @@ const General = ({
               <div>
                 <img
                   className="img-thumbnail mb-3"
-                  src={getTeaserImageUrl(user.teaserImage)}
+                  src={user.teaserImage.publicUrl}
                   alt={`image of ${user.stagename}`}
                   />
               </div> :
@@ -534,7 +526,7 @@ const General = ({
               imageUploadInProgress={(user && user.teaserImageUploadInProgress)}
               onDrop={onTeaserImageDrop(user._id)}
             />
-        ,  </div>
+          </div>
         </fieldset>
 
         <div className="form-group">

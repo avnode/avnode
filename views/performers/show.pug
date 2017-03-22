@@ -4,7 +4,7 @@ block teaser
   if performer.teaserImage
     .d-flex.justify-content-center.align-items-start
       img.img-fluid(
-        src=performer.teaserImageUrl
+        src=performer.teaserImage.publicUrl
         alt=performer.name
       )
 
@@ -27,7 +27,7 @@ block title
 
           .col-lg-4
             img.card-img-top.img-fluid(
-              src=performer.imageUrl
+              src=performer.image.publicUrl
               alt=performer.name
             )
 
@@ -39,7 +39,7 @@ block content
         each event in performer.events
           .card
             img.card-img-top.img-fluid(
-              src=event.imageUrl
+              src=event.image.publicUrl
               alt=event.title
             )
             .card-block

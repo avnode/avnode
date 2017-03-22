@@ -3,7 +3,7 @@ extends ../layout
 block teaser
   .d-flex.justify-content-center.align-items-start
     img.card-img-top.img-fluid(
-      src=`${event.imageUrl}`
+      src=`${event.image.publicUrl}`
       alt=`${event.name}`
     )
 
@@ -33,10 +33,10 @@ block content
             h5.card-subtitle.mb-3=event.address
             a.btn.btn-primary(href=event.direction)=__('Directions')
 
-      each user in users
+      each user in event.organizers
         .card
           img.card-img-top.img-fluid(
-            src=user.imageUrl
+            src=user.image.publicUrl
             alt=user.name
           )
           .card-block

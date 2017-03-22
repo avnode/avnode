@@ -3,7 +3,7 @@ extends ../layout
 block teaser
   .d-flex.justify-content-center.align-items-start
     img.card-img-top.img-fluid(
-      src=`${crew.imageUrl}`
+      src=`${crew.image.publicUrl}`
       alt=`${crew.name}`
     )
 
@@ -19,10 +19,10 @@ block content
     .col-lg-12
       h3=__('Members')
       .card-columns
-        each member in members
+        each member in crew.members
           .card
             img.card-img-top.img-fluid(
-              src=member.imageUrl
+              src=member.image.publicUrl
               alt=member.name
             )
             .card-block

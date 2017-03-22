@@ -16,11 +16,6 @@ let EventForm = props => {
     return dispatch(addEventImage(eventId, file));
   };
 
-  // FIXME: Get url from backend somehow…
-  const getImageUrl = (image) => {
-    return `/storage/${image._id}/512/200`;
-  };
-
   return (
     <Layout>
       <form onSubmit={handleSubmit}>
@@ -75,7 +70,7 @@ let EventForm = props => {
           { event && event.image ?
             <div><img
               className="img-thumbnail mt-2"
-              src={getImageUrl(event.image)}
+              src={event.image.publicUrl}
               alt={`image of ${event.title}`}
               /></div> :
             null

@@ -19,11 +19,6 @@ let PerformanceForm = props => {
     return dispatch(addPerformanceImage(performanceId, file));
   };
 
-  // FIXME: Get url from backend somehow…
-  const getImageUrl = (image) => {
-    return `/storage/${image._id}/512/200`;
-  };
-
   return (
     <Layout>
       <form onSubmit={handleSubmit}>
@@ -59,7 +54,7 @@ let PerformanceForm = props => {
           { performance && performance.image ?
             <img
               className="img-thumbnail mb-3"
-              src={getImageUrl(performance.image)}
+              src={performance.image.publicUrl}
               alt={`image of ${performance.title}`}
               /> :
             null
