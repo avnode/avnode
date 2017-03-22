@@ -436,7 +436,7 @@ const General = ({
             onClick={ openStagenameModal }
           >
             <FormattedMessage
-              id="user.edit.form.label.stagename.change"
+              id="user.edit.form.label.stagename.openModal"
               defaultMessage="Change your stagename"
             />
           </button>

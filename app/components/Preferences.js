@@ -43,7 +43,7 @@ const Preferences = ({user, changeLanguage, onSubmit, intl}) => {
             </option>
             <option value="de">
               <FormattedMessage
-                id="user.edit.form.label.language.en"
+                id="user.edit.form.label.language.de"
                 defaultMessage="German"
               />
             </option>

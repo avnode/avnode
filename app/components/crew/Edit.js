@@ -160,7 +160,7 @@ let CrewForm = props => {
         <div className="form-group">
           <label htmlFor="member">
             <FormattedMessage
-              id="crew.edit.form.label.about"
+              id="crew.edit.form.label.suggestMembers"
               defaultMessage="Invite others"
             />
           </label>
