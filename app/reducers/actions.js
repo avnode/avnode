@@ -20,6 +20,7 @@ export const REQUEST_DELETE_EVENT = 'REQUEST_DELETE_EVENT';
 export const REQUEST_ADD_EVENT = 'REQUEST_ADD_EVENT';
 export const REQUEST_EDIT_EVENT = 'REQUEST_EDIT_EVENT';
 export const REQUEST_ADD_EVENTIMAGE = 'REQUEST_ADD_EVENTIMAGE';
+export const REQUEST_ADD_EVENTTEASERIMAGE = 'REQUEST_ADD_EVENTTEASERIMAGE';
 
 export const REQUEST_ADD_CREW = 'REQUEST_ADD_CREW';
 export const REQUEST_DELETE_CREW = 'REQUEST_DELETE_CREW';
@@ -119,6 +120,22 @@ export function addEventImage(id, file) {
       }
     });
     return fetch(`/account/api/event/${id}/image`, {
+      method: 'POST',
+      body: wrapInFormData(file)
+    }, false)
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function addEventTeaserImage(id, file) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_EVENTTEASERIMAGE,
+      payload: {
+        eventId: id
+      }
+    });
+    return fetch(`/account/api/event/${id}/teaser`, {
       method: 'POST',
       body: wrapInFormData(file)
     }, false)

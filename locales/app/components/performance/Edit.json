@@ -1,0 +1,18 @@
+[
+  {
+    "id": "performance.edit.form.label.title",
+    "defaultMessage": "Name"
+  },
+  {
+    "id": "performance.edit.form.label.image",
+    "defaultMessage": "Image"
+  },
+  {
+    "id": "performance.edit.form.label.about",
+    "defaultMessage": "About"
+  },
+  {
+    "id": "general.form.save",
+    "defaultMessage": "Save"
+  }
+]

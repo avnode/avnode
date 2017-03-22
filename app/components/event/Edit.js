@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'preact-intl';
 
 import Layout from '../Layout';
-import { editEvent, addEventImage } from '../../reducers/actions';
+import { editEvent, addEventImage, addEventTeaserImage } from '../../reducers/actions';
 import ImageDropzone from '../ImageDropzone';
 
 let EventForm = props => {
@@ -14,6 +14,11 @@ let EventForm = props => {
   const onImageDrop = (eventId) => (files, _something, _ev) => {
     const file = files[0];
     return dispatch(addEventImage(eventId, file));
+  };
+
+  const onTeaserImageDrop = (eventId) => (files, _something, _ev) => {
+    const file = files[0];
+    return dispatch(addEventTeaserImage(eventId, file));
   };
 
   return (
@@ -54,6 +59,27 @@ let EventForm = props => {
               defaultMessage="Call is open"
             />
           </label>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="teaserimage">
+            <FormattedMessage
+              id="event.edit.form.label.teaserimage"
+              defaultMessage="TeaserImage"
+            />
+          </label>
+          <ImageDropzone
+            imageUploadInProgress={(event && event.imageUploadInProgress)}
+            onDrop={onTeaserImageDrop(props._id)}
+          />
+          { event && event.teaserImage ?
+            <div><img
+              className="img-thumbnail mt-2"
+              src={event.teaserImage.publicUrl}
+              alt={`image of ${event.title}`}
+              /></div> :
+            null
+          }
         </div>
 
         <div className="form-group">
