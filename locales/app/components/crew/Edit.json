@@ -4,6 +4,10 @@
     "defaultMessage": "Name"
   },
   {
+    "id": "crew.edit.form.label.teaserimage",
+    "defaultMessage": "TeaserImage"
+  },
+  {
     "id": "crew.edit.form.label.image",
     "defaultMessage": "Image"
   },

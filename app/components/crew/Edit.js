@@ -10,6 +10,7 @@ import {
   suggestCrewMember,
   addCrewMember,
   addCrewImage,
+  addCrewTeaserImage,
   removeCrewMember,
 } from '../../reducers/actions';
 import ImageDropzone from '../ImageDropzone';
@@ -72,6 +73,11 @@ let CrewForm = props => {
     return dispatch(addCrewImage(crewId, file));
   };
 
+  const onTeaserImageDrop = (crewId) => (files, _something, _ev) => {
+    const file = files[0];
+    return dispatch(addCrewTeaserImage(crewId, file));
+  };
+
   return (
     <Layout>
       <form onSubmit={handleSubmit}>
@@ -94,6 +100,27 @@ let CrewForm = props => {
             component="input"
             type="text"
             value={props.name}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="teaserImage">
+            <FormattedMessage
+              id="crew.edit.form.label.teaserimage"
+              defaultMessage="TeaserImage"
+            />
+          </label>
+          { crew && crew.teaserImage ?
+            <img
+              className="img-thumbnail mb-3"
+              src={crew.teaserImage.publicUrl}
+              alt={`teaser image of ${crew.name}`}
+              /> :
+            null
+          }
+          <ImageDropzone
+            imageUploadInProgress={(crew && crew.imageUploadInProgress)}
+            onDrop={onTeaserImageDrop(props._id)}
           />
         </div>
 
@@ -141,7 +168,7 @@ let CrewForm = props => {
             />
           </label>
           <ul className="list-group">
-            { crew && crew.members.map((m) => (
+            { crew && crew.members && crew.members.map((m) => (
               <Member
                 member={m}
                 me={props.user._id}
