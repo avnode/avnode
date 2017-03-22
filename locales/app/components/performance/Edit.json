@@ -4,6 +4,10 @@
     "defaultMessage": "Name"
   },
   {
+    "id": "performance.edit.form.label.teaserimage",
+    "defaultMessage": "Teaser Image"
+  },
+  {
     "id": "performance.edit.form.label.image",
     "defaultMessage": "Image"
   },

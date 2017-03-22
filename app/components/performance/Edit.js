@@ -7,7 +7,8 @@ import { injectIntl, FormattedMessage } from 'preact-intl';
 import Layout from '../Layout';
 import {
   editPerformance,
-  addPerformanceImage
+  addPerformanceImage,
+  addPerformanceTeaserImage
 } from '../../reducers/actions';
 import ImageDropzone from '../ImageDropzone';
 
@@ -17,6 +18,11 @@ let PerformanceForm = props => {
   const onImageDrop = (performanceId) => (files, _something, _ev) => {
     const file = files[0];
     return dispatch(addPerformanceImage(performanceId, file));
+  };
+
+  const onTeaserImageDrop = (performanceId) => (files, _something, _ev) => {
+    const file = files[0];
+    return dispatch(addPerformanceTeaserImage(performanceId, file));
   };
 
   return (
@@ -41,6 +47,27 @@ let PerformanceForm = props => {
             component="input"
             type="text"
             value={props.title}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="teaserImage">
+            <FormattedMessage
+              id="performance.edit.form.label.teaserimage"
+              defaultMessage="Teaser Image"
+            />
+          </label>
+          { performance && performance.teaserImage ?
+            <img
+              className="img-thumbnail mb-3"
+              src={performance.teaserImage.publicUrl}
+              alt={`image of ${performance.title}`}
+              /> :
+            null
+          }
+          <ImageDropzone
+            imageUploadInProgress={(performance && performance.imageUploadInProgress)}
+            onDrop={onTeaserImageDrop(props._id)}
           />
         </div>
 
