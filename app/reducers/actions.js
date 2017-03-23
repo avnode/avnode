@@ -412,8 +412,8 @@ export function addUserTeaserImage(dispatch) {
   };
 }
 
-export function editUser(data) {
-  return dispatch => {
+export function editUser(dispatch) {
+  return data => {
     dispatch({
       type: REQUEST_EDIT_USER,
       id: data._id
