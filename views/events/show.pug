@@ -12,10 +12,18 @@ block title
   if title
     .jumbotron.jumbotron-fluid
       .container
-        h1.display-4=title
-        p.lead=event.dateFormatted
-        p.lead=event.subtitle
-        p=event.about
+        .row
+          .col-lg-8
+            h1.display-4=title
+            p.lead=event.dateFormatted
+            p.lead=event.subtitle
+            p=event.about
+          .col-lg-4
+            if event.image
+              img.card-img-top.img-fluid(
+                src=event.image.publicUrl
+                alt=event.title
+              )
 
 block content
   .row

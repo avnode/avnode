@@ -12,8 +12,16 @@ block title
   if title
     .jumbotron.jumbotron-fluid
       .container
-        h1.display-4=title
-        p=crew.about
+        .row
+          .col-lg-8
+            h1.display-4=title
+            p=crew.about
+          .col-lg-4
+            if crew.image
+              img.card-img-top.img-fluid(
+                src=crew.image.publicUrl
+                alt=crew.title
+              )
 
 block content
   .row
