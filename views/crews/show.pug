@@ -30,10 +30,11 @@ block content
       .card-columns
         each member in crew.members
           .card
-            img.card-img-top.img-fluid(
-              src=member.image.publicUrl
-              alt=member.name
-            )
+            if member.image
+              img.card-img-top.img-fluid(
+                src=member.image.publicUrl
+                alt=member.name
+              )
             .card-block
               h4.card-title
                 =member.stagename
