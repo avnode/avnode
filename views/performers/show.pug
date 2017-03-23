@@ -48,3 +48,39 @@ block content
             .card-block.pt-0
               p.card-text=event.dateFormatted
               a.btn.btn-secondary(href=event.publicUrl)=__('More')
+  br
+  br
+  .row
+    .col-lg-12
+      h3=__('Crews')
+      .card-deck
+        each crew in performer.crews
+          .card
+            img.card-img-top.img-fluid(
+              src=crew.image.publicUrl
+              alt=crew.title
+            )
+            .card-block
+              h4.card-title=crew.title
+              h6.card-subtitle.text-muted=crew.subtitle
+            .card-block.pt-0
+              p.card-text=crew.dateFormatted
+              a.btn.btn-secondary(href=crew.publicUrl)=__('More')
+  br
+  br
+  .row
+    .col-lg-12
+      h3=__('Performances')
+      .card-deck
+        each performance in performer.performances
+          .card
+            img.card-img-top.img-fluid(
+              src=performance.image.publicUrl
+              alt=performance.title
+            )
+            .card-block
+              h4.card-title=performance.title
+              h6.card-subtitle.text-muted=performance.subtitle
+            .card-block.pt-0
+              p.card-text=performance.dateFormatted
+              a.btn.btn-secondary(href=performance.publicUrl)=__('More')
