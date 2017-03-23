@@ -37,6 +37,7 @@ export const REQUEST_DELETE_PERFORMANCE = 'REQUEST_DELETE_PERFORMANCE';
 export const REQUEST_EDIT_PERFORMANCE = 'REQUEST_EDIT_PERFORMANCE';
 export const REQUEST_ADD_PERFORMANCEIMAGE = 'REQUEST_ADD_PERFORMANCEIMAGE';
 export const REQUEST_ADD_PERFORMANCETEASERIMAGE = 'REQUEST_ADD_PERFORMANCETEASERIMAGE';
+export const REQUEST_ADD_PERFORMANCEVIDEO = 'REQUEST_ADD_PERFORMANCEVIDEO';
 
 // Wrap fetch with some default settings, always
 // return parsed JSON…
@@ -338,6 +339,24 @@ export function addPerformanceTeaserImage(id, file) {
       method: 'POST',
       body: wrapInFormData(file)
     }, false)
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function addPerformanceVideo({_id, video}) {
+  return dispatch => {
+    console.log('FIND ME', _id, video);
+    dispatch({
+      type: REQUEST_ADD_PERFORMANCEVIDEO,
+      payload: {
+        performanceId: _id,
+        video: video
+      }
+    });
+    return fetch(`/account/api/performance/${_id}/video`, {
+      method: 'POST',
+      body: JSON.stringify({ video})
+    })
     .then(json => dispatch(gotUser(json)));
   };
 }

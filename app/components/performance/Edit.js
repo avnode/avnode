@@ -5,15 +5,18 @@ import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'preact-intl';
 
 import Layout from '../Layout';
+import Video from '../Video';
+
 import {
   editPerformance,
   addPerformanceImage,
-  addPerformanceTeaserImage
+  addPerformanceTeaserImage,
+  addPerformanceVideo,
 } from '../../reducers/actions';
 import ImageDropzone from '../ImageDropzone';
 
 let PerformanceForm = props => {
-  const { handleSubmit, dispatch, performance, user } = props;
+  const { handleSubmit, dispatch, performance, user, intl } = props;
 
   const onImageDrop = (performanceId) => (files, _something, _ev) => {
     const file = files[0];
@@ -24,6 +27,8 @@ let PerformanceForm = props => {
     const file = files[0];
     return dispatch(addPerformanceTeaserImage(performanceId, file));
   };
+
+  let videoLink; // FIXME
 
   return (
     <Layout>
@@ -106,6 +111,42 @@ let PerformanceForm = props => {
             value={props.about}
           />
         </div>
+
+        { performance && performance.video ?
+          <Video {...performance.video.video} /> :
+          <div className="form-group">
+            <div className="input-group">
+              <Field
+                className="form-control"
+                name="video"
+                component="input"
+                ref={ node => { videoLink = node; }}
+                placeholder={intl.formatMessage({
+                  id: 'performance.edit.form.label.videoLink.placeholder',
+                  defaultMessage: 'https://vimeo.com/xyzxyzxyzxyz'
+                })}
+              />
+              <span className="input-group-btn">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={ e => {
+                    e.preventDefault();
+                    return dispatch(addPerformanceVideo({
+                      _id: performance._id,
+                      video: videoLink.value
+                    }));
+                  }}
+                >
+                  <FormattedMessage
+                    id="performance.edit.form.label.videoLink.action"
+                    defaultMessage="Add video"
+                  />
+                </button>
+              </span>
+            </div>
+          </div>
+        }
 
         <div className="form-group">
           <button

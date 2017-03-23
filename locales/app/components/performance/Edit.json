@@ -16,6 +16,10 @@
     "defaultMessage": "About"
   },
   {
+    "id": "performance.edit.form.label.videoLink.action",
+    "defaultMessage": "Add video"
+  },
+  {
     "id": "general.form.save",
     "defaultMessage": "Save"
   }
