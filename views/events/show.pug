@@ -44,10 +44,11 @@ block content
 
       each user in event.organizers
         .card
-          img.card-img-top.img-fluid(
-            src=user.image.publicUrl
-            alt=user.name
-          )
+          if user.image
+            img.card-img-top.img-fluid(
+              src=user.image.publicUrl
+              alt=user.name
+            )
           .card-block
             h6.text-muted.card-title=__('Organizer')
             h5.card-subtitle.mb-3=user.stagename

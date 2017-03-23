@@ -100,3 +100,11 @@ footer {
   background-color: $brand-success !important;
   color: $white;
 }
+
+.teaser {
+  border-radius: 3px;
+  display: inline-block;
+  background-color: rgba($white, .7);
+  padding: 1rem 3rem;
+  margin: 3rem 0 3rem 3rem;
+}

@@ -4,10 +4,11 @@ block content
   .card-columns
     each item in data
       .card
-        img.card-img-top.img-fluid(
-          src=`${item.image.publicUrl}`
-          alt=`${item.name} profile image`
-        )
+        if item.image
+          img.card-img-top.img-fluid(
+            src=`${item.image.publicUrl}`
+            alt=`${item.name} profile image`
+          )
         .card-block
           h4.card-title
             =item.title

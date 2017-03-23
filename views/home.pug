@@ -1,3 +1,11 @@
 extends layout
 
-block content
+block teaser
+  if event.teaserImage
+    .teaser-block(style="background-image: url(" + event.teaserImage.publicUrl + ")")
+      .container
+        .teaser
+          .display-6.badge.badge-success Upcoming Event
+          h1.display-3=event.title
+          p.lead=event.dateFormatted
+          a.btn.btn-primary(href=event.publicUrl)=__('More')
