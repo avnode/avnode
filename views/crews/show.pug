@@ -1,11 +1,12 @@
 extends ../layout
 
 block teaser
-  .d-flex.justify-content-center.align-items-start
-    img.card-img-top.img-fluid(
-      src=`${crew.image.publicUrl}`
-      alt=`${crew.name}`
-    )
+  if crew.teaserImage
+    .d-flex.justify-content-center.align-items-start
+      img.card-img-top.img-fluid(
+        src=`${crew.teaserImage.publicUrl}`
+        alt=`${crew.name}`
+      )
 
 block title
   if title
