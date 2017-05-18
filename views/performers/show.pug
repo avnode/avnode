@@ -3,10 +3,11 @@ extends ../layout
 block teaser
   if performer.teaserImage
     .d-flex.justify-content-center.align-items-start
-      img.img-fluid(
-        src=performer.teaserImage.publicUrl
-        alt=performer.name
-      )
+      if performer.teaserImage
+        img.img-fluid(
+          src=performer.teaserImage.publicUrl
+          alt=performer.name
+        )
 
 block title
   if title
@@ -25,11 +26,12 @@ block title
             if performer.citizenship
               p=performer.citizenship
 
-          .col-lg-4
-            img.card-img-top.img-fluid(
-              src=performer.image.publicUrl
-              alt=performer.name
-            )
+          if performer.image
+            .col-lg-4
+              img.card-img-top.img-fluid(
+                src=performer.image.publicUrl
+                alt=performer.name
+              )
 
 block content
   .row
@@ -38,10 +40,11 @@ block content
       .card-deck
         each event in performer.events
           .card
-            img.card-img-top.img-fluid(
-              src=event.image.publicUrl
-              alt=event.title
-            )
+            if event.image
+              img.card-img-top.img-fluid(
+                src=event.image.publicUrl
+                alt=event.title
+              )
             .card-block
               h4.card-title=event.title
               h6.card-subtitle.text-muted=event.subtitle
@@ -75,10 +78,11 @@ block content
       .card-deck
         each performance in performer.performances
           .card
-            img.card-img-top.img-fluid(
-              src=performance.image.publicUrl
-              alt=performance.title
-            )
+            if performance.image
+              img.card-img-top.img-fluid(
+                src=performance.image.publicUrl
+                alt=performance.title
+              )
             .card-block
               h4.card-title=performance.title
               h6.card-subtitle.text-muted=performance.subtitle
