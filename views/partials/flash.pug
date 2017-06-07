@@ -1,12 +1,15 @@
 if messages.errors
-  .alert.alert-danger
-    for error in messages.errors
-      div=error.msg
+  .container
+    .alert.alert-danger
+      for error in messages.errors
+        div=error.msg
 if messages.info
-  .alert.alert-info
-    for info in messages.info
-      div=info.msg
+  .container
+    .alert.alert-info
+      for info in messages.info
+        div=info.msg
 if messages.success
-  .alert.alert-success
-    for success in messages.success
-      div=success.msg
+  .container
+    .alert.alert-success
+      for success in messages.success
+        div=success.msg

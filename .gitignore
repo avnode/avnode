@@ -6,3 +6,5 @@ storage/
 .db
 .elasticsearch
 logs/*
+storage
+.DS_Store

@@ -3,17 +3,19 @@ const compression = require('compression');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
+const morgan = require('morgan');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('express-flash');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
-// Require mogoose models once!
+// Require mongoose models once!
 require('./lib/models');
 
 const i18n = require('./lib/plugins/i18n');
 const passport = require('./lib/plugins/passport');
 const routes = require('./lib/routes');
 
+// FIXME Kids say not cool
 const dotenv = require('dotenv');
 dotenv.load({ path: '.env.local' });
 
@@ -22,6 +24,8 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+app.use(morgan('short'));
 app.use(expressStatusMonitor());
 app.use(compression());
 app.use(sass({
@@ -41,6 +45,8 @@ app.use(session({
     autoReconnect: true
   })
 }));
+
+// FIXME
 // This blocks mocha testing, so we disable it
 // in this context…
 /**
@@ -53,6 +59,7 @@ if(process.env.NODE_ENV !== 'testing') {
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 */
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
@@ -78,15 +85,46 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 84600 }));
+
+
+// FIXME
+// From your there could be dragons!!!
+// 🔥🐉 🔥🐉 🔥🐉 🔥🐉 🔥🐉 🔥🐉 🔥🐉 🔥🐉
+
+// Temporary cors to have redux come in cross origin
+const cors = require('cors');
+app.use(cors());
 app.use(routes);
 
-app.use(function (err, req, res, _next) {
-  if (err.isBoom) {
-    req.flash('errors', { msg: err.message });
-    return res.redirect('back');
-  } else {
-    throw err;
-  }
-});
+// FIXME
+// Blocks pug exceptions, do we need it at all?
+//
+// app.use(function (err, req, res, _next) {
+//   if (err.isBoom) {
+//     req.flash('errors', { msg: err.message });
+//     return res.redirect('back');
+//   }
+// });
+
+// FIXME
+// What was this about?
+//
+// error middleware for errors that occurred in middleware
+// declared before this
+/*
+app.use(function onerror(err, req, res, next) {
+  console.log('asdf');
+  throw err;
+});*/
+
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config');
+const compiler = webpack(webpackConfig);
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true, publicPath: webpackConfig.output.publicPath
+}));
+app.use(require('webpack-hot-middleware')(compiler, {
+  log: console.log
+}));
 
 module.exports = app;

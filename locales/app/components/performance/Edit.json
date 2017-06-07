@@ -1,0 +1,26 @@
+[
+  {
+    "id": "performance.edit.form.label.title",
+    "defaultMessage": "Name"
+  },
+  {
+    "id": "performance.edit.form.label.teaserimage",
+    "defaultMessage": "Teaser Image"
+  },
+  {
+    "id": "performance.edit.form.label.image",
+    "defaultMessage": "Image"
+  },
+  {
+    "id": "performance.edit.form.label.about",
+    "defaultMessage": "About"
+  },
+  {
+    "id": "performance.edit.form.label.videoLink.action",
+    "defaultMessage": "Add video"
+  },
+  {
+    "id": "general.form.save",
+    "defaultMessage": "Save"
+  }
+]
