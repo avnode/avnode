@@ -14,7 +14,10 @@ import {
   addPerformanceVideo,
   suggestPerformanceCrew,
   addPerformanceCrew,
-  removePerformanceCrew
+  removePerformanceCrew,
+  suggestPerformancePerformer,
+  addPerformancePerformer,
+  removePerformancePerformer
 } from '../../reducers/actions';
 import ImageDropzone from '../ImageDropzone';
 
@@ -25,6 +28,40 @@ const Crew = injectIntl(({crew, onDelete, intl}) => {
       {crew.name}
       </span>
       { crew.deletionInProgress ?
+        <button
+          type="button"
+          className="btn btn-danger disabled"
+        >
+          <i className="fa fa-fw fa-spinner fa-pulse"></i>
+        </button>
+        :
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={onDelete}
+        >
+          <i className="fa fa-trash"></i>
+        </button>
+      }
+    </li>
+  );
+});
+
+const Performer = injectIntl(({performer, me, onDelete, intl}) => {
+  const meLabel = intl.formatMessage({
+    id: 'performance.edit.form.performer.met',
+    defaultMessage: 'Me'
+  });
+  return (
+    <li className="list-group-item justify-content-between">
+      <span>
+        {`${performer.stagename} `}
+        { (performer._id === me) ?
+          <i className="badge badge-default badge-pill">{meLabel}</i>
+          : null
+        }
+      </span>
+      { performer.deletionInProgress ?
         <button
           type="button"
           className="btn btn-danger disabled"
@@ -63,6 +100,25 @@ let PerformanceForm = props => {
   const removeCrew = (crewId) => (e) => {
     e.preventDefault();
     return dispatch(removePerformanceCrew(performance._id, crewId));
+  };
+
+  const performerSuggestions = props.user._performerSuggestions || [];
+
+  const findPerformer = (e) => {
+    e.preventDefault();
+    if (e.target.value.length > 2) {
+      return dispatch(suggestPerformancePerformer(performance._id, e.target.value));
+    } // FIXME: handle reset
+  };
+
+  const addPerformer = (performerId) => (e) => {
+    e.preventDefault();
+    return dispatch(addPerformancePerformer(performance._id, performerId));
+  };
+
+  const removePerformer = (performerId) => (e) => {
+    e.preventDefault();
+    return dispatch(removePerformancePerformer(performance._id, performerId));
   };
 
   const onImageDrop = (performanceId) => (files, _something, _ev) => {
@@ -196,9 +252,70 @@ let PerformanceForm = props => {
         }
 
         <div className="form-group">
+          <label htmlFor="performers">
+            <FormattedMessage
+              id="performance.edit.form.label.performers"
+              defaultMessage="Performers"
+            />
+          </label>
+          <ul className="list-group">
+            { performance && performance.performers && performance.performers.map((performer) => (
+              <Performer
+                performer={performer}
+                me={props.user._id}
+                onDelete={removePerformer(performer.id)}
+              />
+              ))
+            }
+          </ul>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="performer">
+            <FormattedMessage
+              id="performance.edit.form.label.suggestPerformers"
+              defaultMessage="Assign performers"
+            />
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            autoComplete="off"
+            placeholder={props.intl.formatMessage({
+              id: 'performance.edit.form.label.suggestPerformers',
+              defaultMessage: 'Type to find performers…'
+            })}
+            onKeyUp={ findPerformer }
+          />
+          <div className="mt-1 list-group">
+            { performance && performance._performerSuggestionInProgress ?
+              <div className="list-group-item">
+                <i className="fa fa-fw fa-spinner fa-pulse"></i>
+                {' '}
+                <FormattedMessage
+                  id="performer.edit.form.label.suggestPerformersLoading"
+                  defaultMessage="Finding performers…"
+                />
+              </div> :
+              null
+            }
+            { performerSuggestions.map((c) => (
+              <button
+                type="button"
+                className="list-group-item list-group-item-action"
+                onClick={ addPerformer(c.id) }
+              >
+                  {c.stagename} ({c.name})
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <div className="form-group">
           <label htmlFor="crews">
             <FormattedMessage
-              id="performance.edit.form.label.performances"
+              id="performance.edit.form.label.crews"
               defaultMessage="Crews"
             />
           </label>

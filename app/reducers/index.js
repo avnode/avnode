@@ -29,7 +29,9 @@ import {
 
   REQUEST_ADD_PERFORMANCEIMAGE,
   REQUEST_SUGGEST_PERFORMANCE_CREW,
-  RESPONSE_SUGGEST_PERFORMANCE_CREW
+  RESPONSE_SUGGEST_PERFORMANCE_CREW,
+  REQUEST_SUGGEST_PERFORMANCE_PERFORMER,
+  RESPONSE_SUGGEST_PERFORMANCE_PERFORMER
 } from './actions';
 
 const initialValues = {
@@ -166,6 +168,15 @@ const user = (state = initialValues, action) => {
     return Object.assign({}, state, {
       _crewSuggestions: action.suggestions,
       _crewSuggestionInProgress: false
+    });
+  case REQUEST_SUGGEST_PERFORMANCE_PERFORMER:
+    return Object.assign({}, state, {
+      _performerSuggestionInProgress: true
+    });
+  case RESPONSE_SUGGEST_PERFORMANCE_PERFORMER:
+    return Object.assign({}, state, {
+      _performerSuggestions: action.suggestions,
+      _performerSuggestionInProgress: false
     });
   case REQUEST_ADD_CREWIMAGE:
   case REQUEST_DELETE_CREWMEMBER:

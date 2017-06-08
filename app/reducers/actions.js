@@ -42,6 +42,10 @@ export const REQUEST_SUGGEST_PERFORMANCE_CREW = 'REQUEST_SUGGEST_PERFORMANCE_CRE
 export const RESPONSE_SUGGEST_PERFORMANCE_CREW = 'RESPONSE_SUGGEST_PERFORMANCE_CREW';
 export const REQUEST_ADD_PERFORMANCE_CREW = 'REQUEST_ADD_PERFORMANCE_CREW';
 export const REQUEST_DELETE_PERFORMANCE_CREW = 'REQUEST_DELETE_PERFORMANCE_CREW';
+export const REQUEST_SUGGEST_PERFORMANCE_PERFORMER = 'REQUEST_SUGGEST_PERFORMANCE_PERFORMER';
+export const RESPONSE_SUGGEST_PERFORMANCE_PERFORMER = 'RESPONSE_SUGGEST_PERFORMANCE_PERFORMER';
+export const REQUEST_ADD_PERFORMANCE_PERFORMER = 'REQUEST_ADD_PERFORMANCE_PERFORMER';
+export const REQUEST_DELETE_PERFORMANCE_PERFORMER = 'REQUEST_DELETE_PERFORMANCE_PERFORMER';
 
 // Wrap fetch with some default settings, always
 // return parsed JSON…
@@ -406,6 +410,53 @@ export function removePerformanceCrew(performanceId, crewId) {
       }
     });
     return fetch(`/account/api/performance/${performanceId}/crew/${crewId}`, {
+      method: 'DELETE',
+    })
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function suggestPerformancePerformer(performanceId, q) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_SUGGEST_PERFORMANCE_PERFORMER,
+      payload: {
+        q,
+        performanceId
+      }
+    });
+    return fetch(`/account/api/search/user?q=${q}`)
+      .then(json => {
+        dispatch({
+          type: RESPONSE_SUGGEST_PERFORMANCE_PERFORMER,
+          suggestions: json
+        });
+      });
+  };
+}
+
+export function addPerformancePerformer(performanceId, performerId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_PERFORMANCE_PERFORMER
+    });
+    return fetch(`/account/api/performance/${performanceId}/performer/${performerId}`, {
+      method: 'PUT',
+    })
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function removePerformancePerformer(performanceId, performerId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_DELETE_PERFORMANCE_PERFORMER,
+      payload: {
+        performanceId,
+        performerId
+      }
+    });
+    return fetch(`/account/api/performance/${performanceId}/performer/${performerId}`, {
       method: 'DELETE',
     })
     .then(json => dispatch(gotUser(json)));

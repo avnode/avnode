@@ -20,7 +20,19 @@
     "defaultMessage": "Add video"
   },
   {
-    "id": "performance.edit.form.label.performances",
+    "id": "performance.edit.form.label.performers",
+    "defaultMessage": "Performers"
+  },
+  {
+    "id": "performance.edit.form.label.suggestPerformers",
+    "defaultMessage": "Assign performers"
+  },
+  {
+    "id": "performer.edit.form.label.suggestPerformersLoading",
+    "defaultMessage": "Finding performers…"
+  },
+  {
+    "id": "performance.edit.form.label.crews",
     "defaultMessage": "Crews"
   },
   {
