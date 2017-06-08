@@ -16,6 +16,18 @@
     "defaultMessage": "Image"
   },
   {
+    "id": "event.edit.form.label.organisers",
+    "defaultMessage": "Organisers"
+  },
+  {
+    "id": "event.edit.form.label.suggestOrganisers",
+    "defaultMessage": "Assign organisers"
+  },
+  {
+    "id": "organiser.edit.form.label.suggestOrganisersLoading",
+    "defaultMessage": "Finding organisers…"
+  },
+  {
     "id": "event.edit.form.label.about",
     "defaultMessage": "About"
   },

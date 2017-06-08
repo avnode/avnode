@@ -21,6 +21,10 @@ export const REQUEST_ADD_EVENT = 'REQUEST_ADD_EVENT';
 export const REQUEST_EDIT_EVENT = 'REQUEST_EDIT_EVENT';
 export const REQUEST_ADD_EVENTIMAGE = 'REQUEST_ADD_EVENTIMAGE';
 export const REQUEST_ADD_EVENTTEASERIMAGE = 'REQUEST_ADD_EVENTTEASERIMAGE';
+export const REQUEST_SUGGEST_EVENT_ORGANISER = 'REQUEST_SUGGEST_EVENT_ORGANISER';
+export const RESPONSE_SUGGEST_EVENT_ORGANISER = 'RESPONSE_SUGGEST_EVENT_ORGANISER';
+export const REQUEST_ADD_EVENT_ORGANISER = 'REQUEST_ADD_EVENT_ORGANISER';
+export const REQUEST_DELETE_EVENT_ORGANISER = 'REQUEST_DELETE_EVENT_ORGANISER';
 
 export const REQUEST_ADD_CREW = 'REQUEST_ADD_CREW';
 export const REQUEST_DELETE_CREW = 'REQUEST_DELETE_CREW';
@@ -150,6 +154,53 @@ export function addEventTeaserImage(id, file) {
       method: 'POST',
       body: wrapInFormData(file)
     }, false)
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function suggestEventOrganiser(eventId, q) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_SUGGEST_EVENT_ORGANISER,
+      payload: {
+        q,
+        eventId
+      }
+    });
+    return fetch(`/account/api/search/user?q=${q}`)
+      .then(json => {
+        dispatch({
+          type: RESPONSE_SUGGEST_EVENT_ORGANISER,
+          suggestions: json
+        });
+      });
+  };
+}
+
+export function addEventOrganiser(eventId, organiserId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_EVENT_ORGANISER
+    });
+    return fetch(`/account/api/event/${eventId}/organiser/${organiserId}`, {
+      method: 'PUT',
+    })
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function removeEventOrganiser(eventId, organiserId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_DELETE_EVENT_ORGANISER,
+      payload: {
+        eventId,
+        organiserId
+      }
+    });
+    return fetch(`/account/api/event/${eventId}/organiser/${organiserId}`, {
+      method: 'DELETE',
+    })
     .then(json => dispatch(gotUser(json)));
   };
 }

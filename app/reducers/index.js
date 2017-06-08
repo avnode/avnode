@@ -20,6 +20,8 @@ import {
   REQUEST_EDIT_EVENT,
   REQUEST_ADD_EVENT,
   REQUEST_ADD_EVENTIMAGE,
+  REQUEST_SUGGEST_EVENT_ORGANISER,
+  RESPONSE_SUGGEST_EVENT_ORGANISER,
 
   REQUEST_SUGGEST_CREWMEMBER,
   RESPONSE_SUGGEST_CREWMEMBER,
@@ -177,6 +179,15 @@ const user = (state = initialValues, action) => {
     return Object.assign({}, state, {
       _performerSuggestions: action.suggestions,
       _performerSuggestionInProgress: false
+    });
+  case REQUEST_SUGGEST_EVENT_ORGANISER:
+    return Object.assign({}, state, {
+      _organiserSuggestionInProgress: true
+    });
+  case RESPONSE_SUGGEST_EVENT_ORGANISER:
+    return Object.assign({}, state, {
+      _organiserSuggestions: action.suggestions,
+      _organiserSuggestionInProgress: false
     });
   case REQUEST_ADD_CREWIMAGE:
   case REQUEST_DELETE_CREWMEMBER:
