@@ -38,6 +38,10 @@ export const REQUEST_EDIT_PERFORMANCE = 'REQUEST_EDIT_PERFORMANCE';
 export const REQUEST_ADD_PERFORMANCEIMAGE = 'REQUEST_ADD_PERFORMANCEIMAGE';
 export const REQUEST_ADD_PERFORMANCETEASERIMAGE = 'REQUEST_ADD_PERFORMANCETEASERIMAGE';
 export const REQUEST_ADD_PERFORMANCEVIDEO = 'REQUEST_ADD_PERFORMANCEVIDEO';
+export const REQUEST_SUGGEST_PERFORMANCE_CREW = 'REQUEST_SUGGEST_PERFORMANCE_CREW';
+export const RESPONSE_SUGGEST_PERFORMANCE_CREW = 'RESPONSE_SUGGEST_PERFORMANCE_CREW';
+export const REQUEST_ADD_PERFORMANCE_CREW = 'REQUEST_ADD_PERFORMANCE_CREW';
+export const REQUEST_DELETE_PERFORMANCE_CREW = 'REQUEST_DELETE_PERFORMANCE_CREW';
 
 // Wrap fetch with some default settings, always
 // return parsed JSON…
@@ -356,6 +360,53 @@ export function addPerformanceVideo({_id, video}) {
     return fetch(`/account/api/performance/${_id}/video`, {
       method: 'POST',
       body: JSON.stringify({ video})
+    })
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function suggestPerformanceCrew(performanceId, q) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_SUGGEST_PERFORMANCE_CREW,
+      payload: {
+        q,
+        performanceId
+      }
+    });
+    return fetch(`/account/api/search/crew?q=${q}`)
+      .then(json => {
+        dispatch({
+          type: RESPONSE_SUGGEST_PERFORMANCE_CREW,
+          suggestions: json
+        });
+      });
+  };
+}
+
+export function addPerformanceCrew(performanceId, crewId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_PERFORMANCE_CREW
+    });
+    return fetch(`/account/api/performance/${performanceId}/crew/${crewId}`, {
+      method: 'PUT',
+    })
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function removePerformanceCrew(performanceId, crewId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_DELETE_PERFORMANCE_CREW,
+      payload: {
+        performanceId,
+        crewId
+      }
+    });
+    return fetch(`/account/api/performance/${performanceId}/crew/${crewId}`, {
+      method: 'DELETE',
     })
     .then(json => dispatch(gotUser(json)));
   };

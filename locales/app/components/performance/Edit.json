@@ -20,6 +20,18 @@
     "defaultMessage": "Add video"
   },
   {
+    "id": "performance.edit.form.label.performances",
+    "defaultMessage": "Crews"
+  },
+  {
+    "id": "performance.edit.form.label.suggestCrews",
+    "defaultMessage": "Assign crews"
+  },
+  {
+    "id": "crew.edit.form.label.suggestCrewsLoading",
+    "defaultMessage": "Finding crews…"
+  },
+  {
     "id": "general.form.save",
     "defaultMessage": "Save"
   }

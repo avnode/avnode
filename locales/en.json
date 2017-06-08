@@ -36,5 +36,6 @@
 	"Confirm Password": "Confirm Password",
 	"Signup": "Signup",
 	"Please check your inbox and confirm your Email": "Please check your inbox and confirm your Email",
-	"Your account is confirmed, you can now log in.": "Your account is confirmed, you can now log in."
+	"Your account is confirmed, you can now log in.": "Your account is confirmed, you can now log in.",
+	"Invalid email or password.": "Invalid email or password."
 }

@@ -107,11 +107,9 @@ describe('Asset Helper Utitility', () => {
   });
 
   it('setIdentifier should prepend stagename following by random uuid', () => {
-    const user = {
-      stagename: 'el-majestro'
-    };
+    const prefix = 'el-majestro';
 
-    const identifier = helper.setIdentifier(user);
+    const identifier = helper.setIdentifier(prefix);
     const regex = /^el-majestro_.{8}-.{4}-.{4}-.{4}-.{12}/;
 
     assert.equal(

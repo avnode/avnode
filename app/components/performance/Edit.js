@@ -12,11 +12,58 @@ import {
   addPerformanceImage,
   addPerformanceTeaserImage,
   addPerformanceVideo,
+  suggestPerformanceCrew,
+  addPerformanceCrew,
+  removePerformanceCrew
 } from '../../reducers/actions';
 import ImageDropzone from '../ImageDropzone';
 
+const Crew = injectIntl(({crew, onDelete, intl}) => {
+  return (
+    <li className="list-group-item justify-content-between">
+      <span>
+      {crew.name}
+      </span>
+      { crew.deletionInProgress ?
+        <button
+          type="button"
+          className="btn btn-danger disabled"
+        >
+          <i className="fa fa-fw fa-spinner fa-pulse"></i>
+        </button>
+        :
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={onDelete}
+        >
+          <i className="fa fa-trash"></i>
+        </button>
+      }
+    </li>
+  );
+});
+
 let PerformanceForm = props => {
   const { handleSubmit, dispatch, performance, user, intl } = props;
+  const crewSuggestions = props.user._crewSuggestions || [];
+
+  const findCrew = (e) => {
+    e.preventDefault();
+    if (e.target.value.length > 2) {
+      return dispatch(suggestPerformanceCrew(performance._id, e.target.value));
+    } // FIXME: handle reset
+  };
+
+  const addCrew = (crewId) => (e) => {
+    e.preventDefault();
+    return dispatch(addPerformanceCrew(performance._id, crewId));
+  };
+
+  const removeCrew = (crewId) => (e) => {
+    e.preventDefault();
+    return dispatch(removePerformanceCrew(performance._id, crewId));
+  };
 
   const onImageDrop = (performanceId) => (files, _something, _ev) => {
     const file = files[0];
@@ -147,6 +194,66 @@ let PerformanceForm = props => {
             </div>
           </div>
         }
+
+        <div className="form-group">
+          <label htmlFor="crews">
+            <FormattedMessage
+              id="performance.edit.form.label.performances"
+              defaultMessage="Crews"
+            />
+          </label>
+          <ul className="list-group">
+            { performance && performance.crews && performance.crews.map((crew) => (
+              <Crew
+                crew={crew}
+                onDelete={removeCrew(crew.id)}
+              />
+              ))
+            }
+          </ul>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="crew">
+            <FormattedMessage
+              id="performance.edit.form.label.suggestCrews"
+              defaultMessage="Assign crews"
+            />
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            autoComplete="off"
+            placeholder={props.intl.formatMessage({
+              id: 'performance.edit.form.label.suggestCrews',
+              defaultMessage: 'Type to find crews…'
+            })}
+            onKeyUp={ findCrew }
+          />
+          <div className="mt-1 list-group">
+            { performance && performance._crewSuggestionInProgress ?
+              <div className="list-group-item">
+                <i className="fa fa-fw fa-spinner fa-pulse"></i>
+                {' '}
+                <FormattedMessage
+                  id="crew.edit.form.label.suggestCrewsLoading"
+                  defaultMessage="Finding crews…"
+                />
+              </div> :
+              null
+            }
+            { crewSuggestions.map((c) => (
+              <button
+                type="button"
+                className="list-group-item list-group-item-action"
+                onClick={ addCrew(c.id) }
+              >
+                  {c.name}
+                </button>
+              ))
+            }
+          </div>
+        </div>
 
         <div className="form-group">
           <button
