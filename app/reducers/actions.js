@@ -21,10 +21,14 @@ export const REQUEST_ADD_EVENT = 'REQUEST_ADD_EVENT';
 export const REQUEST_EDIT_EVENT = 'REQUEST_EDIT_EVENT';
 export const REQUEST_ADD_EVENTIMAGE = 'REQUEST_ADD_EVENTIMAGE';
 export const REQUEST_ADD_EVENTTEASERIMAGE = 'REQUEST_ADD_EVENTTEASERIMAGE';
-export const REQUEST_SUGGEST_EVENT_ORGANISER = 'REQUEST_SUGGEST_EVENT_ORGANISER';
-export const RESPONSE_SUGGEST_EVENT_ORGANISER = 'RESPONSE_SUGGEST_EVENT_ORGANISER';
-export const REQUEST_ADD_EVENT_ORGANISER = 'REQUEST_ADD_EVENT_ORGANISER';
-export const REQUEST_DELETE_EVENT_ORGANISER = 'REQUEST_DELETE_EVENT_ORGANISER';
+export const REQUEST_SUGGEST_EVENT_ORGANIZER = 'REQUEST_SUGGEST_EVENT_ORGANIZER';
+export const RESPONSE_SUGGEST_EVENT_ORGANIZER = 'RESPONSE_SUGGEST_EVENT_ORGANIZER';
+export const REQUEST_ADD_EVENT_ORGANIZER = 'REQUEST_ADD_EVENT_ORGANIZER';
+export const REQUEST_DELETE_EVENT_ORGANIZER = 'REQUEST_DELETE_EVENT_ORGANIZER';
+export const REQUEST_SUGGEST_EVENT_ORGANIZINGCREW = 'REQUEST_SUGGEST_EVENT_ORGANIZINGCREW';
+export const RESPONSE_SUGGEST_EVENT_ORGANIZINGCREW = 'RESPONSE_SUGGEST_EVENT_ORGANIZINGCREW';
+export const REQUEST_ADD_EVENT_ORGANIZINGCREW = 'REQUEST_ADD_EVENT_ORGANIZINGCREW';
+export const REQUEST_DELETE_EVENT_ORGANIZINGCREW = 'REQUEST_DELETE_EVENT_ORGANIZINGCREW';
 
 export const REQUEST_ADD_CREW = 'REQUEST_ADD_CREW';
 export const REQUEST_DELETE_CREW = 'REQUEST_DELETE_CREW';
@@ -158,10 +162,10 @@ export function addEventTeaserImage(id, file) {
   };
 }
 
-export function suggestEventOrganiser(eventId, q) {
+export function suggestEventOrganizer(eventId, q) {
   return dispatch => {
     dispatch({
-      type: REQUEST_SUGGEST_EVENT_ORGANISER,
+      type: REQUEST_SUGGEST_EVENT_ORGANIZER,
       payload: {
         q,
         eventId
@@ -170,35 +174,82 @@ export function suggestEventOrganiser(eventId, q) {
     return fetch(`/account/api/search/user?q=${q}`)
       .then(json => {
         dispatch({
-          type: RESPONSE_SUGGEST_EVENT_ORGANISER,
+          type: RESPONSE_SUGGEST_EVENT_ORGANIZER,
           suggestions: json
         });
       });
   };
 }
 
-export function addEventOrganiser(eventId, organiserId) {
+export function addEventOrganizer(eventId, organizerId) {
   return dispatch => {
     dispatch({
-      type: REQUEST_ADD_EVENT_ORGANISER
+      type: REQUEST_ADD_EVENT_ORGANIZER
     });
-    return fetch(`/account/api/event/${eventId}/organiser/${organiserId}`, {
+    return fetch(`/account/api/event/${eventId}/organizer/${organizerId}`, {
       method: 'PUT',
     })
     .then(json => dispatch(gotUser(json)));
   };
 }
 
-export function removeEventOrganiser(eventId, organiserId) {
+export function removeEventOrganizer(eventId, organizerId) {
   return dispatch => {
     dispatch({
-      type: REQUEST_DELETE_EVENT_ORGANISER,
+      type: REQUEST_DELETE_EVENT_ORGANIZER,
       payload: {
         eventId,
-        organiserId
+        organizerId
       }
     });
-    return fetch(`/account/api/event/${eventId}/organiser/${organiserId}`, {
+    return fetch(`/account/api/event/${eventId}/organizer/${organizerId}`, {
+      method: 'DELETE',
+    })
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function suggestEventOrganizingCrew(eventId, q) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_SUGGEST_EVENT_ORGANIZINGCREW,
+      payload: {
+        q,
+        eventId
+      }
+    });
+    return fetch(`/account/api/search/crew?q=${q}`)
+      .then(json => {
+        dispatch({
+          type: RESPONSE_SUGGEST_EVENT_ORGANIZINGCREW,
+          suggestions: json
+        });
+      });
+  };
+}
+
+export function addEventOrganizingCrew(eventId, organizingCrewId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_EVENT_ORGANIZINGCREW
+    });
+    return fetch(`/account/api/event/${eventId}/organizingcrew/${organizingCrewId}`, {
+      method: 'PUT',
+    })
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function removeEventOrganizingCrew(eventId, organizingCrewId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_DELETE_EVENT_ORGANIZINGCREW,
+      payload: {
+        eventId,
+        organizingCrewId
+      }
+    });
+    return fetch(`/account/api/event/${eventId}/organizingcrew/${organizingCrewId}`, {
       method: 'DELETE',
     })
     .then(json => dispatch(gotUser(json)));

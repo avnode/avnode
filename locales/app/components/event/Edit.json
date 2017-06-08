@@ -16,16 +16,28 @@
     "defaultMessage": "Image"
   },
   {
-    "id": "event.edit.form.label.organisers",
-    "defaultMessage": "Organisers"
+    "id": "event.edit.form.label.organizers",
+    "defaultMessage": "Organizers"
   },
   {
-    "id": "event.edit.form.label.suggestOrganisers",
-    "defaultMessage": "Assign organisers"
+    "id": "event.edit.form.label.suggestOrganizers",
+    "defaultMessage": "Assign organizers"
   },
   {
-    "id": "organiser.edit.form.label.suggestOrganisersLoading",
-    "defaultMessage": "Finding organisers…"
+    "id": "event.edit.form.label.suggestOrganizersLoading",
+    "defaultMessage": "Finding organizers…"
+  },
+  {
+    "id": "event.edit.form.label.organizingCrews",
+    "defaultMessage": "OrganizingCrews"
+  },
+  {
+    "id": "event.edit.form.label.suggestOrganizingCrews",
+    "defaultMessage": "Assign an organizing crew"
+  },
+  {
+    "id": "event.edit.form.label.suggestOrganizingCrewsLoading",
+    "defaultMessage": "Finding organizingCrews…"
   },
   {
     "id": "event.edit.form.label.about",

@@ -10,14 +10,18 @@ import {
   addEventImage,
   addEventTeaserImage,
 
-  suggestEventOrganiser,
-  addEventOrganiser,
-  removeEventOrganiser
+  suggestEventOrganizer,
+  addEventOrganizer,
+  removeEventOrganizer,
+
+  suggestEventOrganizingCrew,
+  addEventOrganizingCrew,
+  removeEventOrganizingCrew
 
 } from '../../reducers/actions';
 import ImageDropzone from '../ImageDropzone';
 
-const Crew = injectIntl(({crew, onDelete, intl}) => {
+const OrganizingCrew = injectIntl(({crew, onDelete, intl}) => {
   return (
     <li className="list-group-item justify-content-between">
       <span>
@@ -43,21 +47,21 @@ const Crew = injectIntl(({crew, onDelete, intl}) => {
   );
 });
 
-const Organiser = injectIntl(({organiser, me, onDelete, intl}) => {
+const Organizer = injectIntl(({organizer, me, onDelete, intl}) => {
   const meLabel = intl.formatMessage({
-    id: 'event.edit.form.organiser.met',
+    id: 'event.edit.form.organizer.met',
     defaultMessage: 'Me'
   });
   return (
     <li className="list-group-item justify-content-between">
       <span>
-        {`${organiser.stagename} `}
-        { (organiser._id === me) ?
+        {`${organizer.stagename} `}
+        { (organizer._id === me) ?
           <i className="badge badge-default badge-pill">{meLabel}</i>
           : null
         }
       </span>
-      { organiser.deletionInProgress ?
+      { organizer.deletionInProgress ?
         <button
           type="button"
           className="btn btn-danger disabled"
@@ -80,23 +84,42 @@ const Organiser = injectIntl(({organiser, me, onDelete, intl}) => {
 let EventForm = props => {
   const { handleSubmit, dispatch, event, user } = props;
 
-  const organiserSuggestions = props.user._organiserSuggestions || [];
+  const organizerSuggestions = props.user._organizerSuggestions || [];
 
-  const findOrganiser = (e) => {
+  const findOrganizer = (e) => {
     e.preventDefault();
     if (e.target.value.length > 2) {
-      return dispatch(suggestEventOrganiser(event._id, e.target.value));
+      return dispatch(suggestEventOrganizer(event._id, e.target.value));
     } // FIXME: handle reset
   };
 
-  const addOrganiser = (organiserId) => (e) => {
+  const addOrganizer = (organizerId) => (e) => {
     e.preventDefault();
-    return dispatch(addEventOrganiser(event._id, organiserId));
+    return dispatch(addEventOrganizer(event._id, organizerId));
   };
 
-  const removeOrganiser = (organiserId) => (e) => {
+  const removeOrganizer = (organizerId) => (e) => {
     e.preventDefault();
-    return dispatch(removeEventOrganiser(event._id, organiserId));
+    return dispatch(removeEventOrganizer(event._id, organizerId));
+  };
+
+  const organizingCrewSuggestions = props.user._organizingCrewSuggestions || [];
+
+  const findOrganizingCrew = (e) => {
+    e.preventDefault();
+    if (e.target.value.length > 2) {
+      return dispatch(suggestEventOrganizingCrew(event._id, e.target.value));
+    } // FIXME: handle reset
+  };
+
+  const addOrganizingCrew = (organizingCrewId) => (e) => {
+    e.preventDefault();
+    return dispatch(addEventOrganizingCrew(event._id, organizingCrewId));
+  };
+
+  const removeOrganizingCrew = (organizingCrewId) => (e) => {
+    e.preventDefault();
+    return dispatch(removeEventOrganizingCrew(event._id, organizingCrewId));
   };
 
   const onImageDrop = (eventId) => (files, _something, _ev) => {
@@ -191,20 +214,19 @@ let EventForm = props => {
           }
         </div>
 
-
         <div className="form-group">
-          <label htmlFor="organisers">
+          <label htmlFor="organizers">
             <FormattedMessage
-              id="event.edit.form.label.organisers"
-              defaultMessage="Organisers"
+              id="event.edit.form.label.organizers"
+              defaultMessage="Organizers"
             />
           </label>
           <ul className="list-group">
-            { event && event.organisers && event.organisers.map((organiser) => (
-              <Organiser
-                organiser={organiser}
+            { event && event.organizers && event.organizers.map((organizer) => (
+              <Organizer
+                organizer={organizer}
                 me={props.user._id}
-                onDelete={removeOrganiser(organiser.id)}
+                onDelete={removeOrganizer(organizer.id)}
               />
               ))
             }
@@ -212,10 +234,10 @@ let EventForm = props => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="organiser">
+          <label htmlFor="organizer">
             <FormattedMessage
-              id="event.edit.form.label.suggestOrganisers"
-              defaultMessage="Assign organisers"
+              id="event.edit.form.label.suggestOrganizers"
+              defaultMessage="Assign organizers"
             />
           </label>
           <input
@@ -223,28 +245,88 @@ let EventForm = props => {
             type="text"
             autoComplete="off"
             placeholder={props.intl.formatMessage({
-              id: 'event.edit.form.label.suggestOrganisers',
-              defaultMessage: 'Type to find organisers…'
+              id: 'event.edit.form.label.suggestOrganizers',
+              defaultMessage: 'Type to find organizers…'
             })}
-            onKeyUp={ findOrganiser }
+            onKeyUp={ findOrganizer }
           />
           <div className="mt-1 list-group">
-            { event && event._organiserSuggestionInProgress ?
+            { event && event._organizerSuggestionInProgress ?
               <div className="list-group-item">
                 <i className="fa fa-fw fa-spinner fa-pulse"></i>
                 {' '}
                 <FormattedMessage
-                  id="organiser.edit.form.label.suggestOrganisersLoading"
-                  defaultMessage="Finding organisers…"
+                  id="event.edit.form.label.suggestOrganizersLoading"
+                  defaultMessage="Finding organizers…"
                 />
               </div> :
               null
             }
-            { organiserSuggestions.map((c) => (
+            { organizerSuggestions.map((c) => (
               <button
                 type="button"
                 className="list-group-item list-group-item-action"
-                onClick={ addOrganiser(c.id) }
+                onClick={ addOrganizer(c.id) }
+              >
+                  {c.stagename} ({c.name})
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="organizingCrews">
+            <FormattedMessage
+              id="event.edit.form.label.organizingCrews"
+              defaultMessage="OrganizingCrews"
+            />
+          </label>
+          <ul className="list-group">
+            { event && event.organizing_crews && event.organizing_crews.map((crew) => (
+              <OrganizingCrew
+                crew={crew}
+                onDelete={removeOrganizingCrew(crew.id)}
+              />
+              ))
+            }
+          </ul>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="organizingCrew">
+            <FormattedMessage
+              id="event.edit.form.label.suggestOrganizingCrews"
+              defaultMessage="Assign an organizing crew"
+            />
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            autoComplete="off"
+            placeholder={props.intl.formatMessage({
+              id: 'event.edit.form.label.suggestOrganizingCrews',
+              defaultMessage: 'Type to find crews…'
+            })}
+            onKeyUp={ findOrganizingCrew }
+          />
+          <div className="mt-1 list-group">
+            { event && event._organizingCrewSuggestionInProgress ?
+              <div className="list-group-item">
+                <i className="fa fa-fw fa-spinner fa-pulse"></i>
+                {' '}
+                <FormattedMessage
+                  id="event.edit.form.label.suggestOrganizingCrewsLoading"
+                  defaultMessage="Finding organizingCrews…"
+                />
+              </div> :
+              null
+            }
+            { organizingCrewSuggestions.map((c) => (
+              <button
+                type="button"
+                className="list-group-item list-group-item-action"
+                onClick={ addOrganizingCrew(c.id) }
               >
                   {c.stagename} ({c.name})
                 </button>

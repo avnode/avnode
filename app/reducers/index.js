@@ -20,8 +20,10 @@ import {
   REQUEST_EDIT_EVENT,
   REQUEST_ADD_EVENT,
   REQUEST_ADD_EVENTIMAGE,
-  REQUEST_SUGGEST_EVENT_ORGANISER,
-  RESPONSE_SUGGEST_EVENT_ORGANISER,
+  REQUEST_SUGGEST_EVENT_ORGANIZER,
+  RESPONSE_SUGGEST_EVENT_ORGANIZER,
+  REQUEST_SUGGEST_EVENT_ORGANIZINGCREW,
+  RESPONSE_SUGGEST_EVENT_ORGANIZINGCREW,
 
   REQUEST_SUGGEST_CREWMEMBER,
   RESPONSE_SUGGEST_CREWMEMBER,
@@ -180,14 +182,23 @@ const user = (state = initialValues, action) => {
       _performerSuggestions: action.suggestions,
       _performerSuggestionInProgress: false
     });
-  case REQUEST_SUGGEST_EVENT_ORGANISER:
+  case REQUEST_SUGGEST_EVENT_ORGANIZER:
     return Object.assign({}, state, {
-      _organiserSuggestionInProgress: true
+      _organizerSuggestionInProgress: true
     });
-  case RESPONSE_SUGGEST_EVENT_ORGANISER:
+  case RESPONSE_SUGGEST_EVENT_ORGANIZER:
     return Object.assign({}, state, {
-      _organiserSuggestions: action.suggestions,
-      _organiserSuggestionInProgress: false
+      _organizerSuggestions: action.suggestions,
+      _organizerSuggestionInProgress: false
+    });
+  case REQUEST_SUGGEST_EVENT_ORGANIZINGCREW:
+    return Object.assign({}, state, {
+      _organizingCrewSuggestionInProgress: true
+    });
+  case RESPONSE_SUGGEST_EVENT_ORGANIZINGCREW:
+    return Object.assign({}, state, {
+      _organizingCrewSuggestions: action.suggestions,
+      _organizingCrewSuggestionInProgress: false
     });
   case REQUEST_ADD_CREWIMAGE:
   case REQUEST_DELETE_CREWMEMBER:
