@@ -163,6 +163,22 @@ let EventForm = props => {
           <label className="form-check-label">
             <Field
               className="form-check-input form-control-lg"
+              name="is_public"
+              component="input"
+              type="checkbox"
+              value={props.is_public}
+            />
+            <FormattedMessage
+              id="event.edit.form.label.is_public"
+              defaultMessage="Event is public"
+            />
+          </label>
+        </div>
+
+        <div className="form-check">
+          <label className="form-check-label">
+            <Field
+              className="form-check-input form-control-lg"
               name="is_open"
               component="input"
               type="checkbox"

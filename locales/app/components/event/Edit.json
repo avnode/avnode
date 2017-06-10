@@ -4,6 +4,10 @@
     "defaultMessage": "Name"
   },
   {
+    "id": "event.edit.form.label.is_public",
+    "defaultMessage": "Event is public"
+  },
+  {
     "id": "event.edit.form.label.is_open",
     "defaultMessage": "Call is open"
   },
