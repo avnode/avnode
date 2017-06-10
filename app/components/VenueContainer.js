@@ -1,5 +1,5 @@
 import { connect } from 'preact-redux';
-import VenueAutocomplete from './VenueAutocomplete';
+import Venue from './Venue';
 
 import { addEventVenue, removeEventVenue } from '../reducers/actions';
 
@@ -14,4 +14,4 @@ const mapDispatchToProps = (dispatch) => ({
   delete: dispatch(removeEventVenue)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VenueAutocomplete);
+export default connect(mapStateToProps, mapDispatchToProps)(Venue);

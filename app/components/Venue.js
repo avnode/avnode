@@ -3,6 +3,12 @@ import { Field } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'preact-intl';
 
 const styles = {
+  mapCard: {
+    margin: '10px 0'
+  },
+  map: {
+    height: '200px'
+  },
   venueSuggestionBox: {
     border: '1px solid #D3D3D3',
     borderRadius: '0 3px 3px 0'
@@ -15,7 +21,7 @@ const styles = {
   }
 };
 
-class Venue extends React.Component {
+class Map extends React.Component {
   constructor(props) {
 		super(props);
 	}
@@ -33,8 +39,8 @@ class Venue extends React.Component {
 	}
 	render() {
 		return (
-			<div class='card' style="margin: 10px 0;">
-				<div style="height: 200px" class='card-img-top' id={'map-' + this.props.venue._id}></div>
+			<div class='card' style={styles.mapCard}>
+				<div style={styles.map} class='card-img-top' id={'map-' + this.props.venue._id}></div>
 				<div class='card-block'>
 					<p class='card-text'>
           <div class="pull-left">
@@ -56,7 +62,7 @@ class Venue extends React.Component {
 	}
 }
 
-class VenueAutocomplete extends React.Component {
+class Venue extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -88,6 +94,13 @@ class VenueAutocomplete extends React.Component {
 			});
 		}
 	}
+
+  reset() {
+    this.setState({
+      suggestions: []
+    });
+  }
+
 	fetchPredictions(e) {
 		if (e.target.value.length > 3) {
 			this.autocompleteService.getPlacePredictions({
@@ -102,6 +115,7 @@ class VenueAutocomplete extends React.Component {
 	save(place) {
 		this.geocoder.geocode({placeId: place.placeId}, (results, status) => {
 			this.props.complete(this.props.event._id, results[0]);
+      this.reset();
 		});
 	}
 
@@ -132,7 +146,7 @@ class VenueAutocomplete extends React.Component {
         <div class="google-maps-places">
           <Field
             className="form-control"
-            name="sugguest-venu-for-event"
+            name="suggest-venu-for-event"
             component="input"
             placeholder='Search for a venue'
             {...inputProps}
@@ -155,7 +169,7 @@ class VenueAutocomplete extends React.Component {
             </div>
           )}
           {this.props.event && this.props.event.venues.length > 0 && this.props.event.venues.map((v) => (
-            <Venue venue={v} onDelete={this.delete} />
+            <Map venue={v} onDelete={this.delete} />
           ))}
         </div>
       </div>
@@ -163,10 +177,10 @@ class VenueAutocomplete extends React.Component {
 	}
 }
 
-VenueAutocomplete.propTypes = {
+Venue.propTypes = {
   inputProps: (props, propName) => {
     const inputProps = props[propName];
   },
 };
 
-export default VenueAutocomplete;
+export default Venue;

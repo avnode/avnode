@@ -6,7 +6,7 @@ import { injectIntl, FormattedMessage } from 'preact-intl';
 
 import Layout from '../Layout';
 
-import VenueAutocomplete from '../VenueAutocompleteContainer';
+import Venue from '../VenueContainer';
 
 import {
   editEvent,
@@ -353,7 +353,7 @@ let EventForm = props => {
           />
         </div>
 
-        <VenueAutocomplete event={props.event} />
+        <Venue event={props.event} />
 
         <hr />
         <div class="row">
