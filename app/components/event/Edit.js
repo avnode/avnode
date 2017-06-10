@@ -5,6 +5,9 @@ import { Field, reduxForm } from 'redux-form';
 import { injectIntl, FormattedMessage } from 'preact-intl';
 
 import Layout from '../Layout';
+
+import VenueAutocomplete from '../VenueAutocompleteContainer';
+
 import {
   editEvent,
   addEventImage,
@@ -349,6 +352,9 @@ let EventForm = props => {
             value={props.about}
           />
         </div>
+
+        <VenueAutocomplete event={props.event} />
+
         <hr />
         <div class="row">
           <div class="col-6">

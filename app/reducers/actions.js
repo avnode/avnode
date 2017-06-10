@@ -29,6 +29,8 @@ export const REQUEST_SUGGEST_EVENT_ORGANIZINGCREW = 'REQUEST_SUGGEST_EVENT_ORGAN
 export const RESPONSE_SUGGEST_EVENT_ORGANIZINGCREW = 'RESPONSE_SUGGEST_EVENT_ORGANIZINGCREW';
 export const REQUEST_ADD_EVENT_ORGANIZINGCREW = 'REQUEST_ADD_EVENT_ORGANIZINGCREW';
 export const REQUEST_DELETE_EVENT_ORGANIZINGCREW = 'REQUEST_DELETE_EVENT_ORGANIZINGCREW';
+export const REQUEST_ADD_EVENT_VENUE = 'REQUEST_ADD_EVENT_VENUE';
+export const REQUEST_DELETE_EVENT_VENUE = 'REQUEST_DELETE_EVENT_VENUE';
 
 export const REQUEST_ADD_CREW = 'REQUEST_ADD_CREW';
 export const REQUEST_DELETE_CREW = 'REQUEST_DELETE_CREW';
@@ -674,3 +676,38 @@ export function fetchCountries(dispatch) {
     ));
   };
 }
+
+export function addEventVenue(dispatch) {
+  return (id, location) => {
+    dispatch({
+      type: REQUEST_ADD_EVENT_VENUE,
+      payload: {
+        event: id,
+        location: location
+      }
+    });
+    return fetch(
+      '/account/api/event/venue', {
+        method: 'POST',
+        body: JSON.stringify({id, location })
+      })
+      .then(json => dispatch(gotUser(json)));
+  };
+};
+
+export function removeEventVenue(dispatch) {
+  return (eventId, venueId) => {
+    dispatch({
+      type: REQUEST_DELETE_EVENT_VENUE,
+      payload: {
+        event: eventId,
+        venue: venueId
+      }
+    });
+    return fetch(
+      `/account/api/event/${eventId}/venue/${venueId}`, {
+        method: 'DELETE'
+      })
+      .then(json => dispatch(gotUser(json)));
+  };
+};
