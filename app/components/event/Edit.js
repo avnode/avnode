@@ -13,6 +13,10 @@ import {
   addEventImage,
   addEventTeaserImage,
 
+  suggestEventPerformance,
+  addEventPerformance,
+  removeEventPerformance,
+
   suggestEventOrganizer,
   addEventOrganizer,
   removeEventOrganizer,
@@ -31,6 +35,32 @@ const OrganizingCrew = injectIntl(({crew, onDelete, intl}) => {
       {crew.name}
       </span>
       { crew.deletionInProgress ?
+        <button
+          type="button"
+          className="btn btn-danger disabled"
+        >
+          <i className="fa fa-fw fa-spinner fa-pulse"></i>
+        </button>
+        :
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={onDelete}
+        >
+          <i className="fa fa-trash"></i>
+        </button>
+      }
+    </li>
+  );
+});
+
+const Performance = injectIntl(({performance, onDelete, intl}) => {
+  return (
+    <li className="list-group-item justify-content-between">
+      <span>
+        {performance.title}
+      </span>
+      { performance.deletionInProgress ?
         <button
           type="button"
           className="btn btn-danger disabled"
@@ -86,6 +116,25 @@ const Organizer = injectIntl(({organizer, me, onDelete, intl}) => {
 
 let EventForm = props => {
   const { handleSubmit, dispatch, event, user } = props;
+
+  const performanceSuggestions = props.user._performanceSuggestions || [];
+
+  const findPerformance = (e) => {
+    e.preventDefault();
+    if (e.target.value.length > 2) {
+      return dispatch(suggestEventPerformance(event._id, e.target.value));
+    } // FIXME: handle reset
+  };
+
+  const addPerformance = (performanceId) => (e) => {
+    e.preventDefault();
+    return dispatch(addEventPerformance(event._id, performanceId));
+  };
+
+  const removePerformance = (performanceId) => (e) => {
+    e.preventDefault();
+    return dispatch(removeEventPerformance(event._id, performanceId));
+  };
 
   const organizerSuggestions = props.user._organizerSuggestions || [];
 
@@ -156,6 +205,21 @@ let EventForm = props => {
             component="input"
             type="text"
             value={props.title}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="about">
+            <FormattedMessage
+              id="event.edit.form.label.about"
+              defaultMessage="About"
+            />
+          </label>
+          <Field
+            className="form-control"
+            name="about"
+            component="textarea"
+            value={props.about}
           />
         </div>
 
@@ -231,6 +295,67 @@ let EventForm = props => {
               /></div> :
             null
           }
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="performances">
+            <FormattedMessage
+              id="event.edit.form.label.performances"
+              defaultMessage="Performances"
+            />
+          </label>
+          <ul className="list-group">
+            { event && event.performances && event.performances.map((performance) => (
+              <Performance
+                performance={performance}
+                onDelete={removePerformance(performance.id)}
+              />
+              ))
+            }
+          </ul>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="performance">
+            <FormattedMessage
+              id="event.edit.form.label.suggestPerformances"
+              defaultMessage="Assign performances"
+            />
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            autoComplete="off"
+            placeholder={props.intl.formatMessage({
+              id: 'event.edit.form.label.suggestPerformances',
+              defaultMessage: 'Type to find performances…'
+            })}
+            onKeyUp={ findPerformance }
+          />
+          <div className="mt-1 list-group">
+            { event && event._performanceSuggestionInProgress ?
+              <div className="list-group-item">
+                <i className="fa fa-fw fa-spinner fa-pulse"></i>
+                {' '}
+                <FormattedMessage
+                  id="event.edit.form.label.suggestPerformancesLoading"
+                  defaultMessage="Finding performances…"
+                />
+              </div> :
+              null
+            }
+            { performanceSuggestions.map((c) => (
+              <button
+                type="button"
+                className="list-group-item list-group-item-action"
+                onClick={ addPerformance(c.id) }
+              >
+              {console.log(c)}
+                  {c.title}
+                </button>
+              ))
+            }
+          </div>
         </div>
 
         <div className="form-group">
@@ -355,18 +480,63 @@ let EventForm = props => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="about">
+          <label htmlFor="organizingCrews">
             <FormattedMessage
-              id="event.edit.form.label.about"
-              defaultMessage="About"
+              id="event.edit.form.label.organizingCrews"
+              defaultMessage="OrganizingCrews"
             />
           </label>
-          <Field
+          <ul className="list-group">
+            { event && event.organizing_crews && event.organizing_crews.map((crew) => (
+              <OrganizingCrew
+                crew={crew}
+                onDelete={removeOrganizingCrew(crew.id)}
+              />
+              ))
+            }
+          </ul>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="organizingCrew">
+            <FormattedMessage
+              id="event.edit.form.label.suggestOrganizingCrews"
+              defaultMessage="Assign an organizing crew"
+            />
+          </label>
+          <input
             className="form-control"
-            name="about"
-            component="textarea"
-            value={props.about}
+            type="text"
+            autoComplete="off"
+            placeholder={props.intl.formatMessage({
+              id: 'event.edit.form.label.suggestOrganizingCrews',
+              defaultMessage: 'Type to find crews…'
+            })}
+            onKeyUp={ findOrganizingCrew }
           />
+          <div className="mt-1 list-group">
+            { event && event._organizingCrewSuggestionInProgress ?
+              <div className="list-group-item">
+                <i className="fa fa-fw fa-spinner fa-pulse"></i>
+                {' '}
+                <FormattedMessage
+                  id="event.edit.form.label.suggestOrganizingCrewsLoading"
+                  defaultMessage="Finding organizingCrews…"
+                />
+              </div> :
+              null
+            }
+            { organizingCrewSuggestions.map((c) => (
+              <button
+                type="button"
+                className="list-group-item list-group-item-action"
+                onClick={ addOrganizingCrew(c.id) }
+              >
+                  {c.stagename} ({c.name})
+                </button>
+              ))
+            }
+          </div>
         </div>
 
         <Venue event={props.event} />

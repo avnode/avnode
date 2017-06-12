@@ -36,3 +36,32 @@ block content
         mozallowfullscreen
         allowfullscreen
       )
+
+  .row
+    .col-lg-8
+      h3=__('Performer')
+      .card-columns
+        each user in performance.performers
+          .card
+            if user.image
+              img.card-img-top.img-fluid(
+                src=user.image.publicUrl
+                alt=user.name
+              )
+            .card-block
+              h6.text-muted.card-title=__('Performer')
+              h5.card-subtitle.mb-3=user.stagename
+              a.btn.btn-primary(href=user.publicUrl)=__('More')
+    .col-lg-4
+      .card-columns
+        each crew in performance.crews
+          .card
+            if crew.image
+              img.card-img-top.img-fluid(
+                src=crew.image.publicUrl
+                alt=crew.name
+              )
+            .card-block
+              h6.text-muted.card-title=__('Organizing Crew')
+              h5.card-subtitle.mb-3=crew.name
+              a.btn.btn-primary(href=crew.publicUrl)=__('More')

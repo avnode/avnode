@@ -21,6 +21,10 @@ export const REQUEST_ADD_EVENT = 'REQUEST_ADD_EVENT';
 export const REQUEST_EDIT_EVENT = 'REQUEST_EDIT_EVENT';
 export const REQUEST_ADD_EVENTIMAGE = 'REQUEST_ADD_EVENTIMAGE';
 export const REQUEST_ADD_EVENTTEASERIMAGE = 'REQUEST_ADD_EVENTTEASERIMAGE';
+export const REQUEST_SUGGEST_EVENT_PERFORMANCE = 'REQUEST_SUGGEST_EVENT_PERFORMANCE';
+export const RESPONSE_SUGGEST_EVENT_PERFORMANCE = 'RESPONSE_SUGGEST_EVENT_PERFORMANCE';
+export const REQUEST_ADD_EVENT_PERFORMANCE = 'REQUEST_ADD_EVENT_PERFORMANCE';
+export const REQUEST_DELETE_EVENT_PERFORMANCE = 'REQUEST_DELETE_EVENT_PERFORMANCE';
 export const REQUEST_SUGGEST_EVENT_ORGANIZER = 'REQUEST_SUGGEST_EVENT_ORGANIZER';
 export const RESPONSE_SUGGEST_EVENT_ORGANIZER = 'RESPONSE_SUGGEST_EVENT_ORGANIZER';
 export const REQUEST_ADD_EVENT_ORGANIZER = 'REQUEST_ADD_EVENT_ORGANIZER';
@@ -160,6 +164,53 @@ export function addEventTeaserImage(id, file) {
       method: 'POST',
       body: wrapInFormData(file)
     }, false)
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function suggestEventPerformance(eventId, q) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_SUGGEST_EVENT_PERFORMANCE,
+      payload: {
+        q,
+        eventId
+      }
+    });
+    return fetch(`/account/api/search/performance?q=${q}`)
+      .then(json => {
+        dispatch({
+          type: RESPONSE_SUGGEST_EVENT_PERFORMANCE,
+          suggestions: json
+        });
+      });
+  };
+}
+
+export function addEventPerformance(eventId, performanceId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_ADD_EVENT_PERFORMANCE
+    });
+    return fetch(`/account/api/event/${eventId}/performance/${performanceId}`, {
+      method: 'PUT',
+    })
+    .then(json => dispatch(gotUser(json)));
+  };
+}
+
+export function removeEventPerformance(eventId, performanceId) {
+  return dispatch => {
+    dispatch({
+      type: REQUEST_DELETE_EVENT_PERFORMANCE,
+      payload: {
+        eventId,
+        performanceId
+      }
+    });
+    return fetch(`/account/api/event/${eventId}/performance/${performanceId}`, {
+      method: 'DELETE',
+    })
     .then(json => dispatch(gotUser(json)));
   };
 }

@@ -20,6 +20,8 @@ import {
   REQUEST_EDIT_EVENT,
   REQUEST_ADD_EVENT,
   REQUEST_ADD_EVENTIMAGE,
+  REQUEST_SUGGEST_EVENT_PERFORMANCE,
+  RESPONSE_SUGGEST_EVENT_PERFORMANCE,
   REQUEST_SUGGEST_EVENT_ORGANIZER,
   RESPONSE_SUGGEST_EVENT_ORGANIZER,
   REQUEST_SUGGEST_EVENT_ORGANIZINGCREW,
@@ -181,6 +183,15 @@ const user = (state = initialValues, action) => {
     return Object.assign({}, state, {
       _performerSuggestions: action.suggestions,
       _performerSuggestionInProgress: false
+    });
+  case REQUEST_SUGGEST_EVENT_PERFORMANCE:
+    return Object.assign({}, state, {
+      _performanceSuggestionInProgress: true
+    });
+  case RESPONSE_SUGGEST_EVENT_PERFORMANCE:
+    return Object.assign({}, state, {
+      _performanceSuggestions: action.suggestions,
+      _performanceSuggestionInProgress: false
     });
   case REQUEST_SUGGEST_EVENT_ORGANIZER:
     return Object.assign({}, state, {
