@@ -350,7 +350,6 @@ let EventForm = props => {
                 className="list-group-item list-group-item-action"
                 onClick={ addPerformance(c.id) }
               >
-              {console.log(c)}
                   {c.title}
                 </button>
               ))
