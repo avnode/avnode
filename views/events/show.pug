@@ -74,3 +74,15 @@ block content
             h6.text-muted.card-title=__('Organizer')
             h5.card-subtitle.mb-3=user.stagename
             a.btn.btn-primary(href=user.publicUrl)=__('More')
+
+      each crew in event.organizing_crews
+        .card
+          if crew.image
+            img.card-img-top.img-fluid(
+              src=crew.image.publicUrl
+              alt=crew.name
+            )
+          .card-block
+            h6.text-muted.card-title=__('Organizing Crew')
+            h5.card-subtitle.mb-3=crew.name
+            a.btn.btn-primary(href=crew.publicUrl)=__('More')
