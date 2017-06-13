@@ -39,5 +39,10 @@
 	"Your account is confirmed, you can now log in.": "Your account is confirmed, you can now log in.",
 	"Invalid email or password.": "Invalid email or password.",
 	"AVnode is an international network of artists and professionals organising activities in the fields of audio visual performing arts.": "AVnode is an international network of artists and professionals organising activities in the fields of audio visual performing arts.",
-	"Organizing Crew": "Organizing Crew"
+	"Organizing Crew": "Organizing Crew",
+	"Venue": "Venue",
+	"Performance": "Performance",
+	"Venues": "Venues",
+	"Organizers": "Organizers",
+	"Organizing Crews": "Organizing Crews"
 }
