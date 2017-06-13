@@ -3,7 +3,7 @@ node {
 	def livePath = '/sites/avnode.z7'
 	def node = 'node:boron'
 	stage('Update source') {
-		sh "cd ${livePath} && git pull"
+		sh "cd ${livePath} && git checkout -- locales/ && git pull"
 	}
 	stage('Update npm dependencies') {
 		sh "cd ${livePath} && docker run --rm -v ${livePath}:/data -w /data ${node} npm install"
