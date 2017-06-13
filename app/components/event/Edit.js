@@ -478,66 +478,6 @@ let EventForm = props => {
           </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="organizingCrews">
-            <FormattedMessage
-              id="event.edit.form.label.organizingCrews"
-              defaultMessage="OrganizingCrews"
-            />
-          </label>
-          <ul className="list-group">
-            { event && event.organizing_crews && event.organizing_crews.map((crew) => (
-              <OrganizingCrew
-                crew={crew}
-                onDelete={removeOrganizingCrew(crew.id)}
-              />
-              ))
-            }
-          </ul>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="organizingCrew">
-            <FormattedMessage
-              id="event.edit.form.label.suggestOrganizingCrews"
-              defaultMessage="Assign an organizing crew"
-            />
-          </label>
-          <input
-            className="form-control"
-            type="text"
-            autoComplete="off"
-            placeholder={props.intl.formatMessage({
-              id: 'event.edit.form.label.suggestOrganizingCrews',
-              defaultMessage: 'Type to find crews…'
-            })}
-            onKeyUp={ findOrganizingCrew }
-          />
-          <div className="mt-1 list-group">
-            { event && event._organizingCrewSuggestionInProgress ?
-              <div className="list-group-item">
-                <i className="fa fa-fw fa-spinner fa-pulse"></i>
-                {' '}
-                <FormattedMessage
-                  id="event.edit.form.label.suggestOrganizingCrewsLoading"
-                  defaultMessage="Finding organizingCrews…"
-                />
-              </div> :
-              null
-            }
-            { organizingCrewSuggestions.map((c) => (
-              <button
-                type="button"
-                className="list-group-item list-group-item-action"
-                onClick={ addOrganizingCrew(c.id) }
-              >
-                  {c.stagename} ({c.name})
-                </button>
-              ))
-            }
-          </div>
-        </div>
-
         <Venue event={props.event} />
 
         <hr />
