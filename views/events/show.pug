@@ -77,6 +77,7 @@ block content
             .card-block
               h6.text-muted.card-title=__('Venue')
               h5.card-subtitle.mb-3=venue.address
+              a.btn.btn-primary(target="_blank", href='https://maps.google.com?q=' + encodeURIComponent(venue.address))=__('directions')
 
 
       if event.organizers.length > 0
