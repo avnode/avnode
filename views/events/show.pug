@@ -30,9 +30,9 @@ block content
     .col-lg-8
       h3=__('Schedule')
       p tbd
-      h3=__('Performances')
-      .card-columns
-        if event.performances
+      if event.performances.length > 0
+        h3=__('Performances')
+        .card-columns
           each performance in event.performances
             .card
               if performance.image
@@ -45,19 +45,22 @@ block content
                 h5.card-subtitle.mb-3=performance.stagename
                 a.btn.btn-primary(href=performance.publicUrl)=__('More')
 
-      h4=__('Performer')
-      .card-columns
-        each user in event.performers
-          .card
-            if user.image
-              img.card-img-top.img-fluid(
-                src=user.image.publicUrl
-                alt=user.name
-              )
-            .card-block
-              h6.text-muted.card-title=__('Performer')
-              h5.card-subtitle.mb-3=user.stagename
-              a.btn.btn-primary(href=user.publicUrl)=__('More')
+
+      if event.performances[0].performers.length > 0
+        h4=__('Performers')
+        .card-columns
+          each performance in event.performances
+            each performer in performance.performers
+              .card
+                if performer.image
+                  img.card-img-top.img-fluid(
+                    src=performer.image.publicUrl
+                    alt=performer.name
+                  )
+                .card-block
+                  h6.text-muted.card-title=__('Performer')
+                  h5.card-subtitle.mb-3=performer.stagename
+                  a.btn.btn-primary(href=performer.publicUrl)=__('More')
 
     .col-lg-4
       if event.venues.length > 0

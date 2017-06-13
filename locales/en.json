@@ -45,5 +45,12 @@
 	"Venues": "Venues",
 	"Organizers": "Organizers",
 	"Organizing Crews": "Organizing Crews",
-	"directions": "directions"
+	"directions": "directions",
+	"Request a new password": "Request a new password",
+	"reset password": "reset password",
+	"User not found.": "User not found.",
+	"Password reset link sent p.finkbeiner@zimmer7.com.": "Password reset link sent p.finkbeiner@zimmer7.com.",
+	"Reset your password": "Reset your password",
+	"Retype password": "Retype password",
+	"Your password has been reset.": "Your password has been reset."
 }
