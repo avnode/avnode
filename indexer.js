@@ -4,6 +4,7 @@ const args = require('minimist')(process.argv.slice(2));
 const config = require('dotenv').load({path: '.env.local'});
 const MongoClient = require('mongodb').MongoClient;
 const es = require('./lib/plugins/elasticsearch').getClient();
+const INDEX = require('./lib/plugins/elasticsearch').INDEX;
 const indexHelper = {
   crews: require('./lib/plugins/elasticsearch/Crew').cleanForIndex,
   users: require('./lib/plugins/elasticsearch/User').cleanForIndex,
@@ -28,9 +29,15 @@ const index = (doc, done) => {
 };
 
 const removeFromIndex = (type, cb) => {
+  //FIXME we get type as e.g. crews but have to delete by type which is crew
+  const t = type.slice(0, -1);
   es.deleteByQuery({
-    index: 'avnode',
-    body: { "query":{"match_all":{}} }
+    index: INDEX,
+    body: {
+      query: {
+        term: { _type: t }
+      }
+    }
   }, (err, _res) => {
     if (err) {
       throw err;
