@@ -1,7 +1,7 @@
 extends layout
 
 block teaser
-  if event.teaserImage
+  if event && event.teaserImage
     .teaser-block(style="background-image: url(" + event.teaserImage.publicUrl + ")")
       .container
         .teaser
