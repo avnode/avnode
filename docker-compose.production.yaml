@@ -18,4 +18,3 @@ services:
     environment:
       - NODE_ENV=production
       - DEBUG=avnode,avnode.debug
-  
