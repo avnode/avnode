@@ -47,7 +47,7 @@ block content
 
       h4=__('Performer')
       .card-columns
-        each user in users
+        each user in event.performers
           .card
             if user.image
               img.card-img-top.img-fluid(
